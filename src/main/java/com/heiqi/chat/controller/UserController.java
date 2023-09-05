@@ -1,6 +1,7 @@
 package com.heiqi.chat.controller;
 
 
+import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.Represent;
 import com.heiqi.chat.entity.User;
 import com.heiqi.chat.service.RepresentService;
@@ -23,8 +24,9 @@ public class UserController {
     }
 
     @GetMapping("/getUserById/{UserId}")
-    public User getUserById(@PathVariable("UserId") int UserId) {
-        return userService.getUserById(UserId);
+    public Result getUserById(@PathVariable("UserId") int UserId) {
+        User user = userService.getUserById(UserId);
+        return Result.success(user);
     }
 
     @GetMapping("/getUserByName/{UserName}")
@@ -51,20 +53,27 @@ public class UserController {
     }
     //登录时发送短信验证码
     @GetMapping("/sendSMSofLogon/{Phone}")
-    public String sendSMSofLogon(@PathVariable("Phone") String Phone) throws Exception {
-        return userService.sendSMSofLogon(Phone);
+    public Result sendSMSofLogon(@PathVariable("Phone") String Phone) throws Exception {
+        return Result.success();
     }
 
     //用户登录(效验短信验证码)
     @GetMapping("/userLogon/{Phone}")
-    public User userLogon(@PathVariable("Phone") String Phone,@RequestBody String Tempt)  {
-        return userService.userLogon(Phone,Tempt);
+    public Result userLogon(@PathVariable("Phone") String Phone,@RequestBody String Tempt)  {
+        User user = userService.userLogon(Phone, Tempt);
+        if (user!=null){
+            return Result.success(user);
+        }else {
+            return Result.error("登录失败请检查验证码是否正确");
+        }
+       
     }
 
     //用户登出
     @GetMapping("/userQuit/{UserId}")
-    public void userQuit(@PathVariable("UserId") int UserId){
-       userService.userQuit(UserId);
+    public Result userQuit(@PathVariable("UserId") int UserId){
+        userService.userQuit(UserId);
+       return Result.success();
     }
 
     //这里是用户匹配
