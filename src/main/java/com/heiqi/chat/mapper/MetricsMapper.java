@@ -19,7 +19,7 @@ public interface MetricsMapper {
 //    @Update("UPDATE metrics SET ScoRel = #{ScoRel} WHERE MetricID = #{MetricID}")
 //    int insertScoRel(int MetricID,int ScoRel);
 
-    @Insert("INSERT INTO metrics(metricID, userID, curiosity, readly, abstractness, intellectual, openl, tryNew,idea, standard, hc, fs,star,chineseMed,adventure,achievement,aesthetic,excitement,rebel,altruism,emotion,characterl,organization,inductive,attitudes,selfish,male) VALUES(#{metricID},#{userID},#{curiosity},#{readly},#{abstractness},#{intellectual},#{openl},#{tryNew},#{idea},#{standard},#{hc},#{fs},#{star},#{chineseMed},#{adventure},#{achievement},#{aesthetic},#{excitement},#{rebel},#{altruism},#{emotion},#{characterl},#{organization},#{inductive},#{attitudes},#{selfish},#{male})")
+    @Insert("INSERT INTO metrics(metricID, userID, curiosity, readly, abstractness, intellectual, openl, tryNew,idea, standard, hc, fs,adventure,achievement,aesthetic,excitement,rebel,altruism,emotion,characterl,organization,inductive,attitudes,selfish,male) VALUES(#{metricID},#{userID},#{curiosity},#{readly},#{abstractness},#{intellectual},#{openl},#{tryNew},#{idea},#{standard},#{hc},#{fs},#{adventure},#{achievement},#{aesthetic},#{excitement},#{rebel},#{altruism},#{emotion},#{characterl},#{organization},#{inductive},#{attitudes},#{selfish},#{male})")
     @Options(useGeneratedKeys = true, keyProperty = "metricID")
     int insertMetrics(Metrics metrics);
 

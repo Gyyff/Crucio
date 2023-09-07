@@ -22,8 +22,6 @@ public class UserPreference {
     private int standard;  // 顺从/独立
     private int hc;  // 虐猫态度
     private int fs;  //是否相信风水
-    private int star;  // 是否相信星座
-    private int chineseMed;  // 是否相信中医
     private int adventure;  // 冒险精神
     private int achievement;  // 成就欲水平
     private int aesthetic;  // 美感体验

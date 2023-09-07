@@ -209,10 +209,6 @@ public class UserServiceImp implements UserService {
 //            System.out.println("A=" + userPreference.getHc() + "   " + "B=" + metricsUser.getHc() + "   " + "T9 = " + T);
             T += matchUtils.MateMatchSimilarity(userPreference.getFs(), metricsUser.getFs());
 //            System.out.println("A=" + userPreference.getFs() + "   " + "B=" + metricsUser.getFs() + "   " + "T10 = " + T);
-            T += matchUtils.MateMatchSimilarity(userPreference.getStar(), metricsUser.getStar());
-//            System.out.println("A=" + userPreference.getStar() + "   " + "B=" + metricsUser.getStar() + "   " + "T11 = " + T);
-            T += matchUtils.MateMatchSimilarity(userPreference.getChineseMed(), metricsUser.getChineseMed());
-//            System.out.println("A=" + userPreference.getChineseMed() + "   " + "B=" + metricsUser.getChineseMed() + "   " + "T12 = " + T);
             T += matchUtils.MateMatchSimilarity(userPreference.getAdventure(), metricsUser.getAdventure());
 //            System.out.println("A=" + userPreference.getAdventure() + "   " + "B=" + metricsUser.getAdventure() + "   " + "T13 = " + T);
             T += matchUtils.MateMatchSimilarity(userPreference.getAchievement(), metricsUser.getAchievement());
@@ -251,8 +247,6 @@ public class UserServiceImp implements UserService {
                     St += matchUtils.MateMatchSimilarity(sUserPreference.getStandard(), UserMetrics.getStandard());
                     St += matchUtils.MateMatchSimilarity(sUserPreference.getHc(), UserMetrics.getHc());
                     St += matchUtils.MateMatchSimilarity(sUserPreference.getFs(), UserMetrics.getFs());
-                    St += matchUtils.MateMatchSimilarity(sUserPreference.getStar(), UserMetrics.getStar());
-                    St += matchUtils.MateMatchSimilarity(sUserPreference.getChineseMed(), UserMetrics.getChineseMed());
                     St += matchUtils.MateMatchSimilarity(sUserPreference.getAdventure(), UserMetrics.getAdventure());
                     St += matchUtils.MateMatchSimilarity(sUserPreference.getAchievement(), UserMetrics.getAchievement());
                     St += matchUtils.MateMatchSimilarity(sUserPreference.getAesthetic(), UserMetrics.getAesthetic());
