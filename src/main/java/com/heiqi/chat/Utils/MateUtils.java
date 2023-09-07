@@ -195,7 +195,7 @@ public class MateUtils{
         return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
     }
 
-    public static Date dateChange(Date date){
+    public static Date dateChange(String date){
         Date date1 = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String birthday = simpleDateFormat.format(date1);

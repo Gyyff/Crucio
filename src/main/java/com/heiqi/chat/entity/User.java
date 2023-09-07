@@ -18,7 +18,7 @@ public class User {
     private String Identity;//所在行业 身份
     private int Gender;//性别
     private int Age;//年龄
-    private Date BirthDay;//生日
+    private String BirthDay;//生日
     private int Weight;//体重
     private String School; //毕业院校
     private String HomeTownA;//家乡 省（直辖市）
