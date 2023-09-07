@@ -114,10 +114,7 @@ public class UserController {
         userService.updateUserAge(UserId, Age);
     }
 
-    @PutMapping("/updateUserAddress/{UserId}")
-    public void updateUserAddress(@PathVariable("UserId") int UserId, @RequestBody String Address) {
-        userService.updateUserAddress(UserId,Address);
-    }
+
     @PutMapping("/updateUserIdentity/{UserId}")
     public void updateUserIdentity(@PathVariable("UserId") int UserId, @RequestBody String Identity) {
         userService.updateUserIdentity(UserId,Identity);

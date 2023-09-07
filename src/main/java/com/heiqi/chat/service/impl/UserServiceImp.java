@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -96,6 +97,41 @@ public class UserServiceImp implements UserService {
     @Override
     public void userQuit(int UserId) {
         userMapper.updateUserIsLogged(UserId, 0);
+    }
+
+    @Override
+    public int updateUserBirthDay(int UserId, Date BirthDay) {
+        return userMapper.updateUserBirthDay(UserId,BirthDay);
+    }
+
+    @Override
+    public int updateUserWeight(int UserId, int Weight) {
+        return userMapper.updateUserWeight(UserId,Weight);
+    }
+
+    @Override
+    public int updateUserSchool(int UserId, String School) {
+        return userMapper.updateUserSchool(UserId,School);
+    }
+
+    @Override
+    public int updateUserHomeTownA(int UserId, String HomeTownA) {
+        return userMapper.updateUserHomeTownA(UserId,HomeTownA);
+    }
+
+    @Override
+    public int updateUserHomeTownB(int UserId, String HomeTownB) {
+        return userMapper.updateUserHomeTownB(UserId,HomeTownB);
+    }
+
+    @Override
+    public int updateUserAddressA(int UserId, String AddressA) {
+        return userMapper.updateUserAddressA(UserId,AddressA);
+    }
+
+    @Override
+    public int updateUserAddressB(int UserId, String AddressB) {
+        return userMapper.updateUserAddressB(UserId,AddressB);
     }
 
 
@@ -307,10 +343,7 @@ public class UserServiceImp implements UserService {
         userMapper.updateUserAge(UserId, Age);
     }
 
-    @Override
-    public void updateUserAddress(int UserId, String Address) {
-        userMapper.updateUserAddress(UserId, Address);
-    }
+
 
     @Override
     public void updateUserIdentity(int UserId, String Identity) {

@@ -58,10 +58,17 @@ public class RegisterController {
         userService.updateUserAge(userId,user.getAge());
         userService.updateUserIdentity(userId,user.getIdentity());
         userService.updateUserGender(userId,user.getGender());
-        userService.updateUserAddress(userId,user.getAddress());
         userService.updateUserName(userId,user.getUserName());
         userService.updateUserEducation(userId,user.getEducation());
         userService.updateUserHeight(userId,user.getHeight());
+        userService.updateUserBirthDay(userId,user.getBirthDay());
+        userService.updateUserWeight(userId,user.getWeight());
+        userService.updateUserSchool(userId,user.getSchool());
+        userService.updateUserHomeTownA(userId,user.getHomeTownA());
+        userService.updateUserHomeTownB(userId,user.getHomeTownB());
+        userService.updateUserAddressA(userId,user.getAddressA());
+        userService.updateUserAddressB(userId,user.getAddressB());
+        //最后将用户的资料审核状态设置为1
         userService.updateUserIsAuthed(userId,1);
          User SetUser = userService.getUserById(userId);
       if (SetUser!=null){

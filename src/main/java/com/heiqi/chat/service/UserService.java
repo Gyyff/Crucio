@@ -1,10 +1,10 @@
 package com.heiqi.chat.service;
 
-import com.heiqi.chat.entity.Metrics;
+
 import com.heiqi.chat.entity.User;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+import java.util.Date;
 
 
 public interface UserService {
@@ -29,7 +29,6 @@ public interface UserService {
 
     void updateUserAge(int UserId, int Age);
 
-    void updateUserAddress(int UserId, String Address);
 
     void updateUserIdentity(int UserId, String Identity);
 
@@ -58,5 +57,23 @@ public interface UserService {
 
     void userQuit(@Param("UserId") int UserId);
 
+    int updateUserBirthDay(@Param("UserId") int UserId, @Param("updateUserBirthDay") Date updateUserBirthDay);
 
+
+    int updateUserWeight(@Param("UserId") int UserId, @Param("Weight") int Weight);
+
+
+    int updateUserSchool(@Param("UserId") int UserId, @Param("School") String School);
+
+
+    int updateUserHomeTownA(@Param("UserId") int UserId, @Param("HomeTownA") String HomeTownA);
+
+
+    int updateUserHomeTownB(@Param("UserId") int UserId, @Param("HomeTownB") String HomeTownB);
+
+
+    int updateUserAddressA(@Param("UserId") int UserId, @Param("AddressA") String AddressA);
+
+
+    int updateUserAddressB(@Param("UserId") int UserId, @Param("AddressB") String AddressB);
 }

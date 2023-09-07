@@ -5,6 +5,7 @@ import com.heiqi.chat.entity.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -27,10 +28,10 @@ public interface UserMapper {
 
 
     @Select("SElECT * FROM user WHERE age BETWEEN #{ageMin} AND #{ageMax} ")
-    List<User> getUsersByAgeBetween(int ageMax,int ageMin);
+    List<User> getUsersByAgeBetween(int ageMax, int ageMin);
 
 
-    @Insert("INSERT INTO user(UserId, UserName, Phone,PassWord, Photo, Identity, Gender, Age,HomeTown, Address, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus) VALUES(#{UserId}, #{UserName}, #{Phone},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{HomeTown},#{Address}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus})")
+    @Insert("INSERT INTO user(UserId, UserName, Phone,PassWord, Photo, Identity, Gender, Age,BirthDay,Weight,School,HomeTownA,HomeTownB, AddressA,AddressB, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus) VALUES(#{UserId}, #{UserName}, #{Phone},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{BirthDay},#{Weight},#{School},#{HomeTownA},#{HomeTownB},#{AddressA},#{AddressB}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus})")
     @Options(useGeneratedKeys = true, keyProperty = "UserId")
     int insertUser(User user);
 
@@ -43,8 +44,6 @@ public interface UserMapper {
     @Update("UPDATE user SET Age = #{Age} WHERE UserId = #{UserId}")
     int updateUserAge(@Param("UserId") int UserId, @Param("Age") int Age);
 
-    @Update("UPDATE user SET Address = #{Address} WHERE UserId = #{UserId}")
-    int updateUserAddress(@Param("UserId") int UserId, @Param("Address") String Address);
 
     @Update("UPDATE user SET Identity = #{Identity} WHERE UserId = #{UserId}")
     int updateUserIdentity(@Param("UserId") int UserId, @Param("Identity") String Identity);
@@ -74,6 +73,26 @@ public interface UserMapper {
     @Update("UPDATE user SET Height = #{Height} WHERE UserId = #{UserId}")
     int updateUserHeight(@Param("UserId") int UserId, @Param("Height") int Height);
 
+    @Update("UPDATE user SET updateUserBirthDay = #{updateUserBirthDay} WHERE UserId = #{UserId}")
+    int updateUserBirthDay(@Param("UserId") int UserId, @Param("updateUserBirthDay") Date updateUserBirthDay);
+
+    @Update("UPDATE user SET Weight = #{Weight} WHERE UserId = #{UserId}")
+    int updateUserWeight(@Param("UserId") int UserId, @Param("Weight") int Weight);
+
+    @Update("UPDATE user SET School = #{School} WHERE UserId = #{UserId}")
+    int updateUserSchool(@Param("UserId") int UserId, @Param("School") String School);
+
+    @Update("UPDATE user SET HomeTownA = #{HomeTownA} WHERE UserId = #{UserId}")
+    int updateUserHomeTownA(@Param("UserId") int UserId, @Param("HomeTownA") String HomeTownA);
+
+    @Update("UPDATE user SET HomeTownB = #{HomeTownB} WHERE UserId = #{UserId}")
+    int updateUserHomeTownB(@Param("UserId") int UserId, @Param("HomeTownB") String HomeTownB);
+
+    @Update("UPDATE user SET AddressA = #{AddressA} WHERE UserId = #{UserId}")
+    int updateUserAddressA(@Param("UserId") int UserId, @Param("AddressA") String AddressA);
+
+    @Update("UPDATE user SET AddressB = #{AddressB} WHERE UserId = #{UserId}")
+    int updateUserAddressB(@Param("UserId") int UserId, @Param("AddressB") String AddressB);
 
 
 }
