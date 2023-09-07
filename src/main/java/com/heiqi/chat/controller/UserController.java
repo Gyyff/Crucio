@@ -20,9 +20,8 @@ public class UserController {
     private final RepresentService representService;
 
 
-
     @Autowired
-    public UserController(UserService userService,RepresentService representService) {
+    public UserController(UserService userService, RepresentService representService) {
         this.userService = userService;
         this.representService = representService;
 
@@ -43,46 +42,44 @@ public class UserController {
     public User getUserByAge(@PathVariable("Age") int Age) {
         return userService.getUserByAge(Age);
     }
+
     @GetMapping("/getUserByAddress/{Address}")
     public User getUserByAddress(@PathVariable("Address") String Address) {
         return userService.getUserByAddress(Address);
     }
+
     @GetMapping("/getUserByPhone/{Phone}")
-    public User getUserByPhone(@PathVariable("Phone") String Phone){
+    public User getUserByPhone(@PathVariable("Phone") String Phone) {
         return userService.getUserByPhone(Phone);
     }
 
     @GetMapping("/getRepresentByUserId/{UserId}")
-    public Represent getRepresentByUserId(@PathVariable("UserId") int UserId){
+    public Represent getRepresentByUserId(@PathVariable("UserId") int UserId) {
         return representService.getRepresentByUserId(UserId);
     }
     //登录时发送短信验证码
 
     @GetMapping("/sendSMSofLogon/{Phone}")
     public Result sendSMSofLogon(@PathVariable("Phone") String Phone) throws Exception {
-        if (userService.getUserByPhone(Phone)!=null){
-          userService.sendSMSofLogon(Phone);
-          return Result.success("验证码发送成功");
-        }else return Result.error("您还没有注册，请先注册");
-
+        return userService.sendSMSofLogon(Phone);
     }
 
     //用户登录(效验短信验证码)
-    @GetMapping("/userLogon/{Phone}")
-    public Result userLogon(@PathVariable("Phone") String Phone,@RequestBody String Tempt)  {
-        return  userService.userLogon(Phone, Tempt);
+    @GetMapping("/userLogon/{Tem}/{Phone}")
+    public Result userLogon(@PathVariable("Tem") String Tem, @PathVariable("Phone") String Phone ) {
+        return userService.userLogon(Tem,Phone);
     }
 
     //用户登出
     @GetMapping("/userQuit/{UserId}")
-    public Result userQuit(@PathVariable("UserId") int UserId){
+    public Result userQuit(@PathVariable("UserId") int UserId) {
         userService.userQuit(UserId);
-       return Result.success();
+        return Result.success();
     }
 
     //这里是用户匹配
     @GetMapping("/getUserMatch/{UserId}")
-    public User getUserMatch(@PathVariable("UserId") int UserId){
+    public User getUserMatch(@PathVariable("UserId") int UserId) {
         return userService.getUserMatch(UserId);
     }
 
@@ -94,7 +91,7 @@ public class UserController {
     }
 
     @PostMapping("/insertRepresent")
-    public void insertRepresent(@RequestBody Represent represent){
+    public void insertRepresent(@RequestBody Represent represent) {
         representService.insertRepresent(represent);
     }
 
@@ -104,7 +101,7 @@ public class UserController {
     }
 
     @DeleteMapping("/deleteRepresent/{UserId}")
-    public void deleteRepresent(@PathVariable("UserId") int UserId){
+    public void deleteRepresent(@PathVariable("UserId") int UserId) {
         representService.deleteRepresent(UserId);
     }
 
@@ -121,55 +118,56 @@ public class UserController {
 
     @PutMapping("/updateUserIdentity/{UserId}")
     public void updateUserIdentity(@PathVariable("UserId") int UserId, @RequestBody String Identity) {
-        userService.updateUserIdentity(UserId,Identity);
+        userService.updateUserIdentity(UserId, Identity);
     }
 
     @PutMapping("/updateUserEducation/{UserId}")
     public void updateUserEducation(@PathVariable("UserId") int UserId, @RequestBody int Education) {
         System.out.println("UserId = " + UserId);
         System.out.println("Education = " + Education);
-        userService.updateUserEducation(UserId,Education);
+        userService.updateUserEducation(UserId, Education);
     }
 
     @PutMapping("/updateUserPhoto/{UserId}")
     public void updateUserPhoto(@PathVariable("UserId") int UserId, @RequestBody String Photo) {
-        userService.updateUserPhoto(UserId,Photo);
+        userService.updateUserPhoto(UserId, Photo);
     }
 
     @PutMapping("/updateUserIsAuthed/{UserId}")
-    public void updateUserIsAuthed(@PathVariable("UserId") int UserId,@RequestBody int IsAuthed){
+    public void updateUserIsAuthed(@PathVariable("UserId") int UserId, @RequestBody int IsAuthed) {
         userService.updateUserIsAuthed(UserId, IsAuthed);
     }
 
     @PutMapping("/updateUserIsLogged/{UserId}")
-    public void updateUserIsLogged(@PathVariable("UserId") int UserId,@RequestBody int IsLogged){
-        userService.updateUserIsLogged(UserId,IsLogged);
+    public void updateUserIsLogged(@PathVariable("UserId") int UserId, @RequestBody int IsLogged) {
+        userService.updateUserIsLogged(UserId, IsLogged);
     }
 
     //用户是否已经经过性格测试 （0，代表没有）  （1，代表已经通过测试）
     @PutMapping("/updateUserIsTested/{UserId}")
-    public void updateUserIsTested(@PathVariable("UserId") int UserId,@RequestBody int IsTested){
-        userService.updateUserIsTested(UserId,IsTested);
+    public void updateUserIsTested(@PathVariable("UserId") int UserId, @RequestBody int IsTested) {
+        userService.updateUserIsTested(UserId, IsTested);
     }
 
 
     @PutMapping("/updateDescription/{UserId}")
-    public void updateDescription(@PathVariable("UserId") int UserId,@RequestBody String Description){
-        representService.updateDescription(UserId,Description);
+    public void updateDescription(@PathVariable("UserId") int UserId, @RequestBody String Description) {
+        representService.updateDescription(UserId, Description);
     }
 
     @PutMapping("/updateSeek/{UserId}")
-    public void updateSeek(@PathVariable("UserId") int UserId,@RequestBody String Seek){
-        representService.updateSeek(UserId,Seek);
+    public void updateSeek(@PathVariable("UserId") int UserId, @RequestBody String Seek) {
+        representService.updateSeek(UserId, Seek);
     }
 
     @PutMapping("/updateLifeWay/{UserId}")
-    public void updateLifeWay(@PathVariable("UserId") int UserId,@RequestBody String LifeWay){
-        representService.updateLifeWay(UserId,LifeWay);
+    public void updateLifeWay(@PathVariable("UserId") int UserId, @RequestBody String LifeWay) {
+        representService.updateLifeWay(UserId, LifeWay);
     }
+
     @PutMapping("/updateIdol/{UserId}")
-    public void updateIdol(@PathVariable("UserId") int UserId,@RequestBody String Idol){
-        representService.updateIdol(UserId,Idol);
+    public void updateIdol(@PathVariable("UserId") int UserId, @RequestBody String Idol) {
+        representService.updateIdol(UserId, Idol);
     }
     // 这里写更多的 setter 函数...
 }

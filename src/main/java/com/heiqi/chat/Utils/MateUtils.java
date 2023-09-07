@@ -4,6 +4,7 @@ package com.heiqi.chat.Utils;
 import com.heiqi.chat.entity.NonCore;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -195,11 +196,11 @@ public class MateUtils{
         return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
     }
 
-    public static Date dateChange(String date){
-        Date date1 = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String birthday = simpleDateFormat.format(date1);
-        return date1;
+    public static Date dateChange(String s) throws ParseException {
+
+        Date parse = new SimpleDateFormat("yyyy-MM-dd").parse(s);
+
+        return parse;
     }
 
 }

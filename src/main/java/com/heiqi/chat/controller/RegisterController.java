@@ -8,6 +8,7 @@ import com.heiqi.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -52,7 +53,7 @@ public class RegisterController {
 
    //修改用户其他的属性
     @PutMapping("/userSet")
-    public Result userSet(@RequestBody User user){
+    public Result userSet(@RequestBody User user) throws ParseException {
         int userId = user.getUserId();
         userService.updateUserAge(userId,user.getAge());
         userService.updateUserIdentity(userId,user.getIdentity());
@@ -60,8 +61,7 @@ public class RegisterController {
         userService.updateUserName(userId,user.getUserName());
         userService.updateUserEducation(userId,user.getEducation());
         userService.updateUserHeight(userId,user.getHeight());
-        Date date = MateUtils.dateChange(user.getBirthDay());
-        userService.updateUserBirthDay(userId,date);
+        userService.updateUserBirthDay(userId,user.getBirthDay());
         userService.updateUserWeight(userId,user.getWeight());
         userService.updateUserSchool(userId,user.getSchool());
         userService.updateUserHomeTownA(userId,user.getHomeTownA());

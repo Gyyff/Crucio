@@ -54,11 +54,11 @@ public interface UserService {
 
     Result userLogon(@Param("Phone") String Phone, @Param("Tempt") String Tempt);
 
-    String sendSMSofLogon(@Param("Phone") String Phone) throws Exception;
+    Result sendSMSofLogon(@Param("Phone") String Phone) throws Exception;
 
     void userQuit(@Param("UserId") int UserId);
 
-    int updateUserBirthDay(@Param("UserId") int UserId, @Param("updateUserBirthDay") Date updateUserBirthDay);
+    int updateUserBirthDay(@Param("UserId") int UserId, @Param("BirthDay") String BirthDay);
 
 
     int updateUserWeight(@Param("UserId") int UserId, @Param("Weight") int Weight);

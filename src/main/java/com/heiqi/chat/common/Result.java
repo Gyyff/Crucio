@@ -27,7 +27,7 @@ public class Result<T>{
         return new Result(400,"失败",null);
     }
     public static Result error(String msg){
-        return new Result(400, null,null);
+        return new Result(400, msg,null);
     }
 
 

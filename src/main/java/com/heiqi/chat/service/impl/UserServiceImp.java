@@ -71,21 +71,29 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public String sendSMSofLogon(String Phone) throws Exception {
-        Temp = mateUtils.Sjs();
-        String TEMPT = "{\"code\" : \"" + Temp + "\"}";
-        SendSMS.SendSms(Phone, TEMPT);
-        return Temp;
+    public Result sendSMSofLogon(String Phone) throws Exception {
+        if (userMapper.getUserByPhone(Phone)!=null){
+            Temp = mateUtils.Sjs();
+            String TEMPT = "{\"code\" : \"" + Temp + "\"}";
+            SendSMS.SendSms(Phone, TEMPT);
+            return Result.success("成功发送验证码");
+        }else {
+            return Result.error("该手机号还没有注册，请查看手机号是否正确，或前去注册");
+        }
     }
-
     @Override
-    public Result userLogon(String Phone, String Tempt) {
-       if (Tempt==Temp){
+    public Result userLogon(String Tem, String Phone) {
+        System.out.println("Temp = " + Temp);
+        System.out.println("Tem = " + Tem);
+        System.out.println("Phone = " + Phone);
+       if (Tem.equals(Temp)){
            User user = userMapper.getUserByPhone(Phone);
            userMapper.updateUserIsLogged(user.getUserId(),1);
-           return Result.success(user);
-       }else return Result.error("验证码错误");
-
+           User userById = userMapper.getUserById(user.getUserId());
+           return Result.success(userById);
+       }else {
+           return Result.error("验证码错误");
+       }
 
     }
 
@@ -95,7 +103,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public int updateUserBirthDay(int UserId, Date BirthDay) {
+    public int updateUserBirthDay(int UserId, String BirthDay) {
         return userMapper.updateUserBirthDay(UserId,BirthDay);
     }
 
