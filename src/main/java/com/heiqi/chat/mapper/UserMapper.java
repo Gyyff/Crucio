@@ -31,7 +31,7 @@ public interface UserMapper {
     List<User> getUsersByAgeBetween(int ageMax, int ageMin);
 
 
-    @Insert("INSERT INTO user(UserId, UserName, Phone,PassWord, Photo, Identity, Gender, Age,BirthDay,Weight,School,HomeTownA,HomeTownB, AddressA,AddressB, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus) VALUES(#{UserId}, #{UserName}, #{Phone},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{BirthDay},#{Weight},#{School},#{HomeTownA},#{HomeTownB},#{AddressA},#{AddressB}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus})")
+    @Insert("INSERT INTO user(UserId, UserName,Phone,PassWord, Photo, Identity, Gender, Age,BirthDay,Weight,School,HomeTownA,HomeTownB, AddressA,AddressB, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus) VALUES(#{UserId}, #{UserName}, #{Phone},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{BirthDay},#{Weight},#{School},#{HomeTownA},#{HomeTownB},#{AddressA},#{AddressB}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus})")
     @Options(useGeneratedKeys = true, keyProperty = "UserId")
     int insertUser(User user);
 

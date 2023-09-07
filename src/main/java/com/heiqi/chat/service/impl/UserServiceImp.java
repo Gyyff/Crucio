@@ -79,18 +79,13 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User userLogon(String Phone, String Tempt) {
-        String falsePhone = null;
-        System.out.println("Temp= " + Temp);
-        if (Tempt.equals(Temp)) {
-            System.out.println("验证码正确 验证成功");
-            User user = userMapper.getUserByPhone(Phone);
-            userMapper.updateUserIsLogged(user.getUserId(), 1);
-            System.out.println("登录成功");
-            return user;
-        } else
-            System.out.println("登陆失败 请检查验证码");
-        return userMapper.getUserByPhone(falsePhone);
+    public Result userLogon(String Phone, String Tempt) {
+       if (Tempt==Temp){
+           User user = userMapper.getUserByPhone(Phone);
+           userMapper.updateUserIsLogged(user.getUserId(),1);
+           return Result.success(user);
+       }else return Result.error("验证码错误");
+
 
     }
 

@@ -8,14 +8,13 @@ import com.heiqi.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/user/Register")
 public class RegisterController {
     String Tempt;
-    @Autowired
-
     private final UserService userService;
     private final MateUtils mateUtils;
     @Autowired
@@ -61,7 +60,8 @@ public class RegisterController {
         userService.updateUserName(userId,user.getUserName());
         userService.updateUserEducation(userId,user.getEducation());
         userService.updateUserHeight(userId,user.getHeight());
-        userService.updateUserBirthDay(userId,user.getBirthDay());
+        Date date = MateUtils.dateChange(user.getBirthDay());
+        userService.updateUserBirthDay(userId,date);
         userService.updateUserWeight(userId,user.getWeight());
         userService.updateUserSchool(userId,user.getSchool());
         userService.updateUserHomeTownA(userId,user.getHomeTownA());

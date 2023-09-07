@@ -1,6 +1,7 @@
 package com.heiqi.chat.controller;
 
 
+import com.heiqi.chat.Utils.MateUtils;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.Represent;
 import com.heiqi.chat.entity.User;
@@ -17,10 +18,14 @@ public class UserController {
 
     private final UserService userService;
     private final RepresentService representService;
+
+
+
     @Autowired
     public UserController(UserService userService,RepresentService representService) {
         this.userService = userService;
         this.representService = representService;
+
     }
 
     @GetMapping("/getUserById/{UserId}")
@@ -52,21 +57,20 @@ public class UserController {
         return representService.getRepresentByUserId(UserId);
     }
     //登录时发送短信验证码
+
     @GetMapping("/sendSMSofLogon/{Phone}")
     public Result sendSMSofLogon(@PathVariable("Phone") String Phone) throws Exception {
-        return Result.success();
+        if (userService.getUserByPhone(Phone)!=null){
+          userService.sendSMSofLogon(Phone);
+          return Result.success("验证码发送成功");
+        }else return Result.error("您还没有注册，请先注册");
+
     }
 
     //用户登录(效验短信验证码)
     @GetMapping("/userLogon/{Phone}")
     public Result userLogon(@PathVariable("Phone") String Phone,@RequestBody String Tempt)  {
-        User user = userService.userLogon(Phone, Tempt);
-        if (user!=null){
-            return Result.success(user);
-        }else {
-            return Result.error("登录失败请检查验证码是否正确");
-        }
-
+        return  userService.userLogon(Phone, Tempt);
     }
 
     //用户登出

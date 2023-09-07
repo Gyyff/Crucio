@@ -1,6 +1,7 @@
 package com.heiqi.chat.service;
 
 
+import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -51,7 +52,7 @@ public interface UserService {
 
     void updateUserIsTested(@Param("UserId") int UserId, @Param("IsTested") int IsTested);
 
-    User userLogon(@Param("Phone") String Phone, @Param("Tempt") String Tempt);
+    Result userLogon(@Param("Phone") String Phone, @Param("Tempt") String Tempt);
 
     String sendSMSofLogon(@Param("Phone") String Phone) throws Exception;
 

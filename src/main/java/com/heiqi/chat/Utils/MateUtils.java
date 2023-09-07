@@ -4,6 +4,8 @@ package com.heiqi.chat.Utils;
 import com.heiqi.chat.entity.NonCore;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 @Component
@@ -191,6 +193,13 @@ public class MateUtils{
             normB += Math.pow(data2[i], 2);
         }
         return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+    }
+
+    public static Date dateChange(Date date){
+        Date date1 = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String birthday = simpleDateFormat.format(date1);
+        return date1;
     }
 
 }
