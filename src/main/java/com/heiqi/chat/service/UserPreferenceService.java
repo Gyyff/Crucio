@@ -11,5 +11,5 @@ public interface UserPreferenceService {
 
     void deleteUserPreferenceByUserId(int UserId);
 
-    void insertUserPreference(UserPreference userPreference);
+    UserPreference insertUserPreference(UserPreference userPreference);
 }

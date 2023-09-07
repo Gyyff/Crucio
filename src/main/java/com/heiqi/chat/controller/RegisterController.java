@@ -58,7 +58,6 @@ public class RegisterController {
         userService.updateUserAge(userId,user.getAge());
         userService.updateUserIdentity(userId,user.getIdentity());
         userService.updateUserGender(userId,user.getGender());
-        userService.updateUserSex(userId,user.getSex());
         userService.updateUserAddress(userId,user.getAddress());
         userService.updateUserName(userId,user.getUserName());
         userService.updateUserEducation(userId,user.getEducation());

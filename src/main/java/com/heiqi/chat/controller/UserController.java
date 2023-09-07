@@ -66,7 +66,7 @@ public class UserController {
         }else {
             return Result.error("登录失败请检查验证码是否正确");
         }
-       
+
     }
 
     //用户登出

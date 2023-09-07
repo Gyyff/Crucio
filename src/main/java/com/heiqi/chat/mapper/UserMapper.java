@@ -30,7 +30,7 @@ public interface UserMapper {
     List<User> getUsersByAgeBetween(int ageMax,int ageMin);
 
 
-    @Insert("INSERT INTO user(UserId, UserName, Phone,PassWord, Photo, Identity, Gender, Age, Address, Height, Education, Sex,Beauty,IsTested,IsAuthed,IsLogged,MatchStatus) VALUES(#{UserId}, #{UserName}, #{Phone},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{Address}, #{Height}, #{Education}, #{Sex},#{Beauty},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus})")
+    @Insert("INSERT INTO user(UserId, UserName, Phone,PassWord, Photo, Identity, Gender, Age,HomeTown, Address, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus) VALUES(#{UserId}, #{UserName}, #{Phone},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{HomeTown},#{Address}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus})")
     @Options(useGeneratedKeys = true, keyProperty = "UserId")
     int insertUser(User user);
 
@@ -70,8 +70,6 @@ public interface UserMapper {
     @Update("UPDATE user SET Gender = #{Gender} WHERE UserId = #{UserId}")
     int updateUserGender(@Param("UserId") int UserId, @Param("Gender") int Gender);
 
-    @Update("UPDATE user SET Sex = #{Sex} WHERE UserId = #{UserId}")
-    int updateUserSex(@Param("UserId") int UserId, @Param("Sex") int Sex);
 
     @Update("UPDATE user SET Height = #{Height} WHERE UserId = #{UserId}")
     int updateUserHeight(@Param("UserId") int UserId, @Param("Height") int Height);

@@ -16,11 +16,12 @@ public class User {
     private String Identity;
     private int Gender;
     private int Age;
+    private String HomeTown;
     private String Address;
     private int Height;
     private int Education;
-    private int Sex;
     private int Beauty;
+    private int IsPreference;//偏好测试状态
     private int IsTested; //性格测试状态
     private int IsAuthed; //资料审核状态
     private int IsLogged; //登录状态

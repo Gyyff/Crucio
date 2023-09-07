@@ -39,7 +39,7 @@ public interface UserService {
 
     void updateUserGender(int UserId, int Gender);
 
-    void updateUserSex(int UserId, int Sex);
+
 
     void updateUserHeight(int UserId, int Height);
 
