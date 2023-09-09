@@ -49,8 +49,14 @@ public class UserController {
     }
 
     @GetMapping("/getUserByPhone/{Phone}")
-    public User getUserByPhone(@PathVariable("Phone") String Phone) {
-        return userService.getUserByPhone(Phone);
+    public Result getUserByPhone(@PathVariable("Phone") String Phone) {
+        User user = userService.getUserByPhone(Phone);
+        if (user!=null){
+            return Result.success(user);
+        }else {
+            return Result.error("失败");
+        }
+
     }
 
     @GetMapping("/getRepresentByUserId/{UserId}")
