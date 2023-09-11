@@ -1,5 +1,6 @@
 package com.heiqi.chat.controller;
 
+import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.Blog;
 import com.heiqi.chat.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,9 @@ public class BlogController {
 
     // 这里写更多的 getter 函数...
     @PostMapping("/insertBlog")
-    public void insertBlog(@RequestBody Blog blog) {
-        blogService.insertBlog(blog);
+    public Result insertBlog(@RequestBody Blog blog) {
+        Blog blogS = blogService.insertBlog(blog);
+        return Result.success(blogS);
     }
 
     @DeleteMapping("/deleteBlogByUserID/{UserID}")
@@ -37,19 +39,23 @@ public class BlogController {
         blogService.deleteBlogByUserID(UserID);
     }
 
-    @DeleteMapping("/deleteBlogByBlogID/{BlogID}")
-    public void deleteBlogByBlogID(@PathVariable("BlogID") int BlogID) {
-        blogService.deleteBlogByBlogID(BlogID);
+
+    @PutMapping("/updateContentIntroductionByUserID/{UserID}")
+    public Result updateContentIntroductionByUserID(@PathVariable("UserID") int UserID, @RequestBody String Content) {
+        if (blogService.findByUserID(UserID)!=null) {
+            return Result.success(blogService.updateContentIntroductionByUserID(UserID, Content));
+        }else {
+            return Result.error("没找到该blog");
+        }
     }
 
-    @PutMapping("/updateBlogByBlogID/{BlogID}")
-    public void updateBlogByBlogID(@PathVariable("BlogID") int BlogID, @RequestBody String Content) {
-        blogService.updateBlogByBlogID(BlogID, Content);
-    }
-
-    @PutMapping("/updateBlogByUserID/{UserID}")
-    public void updateBlogByUserID(@PathVariable("UserID") int UserID, @RequestBody String Content) {
-        blogService.updateBlogByUserID(UserID, Content);
+    @PutMapping("/updateContentDreamByUserID/{UserID}")
+    public Result updateContentDreamByUserID(@PathVariable("UserID") int UserID, @RequestBody String Content) {
+        if (blogService.findByUserID(UserID)!=null) {
+            return Result.success(blogService.updateContentDreamByUserID(UserID, Content));
+        }else {
+            return Result.error("没找到该blog");
+        }
     }
 
     // 这里写更多的 setter 函数...

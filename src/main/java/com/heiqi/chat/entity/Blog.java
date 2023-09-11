@@ -11,6 +11,7 @@ import java.util.List;
 public class Blog {
     private int BlogID;
     private int UserID;
-    private String Content;
-    private Date PostTime;
+    private String ContentIntroduction;          //自我介绍文案
+    private String ContentDream;      //理想和追求
+    private String PostTime;
 }

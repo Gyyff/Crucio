@@ -12,19 +12,17 @@ public interface BlogMapper {
     @Select("SELECT * FROM blog WHERE UserID = #{UserID}")
     Blog getBlogByUserID(@Param("UserID") int UserID);
 
-    @Insert("INSERT INTO blog(BlogID, UserID, Content,PostTime) VALUES(#{BlogID}, #{UserID}, #{Content},#{PostTime})")
+    @Insert("INSERT INTO blog(BlogID, UserID, ContentIntroduction,ContentDream,PostTime) VALUES(#{BlogID}, #{UserID}, #{ContentIntroduction},#{ContentDream},#{PostTime})")
     @Options(useGeneratedKeys = true, keyProperty = "BlogID")
     int insertBlog(Blog blog);
 
     @Delete("DELETE FROM blog WHERE UserID = #{UserID}")
     int deleteBlogByUserID(@Param("UserID") int UserID);
 
-    @Delete("DELETE FROM blog WHERE BlogID = #{BlogID}")
-    int deleteBlogByBlogID(@Param("BlogID") int BlogID);
+    @Update("UPDATE blog SET ContentIntroduction = #{ContentIntroduction} WHERE UserID = #{UserID}")
+    int updateContentIntroductionByUserID(@Param("UserID") int UserID, @Param("ContentIntroduction") String ContentIntroduction);
 
-    @Update("UPDATE blog SET Content = #{Content} WHERE UserID = #{UserID}")
-    int updateBlogByUserID(@Param("UserID") int UserID, @Param("Content") String Content);
+    @Update("UPDATE blog SET ContentDream = #{ContentDream} WHERE UserID = #{UserID}")
+    int updateContentDreamByUserID(@Param("UserID") int UserID, @Param("ContentDream") String ContentDream);
 
-    @Update("UPDATE blog SET Content = #{Content} WHERE BlogID = #{BlogID}")
-    int updateBlogByBlogID(@Param("BlogID") int BlogID, @Param("Content") String Content);
 }

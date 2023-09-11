@@ -25,8 +25,12 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public int insertBlog(Blog blog) {
-        return blogMapper.insertBlog(blog);
+    public Blog insertBlog(Blog blog) {
+        Blog blogByUserID = blogMapper.getBlogByUserID(blog.getUserID());
+        if (blogByUserID==null){
+            blogMapper.insertBlog(blog);
+        }
+        return blogMapper.getBlogByUserID(blog.getUserID());
     }
 
     @Override
@@ -35,17 +39,16 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public int deleteBlogByBlogID(int BlogID) {
-        return blogMapper.deleteBlogByBlogID(BlogID);
+    public Blog updateContentIntroductionByUserID(int UserID, String ContentIntroduction) {
+        blogMapper.updateContentIntroductionByUserID(UserID,ContentIntroduction);
+        return blogMapper.getBlogByUserID(UserID);
     }
 
     @Override
-    public int updateBlogByUserID(int UserID, String Content) {
-        return blogMapper.updateBlogByUserID(UserID,Content);
+    public Blog updateContentDreamByUserID(int UserID, String ContentDream) {
+        blogMapper.updateContentDreamByUserID(UserID,ContentDream);
+        return blogMapper.getBlogByUserID(UserID);
     }
 
-    @Override
-    public int updateBlogByBlogID(int BlogID, String Content) {
-        return blogMapper.updateBlogByBlogID(BlogID,Content);
-    }
+
 }

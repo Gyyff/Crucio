@@ -10,14 +10,16 @@ public interface BlogService {
 
     Blog findByUserID(int UserID);
 
-    int insertBlog(Blog blog);
+    Blog insertBlog(Blog blog);
 
     int deleteBlogByUserID(int UserID);
 
-    int deleteBlogByBlogID(int BlogID);
+    Blog updateContentIntroductionByUserID(int UserID,  String ContentIntroduction);
 
-    int updateBlogByUserID(int UserID, String Content);
+    Blog updateContentDreamByUserID(int UserID,  String ContentDream);
 
-    int updateBlogByBlogID(int BlogID, String Content);
+
+
+
 
 }
