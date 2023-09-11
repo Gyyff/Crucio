@@ -48,7 +48,7 @@ public class UserPreferenceController {
     }
 
 
-    @PostMapping("/insertUserPreference")
+    @PutMapping("/insertUserPreference")
     public Result insertUserPreference(@RequestBody UserPreference userPreference){
         UserPreference userPreference1 = userPreferenceService.insertUserPreference(userPreference);
         if (userPreference1!=null){

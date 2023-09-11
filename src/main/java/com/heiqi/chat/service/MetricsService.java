@@ -11,7 +11,7 @@ public interface MetricsService {
 
     Metrics getMetricsByUserID(int UserID);
 
-    int insertMetrics(Metrics metrics);
+    Metrics insertMetrics(Metrics metrics);
 
     int deleteByUserID(int UserID);
 

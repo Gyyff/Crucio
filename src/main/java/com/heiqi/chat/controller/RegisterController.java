@@ -26,11 +26,16 @@ public class RegisterController {
     //用户的注册 验证码发送
     @GetMapping("/userRegisterSendSMS/{Phone}")
     public Result Register(@PathVariable("Phone") String Phone) throws Exception {
-        String randomNum = mateUtils.Sjs();
-        String TempLateParam = "{\"code\" : \""+randomNum+"\"}";
-        SendSMS.SendSms(Phone,TempLateParam);
-        Tempt = randomNum;
-        return Result.success();
+        if (userService.getUserByPhone(Phone)==null){
+            String randomNum = mateUtils.Sjs();
+            String TempLateParam = "{\"code\" : \""+randomNum+"\"}";
+            SendSMS.SendSms(Phone,TempLateParam);
+            Tempt = randomNum;
+            return Result.success();
+        }else {
+            return Result.error("手机号已被注册");
+        }
+
     }
 
     //用户注册时的验证码校验 验证成功则直接注册

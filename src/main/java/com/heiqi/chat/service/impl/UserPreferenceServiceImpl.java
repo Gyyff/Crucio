@@ -35,8 +35,9 @@ public class UserPreferenceServiceImpl implements UserPreferenceService {
 
     @Override
     public UserPreference insertUserPreference(UserPreference userPreference) {
-       userPreferenceMapper.insertUserPreference(userPreference);
-        UserPreference SUserPreference = userPreferenceMapper.getUserPreferenceByUserId(userPreference.getUserID());
-        return SUserPreference;
+        if (userPreferenceMapper.getUserPreferenceByUserId(userPreference.getUserID())==null){
+            userPreferenceMapper.insertUserPreference(userPreference);
+        }
+        return userPreferenceMapper.getUserPreferenceByUserId(userPreference.getUserID());
     }
 }

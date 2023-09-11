@@ -25,8 +25,11 @@ public class MetricsServiceImpl implements MetricsService {
     }
 
     @Override
-    public int insertMetrics(Metrics metrics) {
-        return metricsMapper.insertMetrics(metrics);
+    public Metrics insertMetrics(Metrics metrics) {
+        if (metricsMapper.getMetricsByUserID(metrics.getUserID())==null){
+            metricsMapper.insertMetrics(metrics);
+        }
+        return metricsMapper.getMetricsByUserID(metrics.getUserID());
     }
 
     @Override

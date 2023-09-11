@@ -89,7 +89,7 @@ public class UserController {
         return userService.getUserMatch(UserId);
     }
 
-    // 这里写更多的 getter 函数...
+    // 这里写更多的 getter 函数...+
 
     @PostMapping("/insertUser")
     public void insertUser(@RequestBody User user) throws Exception {
@@ -149,7 +149,6 @@ public class UserController {
         userService.updateUserIsLogged(UserId, IsLogged);
     }
 
-    //用户是否已经经过性格测试 （0，代表没有）  （1，代表已经通过测试）
     @PutMapping("/updateUserIsTested/{UserId}")
     public void updateUserIsTested(@PathVariable("UserId") int UserId, @RequestBody int IsTested) {
         userService.updateUserIsTested(UserId, IsTested);
