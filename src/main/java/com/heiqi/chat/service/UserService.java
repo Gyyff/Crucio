@@ -4,6 +4,7 @@ package com.heiqi.chat.service;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.User;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.Date;
 
@@ -77,4 +78,6 @@ public interface UserService {
 
 
     int updateUserAddressB(@Param("UserId") int UserId, @Param("AddressB") String AddressB);
+
+
 }

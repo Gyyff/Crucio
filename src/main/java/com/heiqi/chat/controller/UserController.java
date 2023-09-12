@@ -2,6 +2,7 @@ package com.heiqi.chat.controller;
 
 
 import com.heiqi.chat.Utils.MateUtils;
+import com.heiqi.chat.Utils.UploadUtil;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.Represent;
 import com.heiqi.chat.entity.User;
@@ -9,7 +10,9 @@ import com.heiqi.chat.service.RepresentService;
 import com.heiqi.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -116,6 +119,16 @@ public class UserController {
     public void deleteRepresent(@PathVariable("UserId") int UserId) {
         representService.deleteRepresent(UserId);
     }
+
+
+    //用户头像上传
+    @PutMapping("/uploadUserPhoto/{UserId}")
+    public Result uploadUserPhoto(@PathVariable("UserId") int UserId, @RequestBody MultipartFile file) throws IOException {
+        String path = UploadUtil.uploadImage(file);
+        userService.updateUserPhoto(UserId,path);
+        return Result.success(path);
+    }
+
 
     @PutMapping("/updateUserName/{UserId}")
     public void updateUserName(@PathVariable("UserId") int UserId, @RequestBody String UserName) {

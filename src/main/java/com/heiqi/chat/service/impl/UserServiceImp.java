@@ -319,8 +319,10 @@ public class UserServiceImp implements UserService {
         }));
         System.out.println("匹配结束 最高适配度的用户是" + " " + SucCesUserId.get() + " " + "号用户" + "    " + "他与当前用户的双向契合度总分是" + " " + TAndS.get() + "分。");
         User sUser = userMapper.getUserById(SucCesUserId.get());
+        if (sUser!=null){
             userMapper.updateUserMatchStatus(user.getUserId(), 1);
             userMapper.updateUserMatchStatus(sUser.getUserId(), 1);
+        }
             return sUser;
 
 
