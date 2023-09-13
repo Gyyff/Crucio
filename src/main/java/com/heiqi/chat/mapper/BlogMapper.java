@@ -12,7 +12,7 @@ public interface BlogMapper {
     @Select("SELECT * FROM blog WHERE UserID = #{UserID}")
     Blog getBlogByUserID(@Param("UserID") int UserID);
 
-    @Insert("INSERT INTO blog(BlogID, UserID, ContentIntroduction,ContentDream,PostTime,Content2,Content3,Content4,Content5,Content6,Content7,Content8,Content9,Content10) VALUES(#{BlogID}, #{UserID}, #{ContentIntroduction},#{ContentDream},#{PostTime},#{Content2},#{Content3},#{Content4},#{Content5},#{Content6},#{Content7},#{Content8},#{Content9},#{Content10}")
+    @Insert("INSERT INTO blog(BlogID, UserID, ContentIntroduction,ContentDream,PostTime,Content2,Content3,Content4,Content5,Content6,Content7,Content8,Content9,Content10,Photo1,Photo2,Photo3,Photo4,Photo5,Photo6) VALUES(#{BlogID}, #{UserID}, #{ContentIntroduction},#{ContentDream},#{PostTime},#{Content2},#{Content3},#{Content4},#{Content5},#{Content6},#{Content7},#{Content8},#{Content9},#{Content10},#{Photo1},#{Photo2},#{Photo3},#{Photo4},#{Photo5},#{Photo6})")
     @Options(useGeneratedKeys = true, keyProperty = "BlogID")
     int insertBlog(Blog blog);
 
@@ -21,6 +21,7 @@ public interface BlogMapper {
 
     @Update("UPDATE blog SET ContentIntroduction = #{ContentIntroduction} WHERE UserID = #{UserID}")
     int updateContentIntroductionByUserID(@Param("UserID") int UserID, @Param("ContentIntroduction") String ContentIntroduction);
+
 
     @Update("UPDATE blog SET ContentDream = #{ContentDream} WHERE UserID = #{UserID}")
     int updateContentDreamByUserID(@Param("UserID") int UserID, @Param("ContentDream") String ContentDream);
