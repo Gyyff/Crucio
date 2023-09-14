@@ -178,7 +178,7 @@ public class UserServiceImp implements UserService {
             matchMapper.updateRelationshipUser2(UserId, 1);
             return Result.success("确认关系成功");
         } else {
-            return Result.error("操作失败请重试");
+            return Result.error("操作失败请重试，有可能是网络原因导致");
         }
 
     }
