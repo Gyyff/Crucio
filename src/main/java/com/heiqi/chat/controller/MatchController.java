@@ -32,10 +32,7 @@ public class MatchController {
 
     // 这里写更多的 getter 函数...
 
-    @PostMapping("/insertMatch")
-    public void insertMatch(@RequestBody Match match) {
-        matchService.insertMatch(match);
-    }
+
 
     @DeleteMapping("deleteMatchByMatchID/{MatchID}")
     public void deleteMatchByMatchID(@PathVariable("MatchID") int MatchID) {

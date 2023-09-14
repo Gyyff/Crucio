@@ -20,6 +20,7 @@ public interface BlogService {
     Blog updateContentDreamByUserID(int UserID,  String ContentDream);
 
 
+    Blog updateContent1(@Param("UserID") int UserID, @Param("Content1") String Content1);
     Blog updateContent2(@Param("UserID") int UserID, @Param("Content2") String Content2);
 
 

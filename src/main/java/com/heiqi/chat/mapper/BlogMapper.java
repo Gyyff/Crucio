@@ -26,6 +26,9 @@ public interface BlogMapper {
     @Update("UPDATE blog SET ContentDream = #{ContentDream} WHERE UserID = #{UserID}")
     int updateContentDreamByUserID(@Param("UserID") int UserID, @Param("ContentDream") String ContentDream);
 
+    @Update("UPDATE blog SET Content1 = #{Content1} WHERE UserID = #{UserID}")
+    int updateContent1(@Param("UserID") int UserID, @Param("Content1") String Content1);
+
     @Update("UPDATE blog SET Content2 = #{Content2} WHERE UserID = #{UserID}")
     int updateContent2(@Param("UserID") int UserID, @Param("Content2") String Content2);
 

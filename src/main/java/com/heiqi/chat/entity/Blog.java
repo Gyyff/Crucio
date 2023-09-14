@@ -14,6 +14,7 @@ public class Blog {
     private String ContentIntroduction;          //自我介绍文案
     private String ContentDream;                 //理想和追求
     private String PostTime;
+    private String Content1;
     private String Content2;
     private String Content3;
     private String Content4;

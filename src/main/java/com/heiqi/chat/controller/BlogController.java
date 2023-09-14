@@ -62,6 +62,12 @@ public class BlogController {
         }
     }
 
+    @PutMapping("/updateContent1/{UserID}")
+    public Result updateContent1(@PathVariable("UserID") int UserID,@RequestBody String Content){
+        Blog blog = blogService.updateContent1(UserID, Content);
+        return Result.success(blog);
+    }
+
     @PutMapping("/updateContent2/{UserID}")
     public Result updateContent2(@PathVariable("UserID") int UserID,@RequestBody String Content){
         Blog blog = blogService.updateContent2(UserID, Content);

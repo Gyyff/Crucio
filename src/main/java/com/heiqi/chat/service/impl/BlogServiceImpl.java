@@ -48,6 +48,13 @@ public class BlogServiceImpl implements BlogService {
     public Blog updateContentDreamByUserID(int UserID, String ContentDream) {
         blogMapper.updateContentDreamByUserID(UserID,ContentDream);
         return blogMapper.getBlogByUserID(UserID);
+
+    }
+
+    @Override
+    public Blog updateContent1(int UserID, String Content1) {
+        blogMapper.updateContent1(UserID,Content1);
+        return blogMapper.getBlogByUserID(UserID);
     }
 
     @Override

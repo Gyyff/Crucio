@@ -20,7 +20,7 @@ public interface UserService {
 
     User getUserByPhone(String Phone);
 
-    User getUserMatch(int UserId);
+    Result getUserMatch(int UserId);
 
     //   public List<Metrics> getUserMatch(int UserId);
     void insertUser(User user) throws Exception;
@@ -79,5 +79,11 @@ public interface UserService {
 
     int updateUserAddressB(@Param("UserId") int UserId, @Param("AddressB") String AddressB);
 
+    Result cutLove(int UserId);
+
+
+    Result confirmShip(int UserId);
+
+    Result determineToMatchPages(int UserId);
 
 }

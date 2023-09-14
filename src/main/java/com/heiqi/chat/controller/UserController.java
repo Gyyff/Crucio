@@ -85,17 +85,29 @@ public class UserController {
         userService.userQuit(UserId);
         return Result.success();
     }
+    //结束关系
+    @DeleteMapping("/cutLove/{UserId}")
+    public Result cutLove(@PathVariable("UserId") int UserId){
+        return userService.cutLove(UserId);
+    }
+
+    //确认关系
+    @PutMapping("/confirmShip/{UserId}")
+    public Result confirmShip(@PathVariable("UserId") int UserId){
+        return userService.confirmShip(UserId);
+    }
+
 
     //这里是用户匹配
     @GetMapping("/getUserMatch/{UserId}")
     public Result getUserMatch(@PathVariable("UserId") int UserId) {
-        User user = userService.getUserMatch(UserId);
-        if (user!=null){
-            return Result.success(user);
-        }else {
-            return Result.error("目前还没有找到合适对象");
-        }
+     return userService.getUserMatch(UserId);
+    }
 
+    //用户前往匹配页面时的校验
+    @GetMapping("/determineToMatchPages/{UserId}")
+    public Result determineToMatchPages(@PathVariable("UserId") int UserId) {
+        return userService.determineToMatchPages(UserId);
     }
 
     // 这里写更多的 getter 函数...+
