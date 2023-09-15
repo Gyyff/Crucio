@@ -3,20 +3,20 @@ package com.heiqi.chat.mapper;
 import com.heiqi.chat.entity.FeedBack;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 public interface FeedbackMapper {
-    @Select("SELECT * FROM feedback WHERE FeedbackID = #{FeedbackID}")
-    FeedBack getFeedbackByFeedbackID(@Param("FeedbackID") int FeedbackID);
+    @Select("SELECT * FROM feedback WHERE feedbackId = #{feedbackId}")
+    FeedBack getFeedbackByFeedbackID(@Param("feedbackId") int feedbackId);
 
-    @Select("SELECT * FROM feedback WHERE UserID = #{UserID}")
-    FeedBack getFeedbackByUserID(@Param("UserID") int UserID);
+    @Select("SELECT * FROM feedback WHERE UserID = #{userId}")
+    List<FeedBack> getFeedbackByUserID(@Param("userId") int userId);
 
-    @Insert("INSERT INTO feedback(FeedbackID, UserID, Content,FeedbackTime) VALUES(#{FeedbackID}, #{UserID}, #{Content},#{FeedbackTime})")
-    @Options(useGeneratedKeys = true, keyProperty = "FeedbackID")
+    @Insert("INSERT INTO feedback(feedbackId, userId, user2Id,overallPoint,manyChoice,thoughtQ,valuesQ,lifeQ,characterQ,conflictQ,humiliationQ,supplementQ) VALUES(#{feedbackId}, #{userId}, #{user2Id},#{overallPoint},#{manyChoice},#{thoughtQ},#{valuesQ},#{lifeQ},#{characterQ},#{conflictQ},#{humiliationQ},#{supplementQ})")
+    @Options(useGeneratedKeys = true, keyProperty = "feedbackId")
     int insertFeedBack(FeedBack feedBack);
 
     @Delete("DELETE FROM feedback WHERE FeedbackID = #{FeedbackID}")
     int deleteFeedBack(@Param("FeedbackID") int FeedbackID);
 
-    @Update("UPDATE feedback SET Content = #{Content} WHERE UserID = #{UserID}")
-    int updateFeedBackContent(@Param("UserID") int UserID, @Param("Content") String Content);
 }

@@ -6,6 +6,8 @@ import com.heiqi.chat.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
     private final FeedbackMapper feedbackMapper;
@@ -20,12 +22,13 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public FeedBack getFeedbackByUserID(int UserID) {
+    public List<FeedBack> getFeedbackByUserID(int UserID) {
         return feedbackMapper.getFeedbackByUserID(UserID);
     }
 
     @Override
     public int insertFeedBack(FeedBack feedBack) {
+
         return feedbackMapper.insertFeedBack(feedBack);
     }
 
@@ -34,8 +37,4 @@ public class FeedbackServiceImpl implements FeedbackService {
         return feedbackMapper.deleteFeedBack(FeedbackID);
     }
 
-    @Override
-    public int updateFeedBackContent(int UserId,String Content) {
-        return feedbackMapper.updateFeedBackContent(UserId,Content);
-    }
 }

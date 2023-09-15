@@ -6,6 +6,9 @@ import com.heiqi.chat.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+
 @RestController
 @RequestMapping("/api/user/feedback")
 public class FeedbackController {
@@ -30,11 +33,13 @@ public class FeedbackController {
     // 这里写更多的 getter 函数...
 
 
-    //添加反馈
+    //发送反馈
     @PostMapping("/insertFeedBack")
     public Result insertFeedBack(@RequestBody FeedBack feedBack) {
         feedbackService.insertFeedBack(feedBack);
-       return Result.success(feedbackService.getFeedbackByUserID(feedBack.getUserID()));
+        List<FeedBack> feedBacks;
+        feedBacks=feedbackService.getFeedbackByUserID(feedBack.getUserId());
+       return Result.success(feedBacks);
     }
     //删除
     @DeleteMapping("deleteFeedBack/{FeedbackID}")
@@ -42,13 +47,6 @@ public class FeedbackController {
        return Result.success(feedbackService.deleteFeedBack(FeedbackID));
     }
 
-
-    //修改
-    @PutMapping("/updateFeedBackContent/{UserId}")
-    public Result updateFeedBackContent(@PathVariable("UserId") int UserId, @RequestBody String Content) {
-        feedbackService.updateFeedBackContent(UserId, Content);
-        return Result.success(feedbackService.getFeedbackByUserID(UserId));
-    }
     // 这里写更多的 setter 函数...
 
 }
