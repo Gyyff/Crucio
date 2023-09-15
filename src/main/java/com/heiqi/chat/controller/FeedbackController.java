@@ -1,5 +1,6 @@
 package com.heiqi.chat.controller;
 
+import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.FeedBack;
 import com.heiqi.chat.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,9 @@ public class FeedbackController {
     // 这里写更多的 getter 函数...
 
     @PostMapping("/insertFeedBack")
-    public void insertFeedBack(@RequestBody FeedBack feedBack) {
+    public Result insertFeedBack(@RequestBody FeedBack feedBack) {
         feedbackService.insertFeedBack(feedBack);
+       return Result.success(feedbackService.getFeedbackByUserID(feedBack.getUserID()));
     }
 
     @DeleteMapping("deleteFeedBack/{FeedbackID}")
