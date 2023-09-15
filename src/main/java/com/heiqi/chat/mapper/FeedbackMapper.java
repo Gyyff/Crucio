@@ -17,6 +17,6 @@ public interface FeedbackMapper {
     @Delete("DELETE FROM feedback WHERE FeedbackID = #{FeedbackID}")
     int deleteFeedBack(@Param("FeedbackID") int FeedbackID);
 
-    @Update("UPDATE feedback SET Content = #{Content} WHERE FeedbackID = #{FeedbackID}")
-    int updateFeedBackContent(@Param("FeedbackID") int FeedbackID, @Param("Content") String Content);
+    @Update("UPDATE feedback SET Content = #{Content} WHERE UserID = #{UserID}")
+    int updateFeedBackContent(@Param("UserID") int UserID, @Param("Content") String Content);
 }

@@ -35,7 +35,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public int updateFeedBackContent(int FeedbackID,String Content) {
-        return feedbackMapper.updateFeedBackContent(FeedbackID,Content);
+    public int updateFeedBackContent(int UserId,String Content) {
+        return feedbackMapper.updateFeedBackContent(UserId,Content);
     }
 }

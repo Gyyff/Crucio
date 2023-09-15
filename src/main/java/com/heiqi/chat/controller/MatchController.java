@@ -1,5 +1,6 @@
 package com.heiqi.chat.controller;
 
+import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.Match;
 import com.heiqi.chat.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +21,31 @@ public class MatchController {
         return matchService.getMatchByMatchID(MatchID);
     }
 
+    //根据UserID1 获取match对象
     @GetMapping("/getMatchByUserID1/{UserID1}")
     public Match getMatchByUserID1(@PathVariable("UserID1") int UserID1) {
         return matchService.getMatchByUserID1(UserID1);
     }
 
+    //根据UserID2 获取match对象
     @GetMapping("/getMatchByUserID2/{UserID2}")
     public Match getMatchByUserID2(@PathVariable("UserID2") int UserID2) {
         return matchService.getMatchByUserID2(UserID2);
     }
+    //根据UserID 直接获取match对象 并确认他是user1还是user2
+    @GetMapping("/getMatchByUserID/{UserID}")
+    public Result getMatchByUserID(@PathVariable("UserID") int UserID) {
+        return matchService.getMatchByUserID(UserID);
+    }
+
+
+    // **查看对方的确认状态*
+    @GetMapping("/oppositePartyStatus/{UserID}")
+    public Result oppositePartyStatus(@PathVariable("UserID") int UserID) {
+        return matchService.oppositePartyStatus(UserID);
+    }
 
     // 这里写更多的 getter 函数...
-
 
 
     @DeleteMapping("deleteMatchByMatchID/{MatchID}")

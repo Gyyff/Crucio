@@ -11,6 +11,6 @@ public class FeedBack {
     private int FeedbackID;
     private int UserID;
     private String Content;
-    private Date FeedbackTime;
+    private String FeedbackTime;
 
 }

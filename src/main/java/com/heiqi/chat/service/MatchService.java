@@ -1,5 +1,6 @@
 package com.heiqi.chat.service;
 
+import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.Match;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +19,9 @@ public interface MatchService {
     int deleteMatchByUserID1(int UserID1);
 
     int deleteMatchByUserID2(int UserID2);
+
+    //确认对方状态
+    Result oppositePartyStatus(int UserID);
+
+    Result getMatchByUserID(int UserID);
 }

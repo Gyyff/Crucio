@@ -13,5 +13,5 @@ public interface FeedbackService {
 
     int deleteFeedBack(int FeedbackID);
 
-    int updateFeedBackContent(int FeedbackID,String Content);
+    int updateFeedBackContent(int UserId,String Content);
 }

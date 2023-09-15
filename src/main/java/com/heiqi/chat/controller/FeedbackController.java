@@ -21,27 +21,33 @@ public class FeedbackController {
         return feedbackService.getFeedbackByFeedbackID(FeedbackID);
     }
 
+    //查看该用户的反馈
     @GetMapping("/getFeedbackByUserID/{UserID}")
-    public FeedBack getFeedbackByUserID(@PathVariable("UserID") int UserID) {
-        return feedbackService.getFeedbackByUserID(UserID);
+    public Result getFeedbackByUserID(@PathVariable("UserID") int UserID) {
+        return Result.success(feedbackService.getFeedbackByUserID(UserID));
     }
 
     // 这里写更多的 getter 函数...
 
+
+    //添加反馈
     @PostMapping("/insertFeedBack")
     public Result insertFeedBack(@RequestBody FeedBack feedBack) {
         feedbackService.insertFeedBack(feedBack);
        return Result.success(feedbackService.getFeedbackByUserID(feedBack.getUserID()));
     }
-
+    //删除
     @DeleteMapping("deleteFeedBack/{FeedbackID}")
-    public void deleteFeedBack(@PathVariable("FeedbackID") int FeedbackID) {
-        feedbackService.deleteFeedBack(FeedbackID);
+    public Result deleteFeedBack(@PathVariable("FeedbackID") int FeedbackID) {
+       return Result.success(feedbackService.deleteFeedBack(FeedbackID));
     }
 
-    @PutMapping("/updateFeedBackContent/{FeedbackID}")
-    public void updateFeedBackContent(@PathVariable("FeedbackID") int FeedbackID, @RequestBody String Content) {
-        feedbackService.updateFeedBackContent(FeedbackID, Content);
+
+    //修改
+    @PutMapping("/updateFeedBackContent/{UserId}")
+    public Result updateFeedBackContent(@PathVariable("UserId") int UserId, @RequestBody String Content) {
+        feedbackService.updateFeedBackContent(UserId, Content);
+        return Result.success(feedbackService.getFeedbackByUserID(UserId));
     }
     // 这里写更多的 setter 函数...
 
