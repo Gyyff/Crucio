@@ -1,7 +1,6 @@
 package com.heiqi.chat.Utils;
 
 
-import com.heiqi.chat.entity.NonCore;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;

@@ -3,14 +3,11 @@ package com.heiqi.chat.controller;
 import com.heiqi.chat.Utils.MateUtils;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.User;
-import com.heiqi.chat.service.RepresentService;
 import com.heiqi.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.Date;
-import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/user/Register")
