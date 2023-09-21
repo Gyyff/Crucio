@@ -7,13 +7,13 @@ import com.heiqi.chat.entity.Message;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
-
+import org.springframework.stereotype.Component;
 
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-@ServerEndpoint("/api/user/chatEndpoint")
+@Component
+@ServerEndpoint(value = "/api/websocket")
 public class ChatEndPoint {
 
     //用来储存每一个客户端对象对应的ChatEndpoint
@@ -33,6 +33,7 @@ public class ChatEndPoint {
     //接收到客户端发送的数据时被调用
     public void onMessage(String message, Session session) {
         try {
+            System.out.println("收到了消息 确认连接");
             //将message转换成message对象
             ObjectMapper mapper = new ObjectMapper();
             Message mess = mapper.readValue(message, Message.class);
@@ -55,6 +56,7 @@ public class ChatEndPoint {
 
     @OnOpen
     public void onOpen(Session session,EndpointConfig config) {
+        System.out.println("连接已确认 ");
         //将局部的session对象赋值给成员session
         this.session=session;
         //获取httpSession对象
