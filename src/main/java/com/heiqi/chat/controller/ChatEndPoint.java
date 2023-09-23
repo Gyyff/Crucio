@@ -1,21 +1,16 @@
 package com.heiqi.chat.controller;
 
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.heiqi.chat.Utils.MessageUtils;
 import com.heiqi.chat.common.SessionWrap;
-import com.heiqi.chat.entity.Message;
-import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import org.springframework.stereotype.Component;
-
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+
+
+
+
 @Component
 @ServerEndpoint(value = "/api/websocket/{from}/{to}")
 public class ChatEndPoint {

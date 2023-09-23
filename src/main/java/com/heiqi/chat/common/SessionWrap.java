@@ -10,6 +10,4 @@ public class SessionWrap {
     private int from;     //会话发起者id
     private int to;     //会话接收者id
     private Session session;
-
-
 }
