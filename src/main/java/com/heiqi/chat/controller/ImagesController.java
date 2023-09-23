@@ -31,4 +31,10 @@ public class ImagesController {
         imagesService.insertImages(blogID,path);
         return Result.success(path);
     }
+
+    @GetMapping("/getHeadPhotoByUserId/{UserId}")
+    public Result getHeadPhotoByUserId(@PathVariable("UserId") int UserId){
+        String path = blogService.findByUserID(UserId).getPhoto1();
+        return Result.success(path);
+    }
 }
