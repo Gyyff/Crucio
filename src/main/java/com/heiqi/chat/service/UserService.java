@@ -3,6 +3,7 @@ package com.heiqi.chat.service;
 
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.User;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 

@@ -3,8 +3,10 @@ package com.heiqi.chat.controller;
 
 import com.heiqi.chat.Utils.UploadUtil;
 import com.heiqi.chat.common.Result;
+import com.heiqi.chat.entity.BaseUser;
 import com.heiqi.chat.entity.User;
 import com.heiqi.chat.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/getUserById/{UserId}")
-    public Result getUserById(@PathVariable("UserId") int UserId) {
+    public Result getUserById(@PathVariable("UserId") int UserId, BaseUser baseUser) {
         User user = userService.getUserById(UserId);
         return Result.success(user);
     }
@@ -106,20 +108,20 @@ public class UserController {
     // 这里写更多的 getter 函数...+
 
     @PostMapping("/insertUser")
-    public void insertUser(@RequestBody User user) throws Exception {
+    public void insertUser(@RequestBody User user, BaseUser baseUser) throws Exception {
         userService.insertUser(user);
     }
 
 
     @DeleteMapping("/deleteUser/{UserId}")
-    public void deleteUser(@PathVariable("UserId") int UserId) {
+    public void deleteUser(@PathVariable("UserId") int UserId, BaseUser baseUser) {
         userService.deleteUser(UserId);
     }
 
 
     //用户头像上传
     @PutMapping("/uploadUserPhoto/{UserId}")
-    public Result uploadUserPhoto(@PathVariable("UserId") int UserId, @RequestBody MultipartFile file) throws IOException {
+    public Result uploadUserPhoto(@PathVariable("UserId") int UserId, @RequestBody MultipartFile file, BaseUser baseUser) throws IOException {
         String path = UploadUtil.uploadImage(file);
         userService.updateUserPhoto(UserId,path);
         return Result.success(path);
@@ -127,45 +129,45 @@ public class UserController {
 
 
     @PutMapping("/updateUserName/{UserId}")
-    public void updateUserName(@PathVariable("UserId") int UserId, @RequestBody String UserName) {
+    public void updateUserName(@PathVariable("UserId") int UserId, @RequestBody String UserName, BaseUser baseUser) {
         userService.updateUserName(UserId, UserName);
     }
 
     @PutMapping("/updateUserAge/{UserId}")
-    public void updateUserAge(@PathVariable("UserId") int UserId, @RequestBody int Age) {
+    public void updateUserAge(@PathVariable("UserId") int UserId, @RequestBody int Age, BaseUser baseUser) {
         userService.updateUserAge(UserId, Age);
     }
 
 
     @PutMapping("/updateUserIdentity/{UserId}")
-    public void updateUserIdentity(@PathVariable("UserId") int UserId, @RequestBody String Identity) {
+    public void updateUserIdentity(@PathVariable("UserId") int UserId, @RequestBody String Identity, BaseUser baseUser) {
         userService.updateUserIdentity(UserId, Identity);
     }
 
     @PutMapping("/updateUserEducation/{UserId}")
-    public void updateUserEducation(@PathVariable("UserId") int UserId, @RequestBody int Education) {
+    public void updateUserEducation(@PathVariable("UserId") int UserId, @RequestBody int Education, BaseUser baseUser) {
         System.out.println("UserId = " + UserId);
         System.out.println("Education = " + Education);
         userService.updateUserEducation(UserId, Education);
     }
 
     @PutMapping("/updateUserPhoto/{UserId}")
-    public void updateUserPhoto(@PathVariable("UserId") int UserId, @RequestBody String Photo) {
+    public void updateUserPhoto(@PathVariable("UserId") int UserId, @RequestBody String Photo, BaseUser baseUser) {
         userService.updateUserPhoto(UserId, Photo);
     }
 
     @PutMapping("/updateUserIsAuthed/{UserId}")
-    public void updateUserIsAuthed(@PathVariable("UserId") int UserId, @RequestBody int IsAuthed) {
+    public void updateUserIsAuthed(@PathVariable("UserId") int UserId, @RequestBody int IsAuthed, BaseUser baseUser) {
         userService.updateUserIsAuthed(UserId, IsAuthed);
     }
 
     @PutMapping("/updateUserIsLogged/{UserId}")
-    public void updateUserIsLogged(@PathVariable("UserId") int UserId, @RequestBody int IsLogged) {
+    public void updateUserIsLogged(@PathVariable("UserId") int UserId, @RequestBody int IsLogged, BaseUser baseUser) {
         userService.updateUserIsLogged(UserId, IsLogged);
     }
 
     @PutMapping("/updateUserIsTested/{UserId}")
-    public void updateUserIsTested(@PathVariable("UserId") int UserId, @RequestBody int IsTested) {
+    public void updateUserIsTested(@PathVariable("UserId") int UserId, @RequestBody int IsTested, BaseUser baseUser) {
         userService.updateUserIsTested(UserId, IsTested);
     }
 

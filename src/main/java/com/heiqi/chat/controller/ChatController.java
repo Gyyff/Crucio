@@ -1,5 +1,6 @@
 package com.heiqi.chat.controller;
 
+import com.heiqi.chat.entity.BaseUser;
 import com.heiqi.chat.entity.Chat;
 import com.heiqi.chat.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,12 @@ public class ChatController {
     // 这里写更多的 getter 函数...
 
     @PostMapping("/insertChat")
-    public void insertChat(@RequestBody Chat chat) {
+    public void insertChat(@RequestBody Chat chat, BaseUser baseUser) {
         chatService.insertChat(chat);
     }
 
     @DeleteMapping("deleteChatByChatID/{ChatID}")
-    public void deleteChatByChatID(@PathVariable("ChatID") int ChatID) {
+    public void deleteChatByChatID(@PathVariable("ChatID") int ChatID, BaseUser baseUser) {
         chatService.deleteChatByChatID(ChatID);
     }
 

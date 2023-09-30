@@ -1,6 +1,7 @@
 package com.heiqi.chat.controller;
 
 import com.heiqi.chat.common.Result;
+import com.heiqi.chat.entity.BaseUser;
 import com.heiqi.chat.entity.FeedBack;
 import com.heiqi.chat.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class FeedbackController {
 
     //发送反馈
     @PostMapping("/insertFeedBack")
-    public Result insertFeedBack(@RequestBody FeedBack feedBack) {
+    public Result insertFeedBack(@RequestBody FeedBack feedBack, BaseUser baseUser) {
         feedbackService.insertFeedBack(feedBack);
         List<FeedBack> feedBacks;
         feedBacks=feedbackService.getFeedbackByUserID(feedBack.getUserId());
@@ -43,7 +44,7 @@ public class FeedbackController {
     }
     //删除
     @DeleteMapping("deleteFeedBack/{FeedbackID}")
-    public Result deleteFeedBack(@PathVariable("FeedbackID") int FeedbackID) {
+    public Result deleteFeedBack(@PathVariable("FeedbackID") int FeedbackID, BaseUser baseUser) {
        return Result.success(feedbackService.deleteFeedBack(FeedbackID));
     }
 

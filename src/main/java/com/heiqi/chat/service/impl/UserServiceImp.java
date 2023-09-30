@@ -2,6 +2,7 @@ package com.heiqi.chat.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.heiqi.chat.Utils.JwtUtil;
 import com.heiqi.chat.Utils.MatchUtils;
 import com.heiqi.chat.Utils.MateUtils;
 import com.heiqi.chat.common.Result;
@@ -15,11 +16,14 @@ import com.heiqi.chat.mapper.MetricsMapper;
 import com.heiqi.chat.mapper.UserMapper;
 import com.heiqi.chat.mapper.UserPreferenceMapper;
 import com.heiqi.chat.service.UserService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -36,6 +40,8 @@ public class UserServiceImp implements UserService {
 
     private final MateUtils mateUtils;
 
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     public UserServiceImp(UserMapper userMapper, MetricsMapper metricsMapper, UserPreferenceMapper userPreferenceMapper, MatchUtils matchUtils, MateUtils mateUtils, MatchMapper matchMapper) {
@@ -95,12 +101,17 @@ public class UserServiceImp implements UserService {
             User user = userMapper.getUserByPhone(Phone);
             userMapper.updateUserIsLogged(user.getUserId(), 1);
             User userById = userMapper.getUserById(user.getUserId());
+
+            String token = JwtUtil.sign(userById.getUserId());
+            stringRedisTemplate.opsForValue().set(token, "", 1, TimeUnit.DAYS);
+            userById.setToken(token);
+
             return Result.success(userById);
         } else {
             return Result.error("验证码错误");
         }
 
-    }
+          }
 
     @Override
     public void userQuit(int UserId) {

@@ -1,6 +1,7 @@
 package com.heiqi.chat.controller;
 
 import com.heiqi.chat.common.Result;
+import com.heiqi.chat.entity.BaseUser;
 import com.heiqi.chat.entity.Match;
 import com.heiqi.chat.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,17 +50,17 @@ public class MatchController {
 
 
     @DeleteMapping("deleteMatchByMatchID/{MatchID}")
-    public void deleteMatchByMatchID(@PathVariable("MatchID") int MatchID) {
+    public void deleteMatchByMatchID(@PathVariable("MatchID") int MatchID, BaseUser baseUser) {
         matchService.deleteMatchByMatchID(MatchID);
     }
 
     @DeleteMapping("deleteMatchByUserID1/{UserID1}")
-    public void deleteMatchByUserID1(@PathVariable("UserID1") int UserID1) {
+    public void deleteMatchByUserID1(@PathVariable("UserID1") int UserID1, BaseUser baseUser) {
         matchService.deleteMatchByUserID1(UserID1);
     }
 
     @DeleteMapping("deleteMatchByUserID2/{UserID2}")
-    public void deleteMatchByUserID2(@PathVariable("UserID2") int UserID2) {
+    public void deleteMatchByUserID2(@PathVariable("UserID2") int UserID2, BaseUser baseUser) {
         matchService.deleteMatchByUserID2(UserID2);
     }
 

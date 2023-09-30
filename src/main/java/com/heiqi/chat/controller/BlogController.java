@@ -2,6 +2,7 @@ package com.heiqi.chat.controller;
 
 import com.heiqi.chat.Utils.UploadUtil;
 import com.heiqi.chat.common.Result;
+import com.heiqi.chat.entity.BaseUser;
 import com.heiqi.chat.entity.Blog;
 import com.heiqi.chat.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,19 +34,19 @@ public class BlogController {
 
     // 这里写更多的 getter 函数...
     @PostMapping("/insertBlog")
-    public Result insertBlog(@RequestBody Blog blog) {
+    public Result insertBlog(@RequestBody Blog blog, BaseUser baseUser) {
         Blog blogS = blogService.insertBlog(blog);
         return Result.success(blogS);
     }
 
     @DeleteMapping("/deleteBlogByUserID/{UserID}")
-    public void deleteBlogByUserID(@PathVariable("UserID") int UserID) {
+    public void deleteBlogByUserID(@PathVariable("UserID") int UserID, BaseUser baseUser) {
         blogService.deleteBlogByUserID(UserID);
     }
 
 
     @PutMapping("/updateContentIntroductionByUserID/{UserID}")
-    public Result updateContentIntroductionByUserID(@PathVariable("UserID") int UserID, @RequestBody String Content) {
+    public Result updateContentIntroductionByUserID(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
         if (blogService.findByUserID(UserID)!=null) {
             return Result.success(blogService.updateContentIntroductionByUserID(UserID, Content));
         }else {
@@ -54,7 +55,7 @@ public class BlogController {
     }
 
     @PutMapping("/updateContentDreamByUserID/{UserID}")
-    public Result updateContentDreamByUserID(@PathVariable("UserID") int UserID, @RequestBody String Content) {
+    public Result updateContentDreamByUserID(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
         if (blogService.findByUserID(UserID)!=null) {
             return Result.success(blogService.updateContentDreamByUserID(UserID, Content));
         }else {
@@ -63,61 +64,61 @@ public class BlogController {
     }
 
     @PutMapping("/updateContent1/{UserID}")
-    public Result updateContent1(@PathVariable("UserID") int UserID,@RequestBody String Content){
+    public Result updateContent1(@PathVariable("UserID") int UserID,@RequestBody String Content, BaseUser baseUser){
         Blog blog = blogService.updateContent1(UserID, Content);
         return Result.success(blog);
     }
 
     @PutMapping("/updateContent2/{UserID}")
-    public Result updateContent2(@PathVariable("UserID") int UserID,@RequestBody String Content){
+    public Result updateContent2(@PathVariable("UserID") int UserID,@RequestBody String Content, BaseUser baseUser){
         Blog blog = blogService.updateContent2(UserID, Content);
         return Result.success(blog);
     }
 
     @PutMapping("/updateContent3/{UserID}")
-    public Result updateContent3(@PathVariable("UserID") int UserID,@RequestBody String Content){
+    public Result updateContent3(@PathVariable("UserID") int UserID,@RequestBody String Content, BaseUser baseUser){
         Blog blog = blogService.updateContent3(UserID, Content);
         return Result.success(blog);
     }
 
     @PutMapping("/updateContent4/{UserID}")
-    public Result updateContent4(@PathVariable("UserID") int UserID,@RequestBody String Content){
+    public Result updateContent4(@PathVariable("UserID") int UserID,@RequestBody String Content, BaseUser baseUser){
         Blog blog = blogService.updateContent4(UserID, Content);
         return Result.success(blog);
     }
 
     @PutMapping("/updateContent5/{UserID}")
-    public Result updateContent5(@PathVariable("UserID") int UserID,@RequestBody String Content){
+    public Result updateContent5(@PathVariable("UserID") int UserID,@RequestBody String Content, BaseUser baseUser){
         Blog blog = blogService.updateContent5(UserID, Content);
         return Result.success(blog);
     }
 
     @PutMapping("/updateContent6/{UserID}")
-    public Result updateContent6(@PathVariable("UserID") int UserID,@RequestBody String Content){
+    public Result updateContent6(@PathVariable("UserID") int UserID,@RequestBody String Content, BaseUser baseUser){
         Blog blog = blogService.updateContent6(UserID, Content);
         return Result.success(blog);
     }
 
     @PutMapping("/updateContent7/{UserID}")
-    public Result updateContent7(@PathVariable("UserID") int UserID,@RequestBody String Content){
+    public Result updateContent7(@PathVariable("UserID") int UserID,@RequestBody String Content, BaseUser baseUser){
         Blog blog = blogService.updateContent7(UserID, Content);
         return Result.success(blog);
     }
 
     @PutMapping("/updateContent8/{UserID}")
-    public Result updateContent8(@PathVariable("UserID") int UserID,@RequestBody String Content){
+    public Result updateContent8(@PathVariable("UserID") int UserID,@RequestBody String Content, BaseUser baseUser){
         Blog blog = blogService.updateContent8(UserID, Content);
         return Result.success(blog);
     }
 
     @PutMapping("/updateContent9/{UserID}")
-    public Result updateContent9(@PathVariable("UserID") int UserID,@RequestBody String Content){
+    public Result updateContent9(@PathVariable("UserID") int UserID,@RequestBody String Content, BaseUser baseUser){
         Blog blog = blogService.updateContent9(UserID, Content);
         return Result.success(blog);
     }
 
     @PutMapping("/updateContent10/{UserID}")
-    public Result updateContent10(@PathVariable("UserID") int UserID,@RequestBody String Content){
+    public Result updateContent10(@PathVariable("UserID") int UserID,@RequestBody String Content, BaseUser baseUser){
         Blog blog = blogService.updateContent10(UserID, Content);
         return Result.success(blog);
     }
@@ -125,42 +126,42 @@ public class BlogController {
 
 
     @PutMapping("/updatePhoto1/{UserID}")
-    public Result updatePhoto1(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file) throws IOException{
+    public Result updatePhoto1(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file, BaseUser baseUser) throws IOException{
         String path = UploadUtil.uploadImage(file);
         Blog blog = blogService.updatePhoto1(UserID, path);
         return Result.success(blog);
     }
 
     @PutMapping("/updatePhoto2/{UserID}")
-    public Result updatePhoto2(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file) throws IOException{
+    public Result updatePhoto2(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file, BaseUser baseUser) throws IOException{
         String path = UploadUtil.uploadImage(file);
         Blog blog = blogService.updatePhoto2(UserID, path);
         return Result.success(blog);
     }
 
     @PutMapping("/updatePhoto3/{UserID}")
-    public Result updatePhoto3(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file) throws IOException{
+    public Result updatePhoto3(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file, BaseUser baseUser) throws IOException{
         String path = UploadUtil.uploadImage(file);
         Blog blog = blogService.updatePhoto3(UserID, path);
         return Result.success(blog);
     }
 
     @PutMapping("/updatePhoto4/{UserID}")
-    public Result updatePhoto4(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file) throws IOException{
+    public Result updatePhoto4(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file, BaseUser baseUser) throws IOException{
         String path = UploadUtil.uploadImage(file);
         Blog blog = blogService.updatePhoto4(UserID, path);
         return Result.success(blog);
     }
 
     @PutMapping("/updatePhoto5/{UserID}")
-    public Result updatePhoto5(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file) throws IOException{
+    public Result updatePhoto5(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file, BaseUser baseUser) throws IOException{
         String path = UploadUtil.uploadImage(file);
         Blog blog = blogService.updatePhoto5(UserID, path);
         return Result.success(blog);
     }
 
     @PutMapping("/updatePhoto6/{UserID}")
-    public Result updatePhoto6(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file) throws IOException{
+    public Result updatePhoto6(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file, BaseUser baseUser) throws IOException{
         String path = UploadUtil.uploadImage(file);
         Blog blog = blogService.updatePhoto6(UserID, path);
         return Result.success(blog);

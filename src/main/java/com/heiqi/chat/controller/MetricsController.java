@@ -1,6 +1,7 @@
 package com.heiqi.chat.controller;
 
 import com.heiqi.chat.common.Result;
+import com.heiqi.chat.entity.BaseUser;
 import com.heiqi.chat.entity.Metrics;
 import com.heiqi.chat.service.MetricsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +32,18 @@ public class MetricsController {
     // 这里写更多的 getter 函数...
 
     @PutMapping("/insertMetrics")
-    public Result insertMetrics(@RequestBody Metrics metrics) {
+    public Result insertMetrics(@RequestBody Metrics metrics, BaseUser baseUser) {
         Metrics metrics1 = metricsService.insertMetrics(metrics);
         return Result.success(metrics1);
     }
 
     @DeleteMapping("deleteByUserID/{UserId}")
-    public void deleteByUserID(@PathVariable("UserId") int UserId) {
+    public void deleteByUserID(@PathVariable("UserId") int UserId, BaseUser baseUser) {
         metricsService.deleteByUserID(UserId);
     }
 
     @DeleteMapping("deleteByMetricID/{MetricID}")
-    public void deleteByMetricID(@PathVariable("MetricID") int MetricID) {
+    public void deleteByMetricID(@PathVariable("MetricID") int MetricID, BaseUser baseUser) {
         metricsService.deleteByMetricID(MetricID);
     }
 

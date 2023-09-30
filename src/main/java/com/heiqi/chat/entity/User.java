@@ -34,4 +34,7 @@ public class User {
     private int IsLogged; //登录状态
     private int MatchStatus; //匹配状态
 
+    /** 令牌*/
+    private String token;
+
 }

@@ -26,6 +26,11 @@ public class Result<T>{
     public static Result error(){
         return new Result(400,"失败",null);
     }
+
+    public static Result error(Integer code, String message){
+        return new Result(code,message,null);
+    }
+
     public static Result error(String msg){
         return new Result(400, msg,null);
     }

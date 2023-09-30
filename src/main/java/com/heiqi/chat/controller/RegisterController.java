@@ -1,20 +1,30 @@
 package com.heiqi.chat.controller;
 
+import com.heiqi.chat.Utils.JwtUtil;
 import com.heiqi.chat.Utils.MateUtils;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.User;
 import com.heiqi.chat.service.UserService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/api/user/Register")
 public class RegisterController {
-    String Tempt;
+    ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
+
     private final UserService userService;
     private final MateUtils mateUtils;
+
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
     @Autowired
     public RegisterController(UserService userService,MateUtils mateUtils) {
         this.userService = userService;
@@ -27,7 +37,7 @@ public class RegisterController {
             String randomNum = mateUtils.Sjs();
             String TempLateParam = "{\"code\" : \""+randomNum+"\"}";
             SendSMS.SendSms(Phone,TempLateParam);
-            Tempt = randomNum;
+            map.put(Phone,randomNum);
             return Result.success();
         }else {
             return Result.error("手机号已被注册");
@@ -39,11 +49,17 @@ public class RegisterController {
     @PostMapping("/userRegisterVerify/{temp}")
     public Result verify(@PathVariable("temp") String temp,@RequestBody User user) throws Exception {
         System.out.println("temp = " + temp);
-        System.out.println("Temp = " + Tempt);
-        if (Tempt.equals(temp)){
+        System.out.println("user.getPhone() = " + user.getPhone());
+        System.out.println("map values " + map.get(user.getPhone()));
+        if (map.get(user.getPhone()).equals(temp)){
             userService.insertUser(user);
             System.out.println("验证完成，注册成功");
-            User registerUser = userService.getUserByName(user.getUserName());
+            User registerUser = userService.getUserByPhone(user.getPhone());
+
+            String token = JwtUtil.sign(registerUser.getUserId());
+            stringRedisTemplate.opsForValue().set(token, "", 1, TimeUnit.DAYS);
+            registerUser.setToken(token);
+
             return Result.success(registerUser);
             //成功则返回register 也就是数据库新增的user
         }else {
