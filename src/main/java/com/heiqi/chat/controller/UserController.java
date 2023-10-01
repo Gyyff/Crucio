@@ -20,7 +20,6 @@ public class UserController {
     private final UserService userService;
 
 
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -52,9 +51,9 @@ public class UserController {
     @GetMapping("/getUserByPhone/{Phone}")
     public Result getUserByPhone(@PathVariable("Phone") String Phone) {
         User user = userService.getUserByPhone(Phone);
-        if (user!=null){
+        if (user != null) {
             return Result.success(user);
-        }else {
+        } else {
             return Result.error("失败");
         }
 
@@ -70,8 +69,23 @@ public class UserController {
 
     //用户登录(效验短信验证码)
     @GetMapping("/userLogon/{Tem}/{Phone}")
-    public Result userLogon(@PathVariable("Tem") String Tem, @PathVariable("Phone") String Phone ) {
-        return userService.userLogon(Tem,Phone);
+    public Result userLogon(@PathVariable("Tem") String Tem, @PathVariable("Phone") String Phone) {
+        return userService.userLogon(Tem, Phone);
+    }
+
+    // 临时 用户的账号密码登录
+    @GetMapping("/userLogonOfPassword/{Phone}/{Password}")
+    public Result userLogonOfPassword(@PathVariable("Phone") String Phone, @PathVariable("Password") String Password) {
+        User user = userService.getUserByPhone(Phone);
+        if (user!=null){
+            if (user.getPassWord().equals(Password)){
+                return Result.success("登陆成功");
+            }else {
+                return Result.error("密码错误请确认密码后重试");
+            }
+        }else {
+            return Result.error("该手机号还未被注册，请您注册后再试");
+        }
     }
 
     //用户登出
@@ -80,15 +94,16 @@ public class UserController {
         userService.userQuit(UserId);
         return Result.success();
     }
+
     //结束关系
     @DeleteMapping("/cutLove/{UserId}")
-    public Result cutLove(@PathVariable("UserId") int UserId){
+    public Result cutLove(@PathVariable("UserId") int UserId) {
         return userService.cutLove(UserId);
     }
 
     //确认关系
     @PutMapping("/confirmShip/{UserId}")
-    public Result confirmShip(@PathVariable("UserId") int UserId){
+    public Result confirmShip(@PathVariable("UserId") int UserId) {
         return userService.confirmShip(UserId);
     }
 
@@ -96,7 +111,7 @@ public class UserController {
     //这里是用户匹配
     @GetMapping("/getUserMatch/{UserId}")
     public Result getUserMatch(@PathVariable("UserId") int UserId) {
-     return userService.getUserMatch(UserId);
+        return userService.getUserMatch(UserId);
     }
 
     //用户前往匹配页面时的校验
@@ -123,7 +138,7 @@ public class UserController {
     @PutMapping("/uploadUserPhoto/{UserId}")
     public Result uploadUserPhoto(@PathVariable("UserId") int UserId, @RequestBody MultipartFile file, BaseUser baseUser) throws IOException {
         String path = UploadUtil.uploadImage(file);
-        userService.updateUserPhoto(UserId,path);
+        userService.updateUserPhoto(UserId, path);
         return Result.success(path);
     }
 
@@ -170,7 +185,6 @@ public class UserController {
     public void updateUserIsTested(@PathVariable("UserId") int UserId, @RequestBody int IsTested, BaseUser baseUser) {
         userService.updateUserIsTested(UserId, IsTested);
     }
-
 
 
     // 这里写更多的 setter 函数...
