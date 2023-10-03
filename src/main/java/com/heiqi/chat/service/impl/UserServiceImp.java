@@ -201,7 +201,7 @@ public class UserServiceImp implements UserService {
         Match matchByUserID2 = matchMapper.getMatchByUserID2(UserId);
         if ((user.getMatchStatus() == 0) && matchByUserID1 == null && matchByUserID2 == null) {
             return Result.success();
-        } else if (user.getMatchStatus() == 1 && (matchByUserID1 != null || matchByUserID2 != null)) {
+        } if (user.getMatchStatus() == 1 && (matchByUserID1 != null || matchByUserID2 != null)) {
             if (matchByUserID1 != null) {
                 User userById = userMapper.getUserById(matchByUserID1.getUserID2());
                 return Result.success(userById);
@@ -210,7 +210,7 @@ public class UserServiceImp implements UserService {
                 User userById = userMapper.getUserById(matchByUserID2.getUserID1());
                 return Result.success(userById);
             }
-        }return Result.error("失败");
+        } return Result.error("失败");
 
     }
 

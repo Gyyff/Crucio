@@ -34,7 +34,7 @@ public class BlogController {
 
     // 这里写更多的 getter 函数...
     @PostMapping("/insertBlog")
-    public Result insertBlog(@RequestBody Blog blog, BaseUser baseUser) {
+    public Result insertBlog(@RequestBody Blog blog) {
         Blog blogS = blogService.insertBlog(blog);
         return Result.success(blogS);
     }
@@ -126,7 +126,7 @@ public class BlogController {
 
 
     @PutMapping("/updatePhoto1/{UserID}")
-    public Result updatePhoto1(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file, BaseUser baseUser) throws IOException{
+    public Result updatePhoto1(@PathVariable("UserID") int UserID, @RequestBody MultipartFile file) throws IOException{
         String path = UploadUtil.uploadImage(file);
         Blog blog = blogService.updatePhoto1(UserID, path);
         return Result.success(blog);

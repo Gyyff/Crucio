@@ -53,12 +53,35 @@ public class RegisterController {
         if (userService.getUserByPhone(user.getPhone()) == null) {
             if (user.getPassWord().equals(PasswordAgain)) {
                 userService.insertUser(user);
-                return Result.success("注册成功");
+                User registerUser= userService.getUserByPhone(user.getPhone());
+                String token = JwtUtil.sign(registerUser.getUserId());
+                stringRedisTemplate.opsForValue().set(token, "", 1, TimeUnit.DAYS);
+                registerUser.setToken(token);
+                return Result.success(registerUser);
             }else {
                 return Result.error("两次输入的密码不一致，请确认密码后重试");
             }
         } else {
             return Result.error("手机号已被注册或系统异常，请检查手机号是否正确，如有疑问可联系客服");
+        }
+    }
+
+    // 临时 用户的账号密码登录
+    @GetMapping("/userLogonOfPassword/{Phone}/{Password}")
+    public Result userLogonOfPassword(@PathVariable("Phone") String Phone, @PathVariable("Password") String Password) {
+        User user = userService.getUserByPhone(Phone);
+        if (user!=null){
+            if (user.getPassWord().equals(Password)){
+                userService.updateUserIsLogged(user.getUserId(),1);
+                String token = JwtUtil.sign(user.getUserId());
+                stringRedisTemplate.opsForValue().set(token, "", 1, TimeUnit.DAYS);
+                user.setToken(token);
+                return Result.success(user);
+            }else {
+                return Result.error("密码错误请确认密码后重试");
+            }
+        }else {
+            return Result.error("该手机号还未被注册，请您注册后再试");
         }
     }
 

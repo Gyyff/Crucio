@@ -1,6 +1,7 @@
 package com.heiqi.chat.controller;
 
 
+import com.heiqi.chat.Utils.JwtUtil;
 import com.heiqi.chat.Utils.UploadUtil;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.BaseUser;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/api/user")
@@ -73,20 +75,6 @@ public class UserController {
         return userService.userLogon(Tem, Phone);
     }
 
-    // 临时 用户的账号密码登录
-    @GetMapping("/userLogonOfPassword/{Phone}/{Password}")
-    public Result userLogonOfPassword(@PathVariable("Phone") String Phone, @PathVariable("Password") String Password) {
-        User user = userService.getUserByPhone(Phone);
-        if (user!=null){
-            if (user.getPassWord().equals(Password)){
-                return Result.success("登陆成功");
-            }else {
-                return Result.error("密码错误请确认密码后重试");
-            }
-        }else {
-            return Result.error("该手机号还未被注册，请您注册后再试");
-        }
-    }
 
     //用户登出
     @GetMapping("/userQuit/{UserId}")
