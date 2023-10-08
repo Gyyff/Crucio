@@ -54,10 +54,12 @@ public class RegisterController {
             if (user.getPassWord().equals(PasswordAgain)) {
                 userService.insertUser(user);
                 User registerUser= userService.getUserByPhone(user.getPhone());
-                String token = JwtUtil.sign(registerUser.getUserId());
+                userService.updateUserIsLogged(registerUser.getUserId(),1);
+                User Ruser = userService.getUserById(registerUser.getUserId());
+                String token = JwtUtil.sign(Ruser.getUserId());
                 stringRedisTemplate.opsForValue().set(token, "", 1, TimeUnit.DAYS);
-                registerUser.setToken(token);
-                return Result.success(registerUser);
+                Ruser.setToken(token);
+                return Result.success(Ruser);
             }else {
                 return Result.error("两次输入的密码不一致，请确认密码后重试");
             }
@@ -97,13 +99,15 @@ public class RegisterController {
         if (map.get(user.getPhone()).equals(temp)) {
             userService.insertUser(user);
             System.out.println("验证完成，注册成功");
-            User registerUser = userService.getUserByPhone(user.getPhone());
+            User registUser = userService.getUserByPhone(user.getPhone());
+            userService.updateUserIsLogged(registUser.getUserId(),1);
+            User Ruser= userService.getUserById(registUser.getUserId());
 
-            String token = JwtUtil.sign(registerUser.getUserId());
+            String token = JwtUtil.sign(Ruser.getUserId());
             stringRedisTemplate.opsForValue().set(token, "", 1, TimeUnit.DAYS);
-            registerUser.setToken(token);
+            Ruser.setToken(token);
 
-            return Result.success(registerUser);
+            return Result.success(Ruser);
             //成功则返回register 也就是数据库新增的user
         } else {
             //失败则返回前端传的user

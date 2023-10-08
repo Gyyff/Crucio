@@ -73,6 +73,9 @@ public interface UserMapper {
     @Update("UPDATE user SET Height = #{Height} WHERE UserId = #{UserId}")
     int updateUserHeight(@Param("UserId") int UserId, @Param("Height") int Height);
 
+    @Update("UPDATE user SET IsPreference = #{IsPreference} WHERE UserId = #{UserId}")
+    int updateUserIsPreference(@Param("UserId") int UserId, @Param("IsPreference") int IsPreference);
+
     @Update("UPDATE user SET BirthDay = #{BirthDay} WHERE UserId = #{UserId}")
     int updateUserBirthDay(@Param("UserId") int UserId, @Param("BirthDay") String BirthDay);
 

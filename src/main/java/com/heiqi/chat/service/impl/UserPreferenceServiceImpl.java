@@ -1,6 +1,7 @@
 package com.heiqi.chat.service.impl;
 
 import com.heiqi.chat.entity.UserPreference;
+import com.heiqi.chat.mapper.UserMapper;
 import com.heiqi.chat.mapper.UserPreferenceMapper;
 import com.heiqi.chat.service.UserPreferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,13 @@ public class UserPreferenceServiceImpl implements UserPreferenceService {
 
 
     private UserPreferenceMapper userPreferenceMapper;
+    private UserMapper userMapper;
 
 
     @Autowired
-    public UserPreferenceServiceImpl(UserPreferenceMapper userPreferenceMapper) {
+    public UserPreferenceServiceImpl(UserPreferenceMapper userPreferenceMapper,UserMapper userMapper) {
         this.userPreferenceMapper=userPreferenceMapper;
+        this.userMapper=userMapper;
     }
 
     @Override
@@ -37,6 +40,8 @@ public class UserPreferenceServiceImpl implements UserPreferenceService {
     public UserPreference insertUserPreference(UserPreference userPreference) {
         if (userPreferenceMapper.getUserPreferenceByUserId(userPreference.getUserID())==null){
             userPreferenceMapper.insertUserPreference(userPreference);
+            userMapper.updateUserIsPreference(userPreference.getUserID(),1);
+
         }
         return userPreferenceMapper.getUserPreferenceByUserId(userPreference.getUserID());
     }
