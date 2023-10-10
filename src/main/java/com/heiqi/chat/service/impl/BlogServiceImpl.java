@@ -1,5 +1,6 @@
 package com.heiqi.chat.service.impl;
 
+import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.Blog;
 import com.heiqi.chat.mapper.BlogMapper;
 import com.heiqi.chat.service.BlogService;
@@ -151,6 +152,48 @@ public class BlogServiceImpl implements BlogService {
         blogMapper.updatePhoto6(UserID,Photo6);
         Blog blog= blogMapper.getBlogByUserID(UserID);
         return blog;
+    }
+
+    @Override
+    public Result deletePhoto1ByUserID(int UserID) {
+        blogMapper.deletePhoto1ByUserID(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deletePhoto2ByUserID(int UserID) {
+        blogMapper.deletePhoto2ByUserID(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deletePhoto3ByUserID(int UserID) {
+        blogMapper.deletePhoto3ByUserID(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deletePhoto4ByUserID(int UserID) {
+        blogMapper.deletePhoto4ByUserID(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deletePhoto5ByUserID(int UserID) {
+        blogMapper.deletePhoto5ByUserID(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deletePhoto6ByUserID(int UserID) {
+        blogMapper.deletePhoto6ByUserID(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
     }
 
 

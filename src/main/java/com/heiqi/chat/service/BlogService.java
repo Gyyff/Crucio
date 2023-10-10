@@ -1,6 +1,8 @@
 package com.heiqi.chat.service;
 
+import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.Blog;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
@@ -66,6 +68,22 @@ public interface BlogService {
     Blog updatePhoto6(@Param("UserID") int UserID, @Param("Photo6") String Photo6);
 
 
+
+    Result deletePhoto1ByUserID(@Param("UserID") int UserID);
+
+
+    Result deletePhoto2ByUserID(@Param("UserID") int UserID);
+
+
+    Result deletePhoto3ByUserID(@Param("UserID") int UserID);
+
+
+    Result deletePhoto4ByUserID(@Param("UserID") int UserID);
+
+
+    Result deletePhoto5ByUserID(@Param("UserID") int UserID);
+
+    Result deletePhoto6ByUserID(@Param("UserID") int UserID);
 
 
 

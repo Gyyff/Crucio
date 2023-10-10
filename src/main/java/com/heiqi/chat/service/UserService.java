@@ -6,6 +6,7 @@ import com.heiqi.chat.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public interface UserService {
 
     User getUserByPhone(String Phone);
 
-    Result getUserMatch(int UserId);
+    Result getUserMatch(int UserId) throws Exception;
 
     //   public List<Metrics> getUserMatch(int UserId);
     void insertUser(User user) throws Exception;
@@ -32,7 +33,7 @@ public interface UserService {
 
     void updateUserAge(int UserId, int Age);
 
-
+   Result sendMessageToUserOther(int UserId) throws Exception;
     void updateUserIdentity(int UserId, String Identity);
 
     void updateUserEducation(int UserId, int Education);

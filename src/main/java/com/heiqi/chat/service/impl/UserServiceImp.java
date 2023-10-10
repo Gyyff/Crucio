@@ -6,6 +6,7 @@ import com.heiqi.chat.Utils.JwtUtil;
 import com.heiqi.chat.Utils.MatchUtils;
 import com.heiqi.chat.Utils.MateUtils;
 import com.heiqi.chat.common.Result;
+import com.heiqi.chat.controller.ChatEndPoint;
 import com.heiqi.chat.controller.SendSMS;
 import com.heiqi.chat.entity.Match;
 import com.heiqi.chat.entity.Metrics;
@@ -40,17 +41,20 @@ public class UserServiceImp implements UserService {
 
     private final MateUtils mateUtils;
 
+    private final ChatEndPoint chatEndPoint;
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    public UserServiceImp(UserMapper userMapper, MetricsMapper metricsMapper, UserPreferenceMapper userPreferenceMapper, MatchUtils matchUtils, MateUtils mateUtils, MatchMapper matchMapper) {
+    public UserServiceImp(UserMapper userMapper, MetricsMapper metricsMapper, UserPreferenceMapper userPreferenceMapper, MatchUtils matchUtils, MateUtils mateUtils, MatchMapper matchMapper,ChatEndPoint chatEndPoint) {
         this.userMapper = userMapper;
         this.metricsMapper = metricsMapper;
         this.userPreferenceMapper = userPreferenceMapper;
         this.matchUtils = matchUtils;
         this.mateUtils = mateUtils;
         this.matchMapper = matchMapper;
+        this.chatEndPoint=chatEndPoint;
     }
 
     String Temp;
@@ -279,7 +283,7 @@ public class UserServiceImp implements UserService {
     //**匹配入口**
 
     @Override
-    public Result getUserMatch(int UserId) {
+    public Result getUserMatch(int UserId) throws Exception {
         if (userMapper.getUserById(UserId).getMatchStatus() == 0) {
             //首先得到当前用户的用户所想要匹配的对象的 年龄区间 学历区间 以及用户的性取向
             UserPreference userPreference = userPreferenceMapper.getUserPreferenceByUserId(UserId);
@@ -430,6 +434,13 @@ public class UserServiceImp implements UserService {
     @Override
     public void updateUserAge(int UserId, int Age) {
         userMapper.updateUserAge(UserId, Age);
+    }
+
+    @Override
+    public Result sendMessageToUserOther(int UserId) throws Exception {
+        chatEndPoint.sendMessageToClient("已经成功为您找到了一位适配对象",UserId);
+
+        return Result.success();
     }
 
 

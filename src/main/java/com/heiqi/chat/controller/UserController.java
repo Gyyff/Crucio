@@ -22,6 +22,7 @@ public class UserController {
     private final UserService userService;
 
 
+
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -98,8 +99,13 @@ public class UserController {
 
     //这里是用户匹配
     @GetMapping("/getUserMatch/{UserId}")
-    public Result getUserMatch(@PathVariable("UserId") int UserId) {
+    public Result getUserMatch(@PathVariable("UserId") int UserId) throws Exception {
         return userService.getUserMatch(UserId);
+    }
+    //向另一位用户发送消息
+    @GetMapping("sendMessageToUserOther/{UserId}")
+    public Result sendMessageToUserOther(@PathVariable("UserId") int UserId) throws Exception {
+        return userService.sendMessageToUserOther(UserId);
     }
 
     //用户前往匹配页面时的校验

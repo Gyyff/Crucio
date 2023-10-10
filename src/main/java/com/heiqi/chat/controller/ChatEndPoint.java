@@ -5,6 +5,9 @@ import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +71,6 @@ public class ChatEndPoint {
         sessionWrap.setFrom(from);
         sessionWrap.setTo(to);
         sessionList.add(sessionWrap);
-
     }
     @OnClose
     public void onClose(Session session) {
@@ -79,5 +81,17 @@ public class ChatEndPoint {
     public void onError(Session session, Throwable error) {
         System.out.println("链接出错了" + error.getMessage());
     }
-}
+
+
+
+    public void sendMessageToClient(String message,int UserId) throws Exception {
+        for (SessionWrap item : sessionList){
+            if (item.getTo()==UserId){
+                item.getSession().getBasicRemote().sendText(message);
+                break;
+            }
+
+
+    }
+}}
 

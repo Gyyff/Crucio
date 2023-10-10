@@ -74,4 +74,22 @@ public interface BlogMapper {
     @Update("UPDATE blog SET Photo6 = #{Photo6} WHERE UserID = #{UserID}")
     int updatePhoto6(@Param("UserID") int UserID, @Param("Photo6") String Photo6);
 
+
+    @Update("UPDATE blog SET Photo1 = null WHERE UserID = #{UserID}")
+    int deletePhoto1ByUserID(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Photo2 = null WHERE UserID = #{UserID}")
+    int deletePhoto2ByUserID(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Photo3 = null WHERE UserID = #{UserID}")
+    int deletePhoto3ByUserID(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Photo4 = null WHERE UserID = #{UserID}")
+    int deletePhoto4ByUserID(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Photo5 = null WHERE UserID = #{UserID}")
+    int deletePhoto5ByUserID(@Param("UserID") int UserID);
+    @Update("UPDATE blog SET Photo6 = null WHERE UserID = #{UserID}")
+    int deletePhoto6ByUserID(@Param("UserID") int UserID);
+
 }
