@@ -3,4 +3,22 @@ spring:
     name: chat
   profiles:
     active: dev
-
+#  mail:
+#    host: smtp.qq.com
+#    username: 1821661414@qq.com
+#    password: eymsktmyvnsrdfag
+#    port: 456
+#    protocol: smtp
+#    default-encoding: utf-8
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
+#          ssl:
+#            enable: true
+#          socketFactory:
+#            port: 456
+#            class: javax.net.ssl.SSLSocketFactory

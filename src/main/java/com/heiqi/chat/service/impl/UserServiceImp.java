@@ -85,6 +85,12 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        return userMapper.getUserByEmail(email);
+    }
+
+
+    @Override
     public Result sendSMSofLogon(String Phone) throws Exception {
         if (userMapper.getUserByPhone(Phone) != null) {
             Temp = mateUtils.Sjs();
@@ -490,6 +496,8 @@ public class UserServiceImp implements UserService {
     public void updateUserIsTested(int UserId, int IsTested) {
         userMapper.updateUserIsTested(UserId, IsTested);
     }
+
+
 
 
 }

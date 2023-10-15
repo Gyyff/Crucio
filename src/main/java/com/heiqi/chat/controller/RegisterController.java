@@ -2,6 +2,7 @@ package com.heiqi.chat.controller;
 
 import com.heiqi.chat.Utils.JwtUtil;
 import com.heiqi.chat.Utils.MateUtils;
+import com.heiqi.chat.Utils.SendEmailUtils;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.common.SensitiveWordsChecker;
 import com.heiqi.chat.entity.User;
@@ -24,6 +25,7 @@ public class RegisterController {
     private final MateUtils mateUtils;
     private final SensitiveWordsChecker sensitiveWordsChecker;
 
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
@@ -34,6 +36,7 @@ public class RegisterController {
         this.userService = userService;
         this.mateUtils = mateUtils;
         this.sensitiveWordsChecker=sensitiveWordsChecker;
+
     }
 
     //用户的注册 验证码发送
@@ -127,6 +130,45 @@ public class RegisterController {
         }
     }
 
+
+    //邮箱验证码的发送
+    @GetMapping("/userRegisterSendEmail/{Email}")
+    public Result userRegisterSendEmail(@PathVariable("Email") String Email) throws Exception {
+        if (userService.getUserByEmail(Email) == null) {
+            String randomNum = mateUtils.Sjs();
+            SendEmailUtils.sendEmail(Email, randomNum);
+            map.put(Email, randomNum);
+            return Result.success("验证码已经发送");
+        } else {
+            return Result.error("邮箱已被注册或系统异常，请检查邮箱是否正确，如有疑问可联系客服");
+        }
+    }
+
+    //邮箱验证码的确认
+    @PostMapping("/userRegisterEmailVerify/{code}")
+    public Result userRegisterEmailVerify(@PathVariable("code") String code, @RequestBody User user) throws Exception {
+        if (sensitiveWordsChecker.containsSensitiveWords(user.getUserName())){
+            return Result.error("用户名中存在敏感词");
+        }
+        if (map.get(user.getEmail()).equals(code)) {
+            userService.insertUser(user);
+            System.out.println("验证完成，注册成功");
+            User registUser = userService.getUserByEmail(user.getEmail());
+            userService.updateUserIsLogged(registUser.getUserId(),1);
+            User Ruser= userService.getUserById(registUser.getUserId());
+
+            String token = JwtUtil.sign(Ruser.getUserId());
+            stringRedisTemplate.opsForValue().set(token, "", 1, TimeUnit.DAYS);
+            Ruser.setToken(token);
+
+            return Result.success(Ruser);
+            //成功则返回register 也就是数据库新增的user
+        } else {
+            //失败则返回前端传的user
+            System.out.println("验证失败，请重新输入验证码");
+            return Result.error("验证码错误");
+        }
+    }
     //修改用户其他的属性
     @PutMapping("/userSet")
     public Result userSet(@RequestBody User user) {

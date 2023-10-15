@@ -13,6 +13,7 @@ public class User {
     private int UserId;
     private String UserName;//用户名
     private String Phone;//手机号
+    private String Email;//邮箱
     private String PassWord;//密码
     private String Photo;//照片
     private String Identity;//所在行业 身份
@@ -33,6 +34,7 @@ public class User {
     private int IsAuthed; //资料审核状态
     private int IsLogged; //登录状态
     private int MatchStatus; //匹配状态
+
 
     /** 令牌*/
     private String token;

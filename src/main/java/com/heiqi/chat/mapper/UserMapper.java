@@ -26,12 +26,15 @@ public interface UserMapper {
     @Select("SELECT * FROM user WHERE Phone = #{Phone}")
     User getUserByPhone(@Param("Phone") String Phone);
 
+    @Select("SELECT * FROM user WHERE Email = #{Email}")
+    User getUserByEmail(@Param("Email") String Email);
+
 
     @Select("SElECT * FROM user WHERE age BETWEEN #{ageMin} AND #{ageMax} ")
     List<User> getUsersByAgeBetween(int ageMax, int ageMin);
 
 
-    @Insert("INSERT INTO user(UserId, UserName,Phone,PassWord, Photo, Identity, Gender, Age,BirthDay,Weight,School,HomeTownA,HomeTownB, AddressA,AddressB, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus) VALUES(#{UserId}, #{UserName}, #{Phone},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{BirthDay},#{Weight},#{School},#{HomeTownA},#{HomeTownB},#{AddressA},#{AddressB}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus})")
+    @Insert("INSERT INTO user(UserId, UserName,Phone,Email,PassWord, Photo, Identity, Gender, Age,BirthDay,Weight,School,HomeTownA,HomeTownB, AddressA,AddressB, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus) VALUES(#{UserId}, #{UserName}, #{Phone},#{Email},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{BirthDay},#{Weight},#{School},#{HomeTownA},#{HomeTownB},#{AddressA},#{AddressB}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus})")
     @Options(useGeneratedKeys = true, keyProperty = "UserId")
     int insertUser(User user);
 

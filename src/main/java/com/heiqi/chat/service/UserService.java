@@ -22,7 +22,11 @@ public interface UserService {
 
     User getUserByPhone(String Phone);
 
+    User getUserByEmail(String email);
+
     Result getUserMatch(int UserId) throws Exception;
+
+
 
     //   public List<Metrics> getUserMatch(int UserId);
     void insertUser(User user) throws Exception;
