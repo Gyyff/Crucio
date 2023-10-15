@@ -172,6 +172,26 @@ public class RegisterController {
             return Result.error("验证码错误");
         }
     }
+    //邮箱登录
+    @GetMapping("/userLogonEmailOfPassword/{Email}/{Password}")
+    public Result userLogonEmailOfPassword(@PathVariable("Email") String Email, @PathVariable("Password") String Password) {
+        User user = userService.getUserByEmail(Email);
+        if (user!=null){
+            if (user.getPassWord().equals(Password)){
+                userService.updateUserIsLogged(user.getUserId(),1);
+                String token = JwtUtil.sign(user.getUserId());
+                stringRedisTemplate.opsForValue().set(token, "", 1, TimeUnit.DAYS);
+                user.setToken(token);
+                return Result.success(user);
+            }else {
+                return Result.error("密码错误请确认密码后重试");
+            }
+        }else {
+            return Result.error("该邮箱号还未被注册，请您注册后再试");
+        }
+    }
+
+
     //修改用户其他的属性
     @PutMapping("/userSet")
     public Result userSet(@RequestBody User user) {
