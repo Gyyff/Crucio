@@ -147,6 +147,9 @@ public class RegisterController {
     //邮箱验证码的确认
     @PostMapping("/userRegisterEmailVerify/{code}")
     public Result userRegisterEmailVerify(@PathVariable("code") String code, @RequestBody User user) throws Exception {
+        if (userService.getUserByEmail(user.getEmail())!=null){
+            return Result.error("该邮箱已被注册，请勿重复注册");
+        }
         if (sensitiveWordsChecker.containsSensitiveWords(user.getUserName())){
             return Result.error("用户名中存在敏感词");
         }
