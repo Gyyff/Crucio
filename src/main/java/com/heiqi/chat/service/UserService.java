@@ -26,6 +26,8 @@ public interface UserService {
 
     Result getUserMatch(int UserId) throws Exception;
 
+    Result getConformUsers(int UserId);
+
 
 
     //   public List<Metrics> getUserMatch(int UserId);
@@ -37,7 +39,10 @@ public interface UserService {
 
     void updateUserAge(int UserId, int Age);
 
-   Result sendMessageToUserOther(int UserId) throws Exception;
+   Result sendMessageToUserOther(String messages,int UserId) throws Exception;
+
+
+
     void updateUserIdentity(int UserId, String Identity);
 
     void updateUserEducation(int UserId, int Education);

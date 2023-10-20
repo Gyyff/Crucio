@@ -62,6 +62,12 @@ public class UserController {
 
     }
 
+    //获取符合用户偏好的人数
+    @GetMapping("/getConformUsers/{UserId}")
+    public Result getConformUsers(@PathVariable("UserId") int UserId) {
+        return userService.getConformUsers(UserId);
+    }
+
 
     //登录时发送短信验证码
 
@@ -104,8 +110,8 @@ public class UserController {
     }
     //向另一位用户发送消息
     @GetMapping("sendMessageToUserOther/{UserId}")
-    public Result sendMessageToUserOther(@PathVariable("UserId") int UserId) throws Exception {
-        return userService.sendMessageToUserOther(UserId);
+    public Result sendMessageToUserOther(@PathVariable("UserId") int UserId,@RequestBody String messages) throws Exception {
+        return userService.sendMessageToUserOther(messages,UserId);
     }
 
     //用户前往匹配页面时的校验

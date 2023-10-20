@@ -53,6 +53,12 @@ public class BlogController {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
         }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContentIntroductionByUserID(UserID, str);
+            return Result.success(blog);
+        }
         if (blogService.findByUserID(UserID) != null) {
             return Result.success(blogService.updateContentIntroductionByUserID(UserID, Content));
         } else {
@@ -65,6 +71,13 @@ public class BlogController {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
         }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContentDreamByUserID(UserID, str);
+            return Result.success(blog);
+        }
+
         if (blogService.findByUserID(UserID) != null) {
             return Result.success(blogService.updateContentDreamByUserID(UserID, Content));
         } else {
@@ -77,6 +90,12 @@ public class BlogController {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
         }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContent1(UserID, str);
+            return Result.success(blog);
+        }
         Blog blog = blogService.updateContent1(UserID, Content);
         return Result.success(blog);
     }
@@ -85,6 +104,12 @@ public class BlogController {
     public Result updateContent2(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
+        }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContent2(UserID, str);
+            return Result.success(blog);
         }
         Blog blog = blogService.updateContent2(UserID, Content);
         return Result.success(blog);
@@ -95,6 +120,12 @@ public class BlogController {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
         }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContent3(UserID, str);
+            return Result.success(blog);
+        }
         Blog blog = blogService.updateContent3(UserID, Content);
         return Result.success(blog);
     }
@@ -103,6 +134,12 @@ public class BlogController {
     public Result updateContent4(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
+        }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContent4(UserID, str);
+            return Result.success(blog);
         }
         Blog blog = blogService.updateContent4(UserID, Content);
         return Result.success(blog);
@@ -113,6 +150,12 @@ public class BlogController {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
         }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContent5(UserID, str);
+            return Result.success(blog);
+        }
         Blog blog = blogService.updateContent5(UserID, Content);
         return Result.success(blog);
     }
@@ -121,6 +164,12 @@ public class BlogController {
     public Result updateContent6(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
+        }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContent6(UserID, str);
+            return Result.success(blog);
         }
         Blog blog = blogService.updateContent6(UserID, Content);
         return Result.success(blog);
@@ -131,6 +180,12 @@ public class BlogController {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
         }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContent7(UserID, str);
+            return Result.success(blog);
+        }
         Blog blog = blogService.updateContent7(UserID, Content);
         return Result.success(blog);
     }
@@ -139,6 +194,12 @@ public class BlogController {
     public Result updateContent8(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
+        }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContent8(UserID, str);
+            return Result.success(blog);
         }
         Blog blog = blogService.updateContent8(UserID, Content);
         return Result.success(blog);
@@ -149,6 +210,12 @@ public class BlogController {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
         }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContent9(UserID, str);
+            return Result.success(blog);
+        }
         Blog blog = blogService.updateContent9(UserID, Content);
         return Result.success(blog);
     }
@@ -157,6 +224,12 @@ public class BlogController {
     public Result updateContent10(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
         if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
             return Result.error("该文案中存在敏感词汇，请重新填写");
+        }
+        if (Content.equals("heiqi2023")){
+            String str = new String();
+            str="";
+            Blog blog = blogService.updateContent10(UserID, str);
+            return Result.success(blog);
         }
         Blog blog = blogService.updateContent10(UserID, Content);
         return Result.success(blog);
