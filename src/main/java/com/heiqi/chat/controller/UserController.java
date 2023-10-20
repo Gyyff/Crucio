@@ -109,7 +109,7 @@ public class UserController {
         return userService.getUserMatch(UserId);
     }
     //向另一位用户发送消息
-    @GetMapping("sendMessageToUserOther/{UserId}")
+   @PostMapping("sendMessageToUserOther/{UserId}")
     public Result sendMessageToUserOther(@PathVariable("UserId") int UserId,@RequestBody String messages) throws Exception {
         return userService.sendMessageToUserOther(messages,UserId);
     }

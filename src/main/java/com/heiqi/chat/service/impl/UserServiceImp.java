@@ -499,7 +499,7 @@ public class UserServiceImp implements UserService {
                         ConformUsers.add(sUser);
                     }
                 }));
-                return Result.success(ConformUsers.size());
+                return Result.success("目前Crucio中大约有 "+ConformUsers.size()+" 人符合您的偏好");
             }
             return Result.error("目前Crucio中没有符合您基本偏好的用户");
         }
