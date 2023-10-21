@@ -22,9 +22,6 @@ public class Result<T>{
     public static Result success(Object data){
         return new Result(200,"操作成功",data);
     }
-    public static Result success(String msg){
-        return new Result(200,msg,null);
-    }
 
     public static Result error(){
         return new Result(400,"失败",null);

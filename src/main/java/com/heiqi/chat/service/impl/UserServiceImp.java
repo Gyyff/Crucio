@@ -294,11 +294,22 @@ public class UserServiceImp implements UserService {
 
     @Override
     public Result getUserMatch(int UserId) throws Exception {
+        User user = userMapper.getUserById(UserId);
+        if (user.getIsPreference()==0&&user.getIsTested()==0){
+            return Result.error("请您完成偏好测试和性格测试后再来匹配");
+        }
+        if (user.getIsPreference()==0){
+            return Result.error("请您完成偏好测试后再来匹配");
+        }
+        if (user.getIsTested()==0){
+            return Result.error("请您完成性格测试后再来匹配");
+        }
+
         if (userMapper.getUserById(UserId).getMatchStatus() == 0) {
             //首先得到当前用户的用户所想要匹配的对象的 年龄区间 学历区间 以及用户的性取向
             UserPreference userPreference = userPreferenceMapper.getUserPreferenceByUserId(UserId);
             Metrics UserMetrics = metricsMapper.getMetricsByUserID(UserId);
-            User user = userMapper.getUserById(UserId);
+
             // 根据用户选择的年龄区间 确定出最初的匹配范围
             List<User> usersByAgeBetween = userMapper.getUsersByAgeBetween(userPreference.getAgeMax(), userPreference.getAgeMin());
             //在此范围内 筛选出符合用户性取向 学历要求的用户 并且提前建立一个准备进行偏好匹配的集合
