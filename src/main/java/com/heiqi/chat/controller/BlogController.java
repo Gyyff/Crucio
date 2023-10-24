@@ -50,9 +50,9 @@ public class BlogController {
 
     @PutMapping("/updateContentIntroductionByUserID/{UserID}")
     public Result updateContentIntroductionByUserID(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -68,9 +68,9 @@ public class BlogController {
 
     @PutMapping("/updateContentDreamByUserID/{UserID}")
     public Result updateContentDreamByUserID(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -87,9 +87,9 @@ public class BlogController {
 
     @PutMapping("/updateContent1/{UserID}")
     public Result updateContent1(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -102,9 +102,9 @@ public class BlogController {
 
     @PutMapping("/updateContent2/{UserID}")
     public Result updateContent2(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -117,9 +117,9 @@ public class BlogController {
 
     @PutMapping("/updateContent3/{UserID}")
     public Result updateContent3(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -132,9 +132,9 @@ public class BlogController {
 
     @PutMapping("/updateContent4/{UserID}")
     public Result updateContent4(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -147,9 +147,9 @@ public class BlogController {
 
     @PutMapping("/updateContent5/{UserID}")
     public Result updateContent5(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -162,9 +162,9 @@ public class BlogController {
 
     @PutMapping("/updateContent6/{UserID}")
     public Result updateContent6(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -177,9 +177,9 @@ public class BlogController {
 
     @PutMapping("/updateContent7/{UserID}")
     public Result updateContent7(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -192,9 +192,9 @@ public class BlogController {
 
     @PutMapping("/updateContent8/{UserID}")
     public Result updateContent8(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -207,9 +207,9 @@ public class BlogController {
 
     @PutMapping("/updateContent9/{UserID}")
     public Result updateContent9(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -222,9 +222,9 @@ public class BlogController {
 
     @PutMapping("/updateContent10/{UserID}")
     public Result updateContent10(@PathVariable("UserID") int UserID, @RequestBody String Content, BaseUser baseUser) {
-        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
-            return Result.error("该文案中存在敏感词汇，请重新填写");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(Content)) {
+//            return Result.error("该文案中存在敏感词汇，请重新填写");
+//        }
         if (Content.equals("heiqi2023")){
             String str = new String();
             str="";
@@ -308,8 +308,66 @@ public class BlogController {
         return blogService.deletePhoto6ByUserID(UserId);
     }
 
+    @DeleteMapping("/deleteContentIntroductionByUserID/{UserId}")
+    public Result deleteContentIntroductionByUserID(@PathVariable("UserId") int UserId){
+        return blogService.deleteContentIntroductionByUserID(UserId);
+    }
+
+    @DeleteMapping("/deleteContentDreamByUserID/{UserId}")
+    public Result deleteContentDreamByUserID(@PathVariable("UserId") int UserId){
+        return blogService.deleteContentDreamByUserID(UserId);
+    }
+
+    @DeleteMapping("/deleteContent1/{UserId}")
+    public Result deleteContent1(@PathVariable("UserId") int UserId){
+        return blogService.deleteContent1(UserId);
+    }
+
+    @DeleteMapping("/deleteContent2/{UserId}")
+    public Result deleteContent2(@PathVariable("UserId") int UserId){
+        return blogService.deleteContent2(UserId);
+    }
+
+    @DeleteMapping("/deleteContent3/{UserId}")
+    public Result deleteContent3(@PathVariable("UserId") int UserId){
+        return blogService.deleteContent3(UserId);
+    }
+
+    @DeleteMapping("/deleteContent4/{UserId}")
+    public Result deleteContent4(@PathVariable("UserId") int UserId){
+        return blogService.deleteContent4(UserId);
+    }
+
+    @DeleteMapping("/deleteContent5/{UserId}")
+    public Result deleteContent5(@PathVariable("UserId") int UserId){
+        return blogService.deleteContent5(UserId);
+    }
 
 
+    @DeleteMapping("/deleteContent6/{UserId}")
+    public Result deleteContent6(@PathVariable("UserId") int UserId){
+        return blogService.deleteContent6(UserId);
+    }
+
+    @DeleteMapping("/deleteContent7/{UserId}")
+    public Result deleteContent7(@PathVariable("UserId") int UserId){
+        return blogService.deleteContent7(UserId);
+    }
+
+    @DeleteMapping("/deleteContent8/{UserId}")
+    public Result deleteContent8(@PathVariable("UserId") int UserId){
+        return blogService.deleteContent8(UserId);
+    }
+
+    @DeleteMapping("/deleteContent9/{UserId}")
+    public Result deleteContent9(@PathVariable("UserId") int UserId){
+        return blogService.deleteContent9(UserId);
+    }
+
+    @DeleteMapping("/deleteContent10/{UserId}")
+    public Result deleteContent10(@PathVariable("UserId") int UserId){
+        return blogService.deleteContent10(UserId);
+    }
 
     // 这里写更多的 setter 函数...
 }

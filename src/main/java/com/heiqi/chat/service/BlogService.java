@@ -17,12 +17,13 @@ public interface BlogService {
 
     int deleteBlogByUserID(int UserID);
 
-    Blog updateContentIntroductionByUserID(int UserID,  String ContentIntroduction);
+    Blog updateContentIntroductionByUserID(int UserID, String ContentIntroduction);
 
-    Blog updateContentDreamByUserID(int UserID,  String ContentDream);
+    Blog updateContentDreamByUserID(int UserID, String ContentDream);
 
 
     Blog updateContent1(@Param("UserID") int UserID, @Param("Content1") String Content1);
+
     Blog updateContent2(@Param("UserID") int UserID, @Param("Content2") String Content2);
 
 
@@ -68,7 +69,6 @@ public interface BlogService {
     Blog updatePhoto6(@Param("UserID") int UserID, @Param("Photo6") String Photo6);
 
 
-
     Result deletePhoto1ByUserID(@Param("UserID") int UserID);
 
 
@@ -85,6 +85,38 @@ public interface BlogService {
 
     Result deletePhoto6ByUserID(@Param("UserID") int UserID);
 
+    Result deleteContentIntroductionByUserID(int UserID);
+
+    Result deleteContentDreamByUserID(int UserID);
+
+
+    Result deleteContent1(int UserID);
+
+    Result deleteContent2(int UserID);
+
+
+    Result deleteContent3(int UserID);
+
+
+    Result deleteContent4(int UserID);
+
+
+    Result deleteContent5(int UserID);
+
+
+    Result deleteContent6(int UserID);
+
+
+    Result deleteContent7(int UserID);
+
+
+    Result deleteContent8(int UserID);
+
+
+    Result deleteContent9(int UserID);
+
+
+    Result deleteContent10(int UserID);
 
 
 }

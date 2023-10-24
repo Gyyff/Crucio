@@ -5,15 +5,16 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 public final class SendEmailUtils {
-    private static final String User = "1821661414@qq.com";
-    private static final String PASSWORD = "jokfgenxjkiycaai";
+    private static final String User = "gyf@crucio.cn";
+    private static final String PASSWORD = "ZF3BY5WuS3SGd3qK";
 
 
     public static void sendEmail(String email, String code) throws Exception {
         final Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.host", "smtp.qq.com");
+        properties.put("mail.smtp.host", "smtp.exmail.qq.com");
         properties.put("mail.smtp.port", "587");
+
 
         //发件人的账号
         properties.put("mail.user", User);

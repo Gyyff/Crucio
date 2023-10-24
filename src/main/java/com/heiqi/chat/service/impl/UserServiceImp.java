@@ -173,7 +173,7 @@ public class UserServiceImp implements UserService {
             matchMapper.deleteMatchByUserID1(UserId);
             userMapper.updateUserMatchStatus(UserId, 0);
             userMapper.updateUserMatchStatus(matchByUserID1.getUserID2(), 0);
-
+            matchMapper.deleteMatchByUserID1(matchByUserID1.getUserID1());
             //ToDo 这里要通过短信通知双方
 
             return Result.success("关系已结束");
@@ -181,6 +181,7 @@ public class UserServiceImp implements UserService {
             matchMapper.deleteMatchByUserID2(UserId);
             userMapper.updateUserMatchStatus(UserId, 0);
             userMapper.updateUserMatchStatus(matchByUserID2.getUserID1(), 0);
+            matchMapper.deleteMatchByUserID2(matchByUserID2.getUserID2());
 
             //ToDo 这里要通过短信通知双方
 

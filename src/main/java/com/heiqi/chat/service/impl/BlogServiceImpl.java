@@ -196,5 +196,89 @@ public class BlogServiceImpl implements BlogService {
         return Result.success(blogByUserID);
     }
 
+    @Override
+    public Result deleteContentIntroductionByUserID(int UserID) {
+        blogMapper.deleteContentIntroductionByUserID(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContentDreamByUserID(int UserID) {
+        blogMapper.deleteContentDreamByUserID(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContent1(int UserID) {
+        blogMapper.deleteContent1(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContent2(int UserID) {
+        blogMapper.deleteContent2(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContent3(int UserID) {
+        blogMapper.deleteContent3(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContent4(int UserID) {
+        blogMapper.deleteContent4(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContent5(int UserID) {
+        blogMapper.deleteContent5(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContent6(int UserID) {
+        blogMapper.deleteContent6(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContent7(int UserID) {
+        blogMapper.deleteContent7(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContent8(int UserID) {
+        blogMapper.deleteContent8(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContent9(int UserID) {
+        blogMapper.deleteContent9(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
+    @Override
+    public Result deleteContent10(int UserID) {
+        blogMapper.deleteContent10(UserID);
+        Blog blogByUserID = blogMapper.getBlogByUserID(UserID);
+        return Result.success(blogByUserID);
+    }
+
 
 }

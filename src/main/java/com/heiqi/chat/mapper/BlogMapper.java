@@ -92,4 +92,39 @@ public interface BlogMapper {
     @Update("UPDATE blog SET Photo6 = null WHERE UserID = #{UserID}")
     int deletePhoto6ByUserID(@Param("UserID") int UserID);
 
+    @Update("UPDATE blog SET ContentIntroduction = null WHERE UserID = #{UserID}")
+    int deleteContentIntroductionByUserID(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET ContentDream = null WHERE UserID = #{UserID}")
+    int deleteContentDreamByUserID(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Content1 = null WHERE UserID = #{UserID}")
+    int deleteContent1(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Content2 = null WHERE UserID = #{UserID}")
+    int deleteContent2(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Content3 = null WHERE UserID = #{UserID}")
+    int deleteContent3(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Content4 = null WHERE UserID = #{UserID}")
+    int deleteContent4(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Content5 = null WHERE UserID = #{UserID}")
+    int deleteContent5(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Content6 = null WHERE UserID = #{UserID}")
+    int deleteContent6(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Content7 = null WHERE UserID = #{UserID}")
+    int deleteContent7(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Content8 = null WHERE UserID = #{UserID}")
+    int deleteContent8(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Content9 = null WHERE UserID = #{UserID}")
+    int deleteContent9(@Param("UserID") int UserID);
+
+    @Update("UPDATE blog SET Content10 = null WHERE UserID = #{UserID}")
+    int deleteContent10(@Param("UserID") int UserID);
 }

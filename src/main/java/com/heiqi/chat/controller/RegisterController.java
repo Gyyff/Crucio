@@ -134,6 +134,9 @@ public class RegisterController {
     //邮箱验证码的发送
     @GetMapping("/userRegisterSendEmail/{Email}")
     public Result userRegisterSendEmail(@PathVariable("Email") String Email) throws Exception {
+        if (userService.getUserByEmail(Email)!=null){
+            return Result.error("该邮箱已被注册，请勿重复注册");
+        }
         if (userService.getUserByEmail(Email) == null) {
             String randomNum = mateUtils.Sjs();
             SendEmailUtils.sendEmail(Email, randomNum);
