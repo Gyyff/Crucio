@@ -98,8 +98,8 @@ public class RegisterController {
         }
     }
     //校验邮箱是否被注册
-    @GetMapping("VerifyUserEmail/{Email}")
-    public Result VerifyUserEmail(@PathVariable("Email") String Email){
+    @GetMapping("/verifyUserEmail/{Email}")
+    public Result verifyUserEmail(@PathVariable("Email") String Email){
         if (userService.getUserByEmail(Email)==null){
             return Result.success("邮箱可以使用");
         }else
