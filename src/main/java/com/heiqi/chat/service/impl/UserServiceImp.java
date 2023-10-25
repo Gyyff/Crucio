@@ -296,13 +296,13 @@ public class UserServiceImp implements UserService {
     @Override
     public Result getUserMatch(int UserId) throws Exception {
         User user = userMapper.getUserById(UserId);
-        if (user.getIsPreference()==0&&user.getIsTested()==0){
+        if (user.getIsPreference() == 0 && user.getIsTested() == 0) {
             return Result.error("请您完成偏好测试和性格测试后再来匹配");
         }
-        if (user.getIsPreference()==0){
+        if (user.getIsPreference() == 0) {
             return Result.error("请您完成偏好测试后再来匹配");
         }
-        if (user.getIsTested()==0){
+        if (user.getIsTested() == 0) {
             return Result.error("请您完成性格测试后再来匹配");
         }
 
@@ -333,44 +333,46 @@ public class UserServiceImp implements UserService {
                     System.out.println("当前进行适配的用户id是" + sUser.getUserId());
                     Metrics metricsUser = metricsMapper.getMetricsByUserID(sUser.getUserId());
                     int T = 0;
-                    T += matchUtils.MateMatchSimilarity(userPreference.getCuriosity(), metricsUser.getCuriosity());
+                    if (metricsUser != null) {
+                        T += matchUtils.MateMatchSimilarity(userPreference.getCuriosity(), metricsUser.getCuriosity());
 //            System.out.println("A=" + userPreference.getCuriosity() + "   " + "B=" + metricsUser.getCuriosity() + "   " + "T1 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getReadly(), metricsUser.getReadly());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getReadly(), metricsUser.getReadly());
 //            System.out.println("A=" + userPreference.getReadly() + "   " + "B=" + metricsUser.getReadly() + "   " + "T2 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getAbstractness(), metricsUser.getAbstractness());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getAbstractness(), metricsUser.getAbstractness());
 //            System.out.println("A=" + userPreference.getAbstractness() + "   " + "B=" + metricsUser.getAbstractness() + "   " + "T3 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getIntellectual(), metricsUser.getIntellectual());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getIntellectual(), metricsUser.getIntellectual());
 //            System.out.println("A=" + userPreference.getIntellectual() + "   " + "B=" + metricsUser.getIntellectual() + "   " + "T4 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getOpenl(), metricsUser.getOpenl());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getOpenl(), metricsUser.getOpenl());
 //            System.out.println("A=" + userPreference.getOpen() + "   " + "B=" + metricsUser.getOpen() + "   " + "T5 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getTryNew(), metricsUser.getTryNew());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getTryNew(), metricsUser.getTryNew());
 //            System.out.println("A=" + userPreference.getTryNew() + "   " + "B=" + metricsUser.getTryNew() + "   " + "T6 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getIdea(), metricsUser.getIdea());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getIdea(), metricsUser.getIdea());
 //            System.out.println("A=" + userPreference.getIdea() + "   " + "B=" + metricsUser.getIdea() + "   " + "T7 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getStandard(), metricsUser.getStandard());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getStandard(), metricsUser.getStandard());
 //            System.out.println("A=" + userPreference.getStandard() + "   " + "B=" + metricsUser.getStandard() + "   " + "T8 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getHc(), metricsUser.getHc());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getHc(), metricsUser.getHc());
 //            System.out.println("A=" + userPreference.getHc() + "   " + "B=" + metricsUser.getHc() + "   " + "T9 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getFs(), metricsUser.getFs());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getFs(), metricsUser.getFs());
 //            System.out.println("A=" + userPreference.getFs() + "   " + "B=" + metricsUser.getFs() + "   " + "T10 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getAdventure(), metricsUser.getAdventure());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getAdventure(), metricsUser.getAdventure());
 //            System.out.println("A=" + userPreference.getAdventure() + "   " + "B=" + metricsUser.getAdventure() + "   " + "T13 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getAchievement(), metricsUser.getAchievement());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getAchievement(), metricsUser.getAchievement());
 //            System.out.println("A=" + userPreference.getAchievement() + "   " + "B=" + metricsUser.getAchievement() + "   " + "T14 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getAesthetic(), metricsUser.getAesthetic());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getAesthetic(), metricsUser.getAesthetic());
 //            System.out.println("A=" + userPreference.getAesthetic() + "   " + "B=" + metricsUser.getAesthetic() + "   " + "T15 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getExcitement(), metricsUser.getExcitement());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getExcitement(), metricsUser.getExcitement());
 //            System.out.println("A=" + userPreference.getExcitement() + "   " + "B=" + metricsUser.getExcitement() + "   " + "T16 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getRebel(), metricsUser.getRebel());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getAltruism(), metricsUser.getAltruism());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getEmotion(), metricsUser.getEmotion());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getCharacterl(), metricsUser.getCharacterl());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getOrganization(), metricsUser.getOrganization());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getInductive(), metricsUser.getInductive());
-                    T += matchUtils.AttitudesSimilarity(userPreference.getAttitudes(), metricsUser.getAttitudes());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getSelfish(), metricsUser.getSelfish());
-                    T += matchUtils.MaleSimilarity(userPreference.getMale(), metricsUser.getMale(), user.getGender());
-                    System.out.println("当前用户性别为" + user.getGender() + "----大男子主义匹配分数为" + matchUtils.MaleSimilarity(userPreference.getMale(), metricsUser.getMale(), user.getGender()));
+                        T += matchUtils.MateMatchSimilarity(userPreference.getRebel(), metricsUser.getRebel());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getAltruism(), metricsUser.getAltruism());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getEmotion(), metricsUser.getEmotion());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getCharacterl(), metricsUser.getCharacterl());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getOrganization(), metricsUser.getOrganization());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getInductive(), metricsUser.getInductive());
+                        T += matchUtils.AttitudesSimilarity(userPreference.getAttitudes(), metricsUser.getAttitudes());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getSelfish(), metricsUser.getSelfish());
+                        T += matchUtils.MaleSimilarity(userPreference.getMale(), metricsUser.getMale(), user.getGender());
+                        System.out.println("当前用户性别为" + user.getGender() + "----大男子主义匹配分数为" + matchUtils.MaleSimilarity(userPreference.getMale(), metricsUser.getMale(), user.getGender()));
+                    }
                     //采用累加制 计算出T的总和
                     System.out.println("最终匹配结束总分T总 = " + T);
                     //只有单向匹配分数>0 才可进入双向匹配  同时如果单向得分小于最高分数 则排除掉该用户
@@ -448,6 +450,9 @@ public class UserServiceImp implements UserService {
         if (userMapper.getUserById(UserId).getMatchStatus() == 0) {
             //首先得到当前用户的用户所想要匹配的对象的 年龄区间 学历区间 以及用户的性取向
             UserPreference userPreference = userPreferenceMapper.getUserPreferenceByUserId(UserId);
+            if (userPreference==null){
+                return Result.error("请您先完成用户偏好测试");
+            }
             Metrics UserMetrics = metricsMapper.getMetricsByUserID(UserId);
             User user = userMapper.getUserById(UserId);
             // 根据用户选择的年龄区间 确定出最初的匹配范围
@@ -466,44 +471,46 @@ public class UserServiceImp implements UserService {
                 firstUsers.forEach((sUser -> {
                     Metrics metricsUser = metricsMapper.getMetricsByUserID(sUser.getUserId());
                     int T = 0;
-                    T += matchUtils.MateMatchSimilarity(userPreference.getCuriosity(), metricsUser.getCuriosity());
+                    if (metricsUser != null) {
+                        T += matchUtils.MateMatchSimilarity(userPreference.getCuriosity(), metricsUser.getCuriosity());
 //            System.out.println("A=" + userPreference.getCuriosity() + "   " + "B=" + metricsUser.getCuriosity() + "   " + "T1 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getReadly(), metricsUser.getReadly());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getReadly(), metricsUser.getReadly());
 //            System.out.println("A=" + userPreference.getReadly() + "   " + "B=" + metricsUser.getReadly() + "   " + "T2 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getAbstractness(), metricsUser.getAbstractness());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getAbstractness(), metricsUser.getAbstractness());
 //            System.out.println("A=" + userPreference.getAbstractness() + "   " + "B=" + metricsUser.getAbstractness() + "   " + "T3 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getIntellectual(), metricsUser.getIntellectual());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getIntellectual(), metricsUser.getIntellectual());
 //            System.out.println("A=" + userPreference.getIntellectual() + "   " + "B=" + metricsUser.getIntellectual() + "   " + "T4 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getOpenl(), metricsUser.getOpenl());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getOpenl(), metricsUser.getOpenl());
 //            System.out.println("A=" + userPreference.getOpen() + "   " + "B=" + metricsUser.getOpen() + "   " + "T5 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getTryNew(), metricsUser.getTryNew());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getTryNew(), metricsUser.getTryNew());
 //            System.out.println("A=" + userPreference.getTryNew() + "   " + "B=" + metricsUser.getTryNew() + "   " + "T6 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getIdea(), metricsUser.getIdea());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getIdea(), metricsUser.getIdea());
 //            System.out.println("A=" + userPreference.getIdea() + "   " + "B=" + metricsUser.getIdea() + "   " + "T7 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getStandard(), metricsUser.getStandard());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getStandard(), metricsUser.getStandard());
 //            System.out.println("A=" + userPreference.getStandard() + "   " + "B=" + metricsUser.getStandard() + "   " + "T8 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getHc(), metricsUser.getHc());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getHc(), metricsUser.getHc());
 //            System.out.println("A=" + userPreference.getHc() + "   " + "B=" + metricsUser.getHc() + "   " + "T9 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getFs(), metricsUser.getFs());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getFs(), metricsUser.getFs());
 //            System.out.println("A=" + userPreference.getFs() + "   " + "B=" + metricsUser.getFs() + "   " + "T10 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getAdventure(), metricsUser.getAdventure());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getAdventure(), metricsUser.getAdventure());
 //            System.out.println("A=" + userPreference.getAdventure() + "   " + "B=" + metricsUser.getAdventure() + "   " + "T13 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getAchievement(), metricsUser.getAchievement());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getAchievement(), metricsUser.getAchievement());
 //            System.out.println("A=" + userPreference.getAchievement() + "   " + "B=" + metricsUser.getAchievement() + "   " + "T14 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getAesthetic(), metricsUser.getAesthetic());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getAesthetic(), metricsUser.getAesthetic());
 //            System.out.println("A=" + userPreference.getAesthetic() + "   " + "B=" + metricsUser.getAesthetic() + "   " + "T15 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getExcitement(), metricsUser.getExcitement());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getExcitement(), metricsUser.getExcitement());
 //            System.out.println("A=" + userPreference.getExcitement() + "   " + "B=" + metricsUser.getExcitement() + "   " + "T16 = " + T);
-                    T += matchUtils.MateMatchSimilarity(userPreference.getRebel(), metricsUser.getRebel());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getAltruism(), metricsUser.getAltruism());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getEmotion(), metricsUser.getEmotion());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getCharacterl(), metricsUser.getCharacterl());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getOrganization(), metricsUser.getOrganization());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getInductive(), metricsUser.getInductive());
-                    T += matchUtils.AttitudesSimilarity(userPreference.getAttitudes(), metricsUser.getAttitudes());
-                    T += matchUtils.MateMatchSimilarity(userPreference.getSelfish(), metricsUser.getSelfish());
-                    T += matchUtils.MaleSimilarity(userPreference.getMale(), metricsUser.getMale(), user.getGender());
-                    System.out.println("当前用户性别为" + user.getGender() + "----大男子主义匹配分数为" + matchUtils.MaleSimilarity(userPreference.getMale(), metricsUser.getMale(), user.getGender()));
+                        T += matchUtils.MateMatchSimilarity(userPreference.getRebel(), metricsUser.getRebel());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getAltruism(), metricsUser.getAltruism());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getEmotion(), metricsUser.getEmotion());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getCharacterl(), metricsUser.getCharacterl());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getOrganization(), metricsUser.getOrganization());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getInductive(), metricsUser.getInductive());
+                        T += matchUtils.AttitudesSimilarity(userPreference.getAttitudes(), metricsUser.getAttitudes());
+                        T += matchUtils.MateMatchSimilarity(userPreference.getSelfish(), metricsUser.getSelfish());
+                        T += matchUtils.MaleSimilarity(userPreference.getMale(), metricsUser.getMale(), user.getGender());
+                        System.out.println("当前用户性别为" + user.getGender() + "----大男子主义匹配分数为" + matchUtils.MaleSimilarity(userPreference.getMale(), metricsUser.getMale(), user.getGender()));
+                    }
                     //采用累加制 计算出T的总和
                     System.out.println("最终匹配结束总分T总 = " + T);
                     //只有单向匹配分数>0 才可进入双向匹配  同时如果单向得分小于最高分数 则排除掉该用户
@@ -511,7 +518,7 @@ public class UserServiceImp implements UserService {
                         ConformUsers.add(sUser);
                     }
                 }));
-                return Result.success("目前Crucio中大约有 "+ConformUsers.size()+" 人符合您的偏好");
+                return Result.success("目前Crucio中大约有 " + ConformUsers.size() + " 人符合您的偏好");
             }
             return Result.error("目前Crucio中没有符合您基本偏好的用户");
         }

@@ -97,7 +97,15 @@ public class RegisterController {
             return Result.error("该手机号还未被注册，请您注册后再试");
         }
     }
+    //校验邮箱是否被注册
+    @GetMapping("VerifyUserEmail/{Email}")
+    public Result VerifyUserEmail(@PathVariable("Email") String Email){
+        if (userService.getUserByEmail(Email)==null){
+            return Result.success("邮箱可以使用");
+        }else
+            return Result.error("邮箱已经被注册");
 
+    }
 
 
 

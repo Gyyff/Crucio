@@ -5,8 +5,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 public final class SendEmailUtils {
-    private static final String User = "gyf@crucio.cn";
-    private static final String PASSWORD = "ZF3BY5WuS3SGd3qK";
+    private static final String User = "crucio@crucio.cn";
+    private static final String PASSWORD = "BmVNkf3c5gKgav3k";
 
 
     public static void sendEmail(String email, String code) throws Exception {
