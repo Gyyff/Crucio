@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
+import java.util.List;
 
 
 public interface UserService {
@@ -27,6 +28,10 @@ public interface UserService {
     Result getUserMatch(int UserId) throws Exception;
 
     Result getConformUsers(int UserId);
+
+    List<Integer> getUserIds();
+
+    List<User>  getUsers();
 
 
 

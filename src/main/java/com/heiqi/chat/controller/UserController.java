@@ -119,6 +119,12 @@ public class UserController {
     public Result determineToMatchPages(@PathVariable("UserId") int UserId) {
         return userService.determineToMatchPages(UserId);
     }
+    //查看用户的匹配模式选择
+    @GetMapping("/getUserMatchChoice/{UserId}")
+    public Result getUserMatchChoice(@PathVariable("UserId") int UserId){
+        int matchChoice = userService.getUserById(UserId).getMatchChoice();
+        return Result.success(matchChoice);
+    }
 
 
     // 这里写更多的 getter 函数...+

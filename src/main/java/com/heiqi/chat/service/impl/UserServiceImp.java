@@ -531,6 +531,16 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public List<Integer> getUserIds() {
+        return userMapper.getUserIds();
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return userMapper.getUsers();
+    }
+
+    @Override
     public void insertUser(User user) {
         userMapper.insertUser(user);
     }

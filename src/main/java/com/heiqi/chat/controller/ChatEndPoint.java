@@ -1,25 +1,29 @@
 package com.heiqi.chat.controller;
 
+import cn.hutool.core.collection.CollUtil;
+import com.alibaba.fastjson.JSON;
+import com.heiqi.chat.Utils.RedisUtil;
 import com.heiqi.chat.common.SessionWrap;
+import io.swagger.models.auth.In;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-
-
-
+@Slf4j
 @Component
 @ServerEndpoint(value = "/api/websocket/{from}/{to}")
 public class ChatEndPoint {
 
     private static List<SessionWrap> sessionList = new ArrayList<>();
 
-    private int from;
-
-    private int to;
+    private Map<Session,SessionWrap> FROM_TO = new ConcurrentHashMap<>();
 
 
     @OnMessage
@@ -27,23 +31,15 @@ public class ChatEndPoint {
     public void onMessage(String message, Session session) {
         try {
             System.out.println("收到了消息 确认连接");
-//            //将message转换成message对象
-//            ObjectMapper mapper = new ObjectMapper();
-//            Message mess = mapper.readValue(message, Message.class);
-//            //选择要把消息推送给谁（数据接收人）
-//            int toUserId = mess.getToUserId();
-//            //获取消息数据(数据内容)
-//            String toMessage = mess.getMessage();
-//            //获取给指定用户的消息格式的数据
-//            String resultMessage = MessageUtils.getMessage(false, UserId, toMessage);
-//            System.out.println("resultMessage = " + resultMessage.toString());
-//            //发送数据
-//            session.getBasicRemote().sendText(resultMessage);
-
+            SessionWrap wrap = FROM_TO.get(session);
             for (SessionWrap item : sessionList){
-                if (item.getFrom()==to&&item.getTo()==from){
+                if (item.getFrom()==wrap.getTo() && item.getTo()==wrap.getFrom()){
                     item.getSession().getBasicRemote().sendText(message);
+                    FROM_TO.remove(wrap);
                     break;
+                } else {
+                    // 用户离线，开始缓存消息
+                    RedisUtil.lLeftPush(wrap.getTo() + "-" + wrap.getFrom(), message);
                 }
             }
             System.out.println("消息发送完毕");
@@ -55,12 +51,10 @@ public class ChatEndPoint {
     @OnOpen
     public void onOpen(Session session, @PathParam("from") int from, @PathParam("to") int to) {
         System.out.println("连接已确认 ");
-        this.from = from;
-        this.to = to;
         for (SessionWrap item : sessionList) {
             if (item.getFrom() == from && item.getTo() == to) {
                 item.setSession(session);
-                return;
+                break;
             }
         }
         SessionWrap sessionWrap = new SessionWrap();
@@ -68,6 +62,19 @@ public class ChatEndPoint {
         sessionWrap.setFrom(from);
         sessionWrap.setTo(to);
         sessionList.add(sessionWrap);
+        String key = from + "-" + to;
+        FROM_TO.put(session, sessionWrap);
+        List<String> msgList = RedisUtil.lRange(key, 0, -1);
+        if (CollUtil.isNotEmpty(msgList)) {
+            msgList.forEach(item -> {
+                try {
+                    sendMessageToClient(item, to);
+                } catch (Exception e) {
+                    log.error("消息发送失败,from:{},to:{}", from, to, e);
+                }
+            });
+            RedisUtil.delete(key);
+        }
     }
     @OnClose
     public void onClose(Session session) {
@@ -80,15 +87,16 @@ public class ChatEndPoint {
     }
 
 
-
+//
     public void sendMessageToClient(String message,int UserId) throws Exception {
-        for (SessionWrap item : sessionList){
-            if (item.getTo()==UserId){
+        for (SessionWrap item : sessionList) {
+            if (item.getTo() == UserId) {
                 item.getSession().getBasicRemote().sendText(message);
                 break;
             }
 
 
+        }
     }
-}}
+}
 

@@ -32,6 +32,12 @@ public interface UserMapper {
     @Select("SElECT * FROM user WHERE age BETWEEN #{ageMin} AND #{ageMax} ")
     List<User> getUsersByAgeBetween(int ageMax, int ageMin);
 
+    @Select("SElECT * FROM user WHERE MatchChoice = 1 ")
+    List<User> getUsers();
+
+    @Select("SElECT UserId FROM user WHERE MatchChoice = 1 ")
+    List<Integer> getUserIds();
+
 
     @Insert("INSERT INTO user(UserId, UserName,Phone,Email,PassWord,WeChat, Photo, Identity, Gender, Age,BirthDay,Weight,School,HomeTownA,HomeTownB, AddressA,AddressB, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus,MatchChoice) VALUES(#{UserId}, #{UserName}, #{Phone},#{Email},#{WeChat},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{BirthDay},#{Weight},#{School},#{HomeTownA},#{HomeTownB},#{AddressA},#{AddressB}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus},#{MatchChoice})")
     @Options(useGeneratedKeys = true, keyProperty = "UserId")
