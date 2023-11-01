@@ -143,19 +143,22 @@ public class UserController {
         return Result.success(path);
     }
     @PutMapping("/updateUserWeChat/{UserId}")
-    public void updateUserWeChat(@PathVariable("UserId") int UserId, @RequestBody String WeChat, BaseUser baseUser) {
+    public Result updateUserWeChat(@PathVariable("UserId") int UserId, @RequestBody String WeChat, BaseUser baseUser) {
         userService.updateUserWeChat(UserId, WeChat);
+        return Result.success();
     }
     //切换为自动匹配状态
     @PutMapping("/updateUserMatchChoiceAuto/{UserId}")
-    public void updateUserMatchChoiceAuto(@PathVariable("UserId") int UserId, BaseUser baseUser) {
+    public Result updateUserMatchChoiceAuto(@PathVariable("UserId") int UserId, BaseUser baseUser) {
         userService.updateUserMatchChoiceAuto(UserId);
+        return Result.success();
     }
 
     //切换为暂停匹配状态
     @PutMapping("/updateUserMatchChoiceStop/{UserId}")
-    public void updateUserMatchChoiceStop(@PathVariable("UserId") int UserId, BaseUser baseUser) {
+    public Result updateUserMatchChoiceStop(@PathVariable("UserId") int UserId, BaseUser baseUser) {
         userService.updateUserMatchChoiceStop(UserId);
+        return Result.success();
     }
 
 
