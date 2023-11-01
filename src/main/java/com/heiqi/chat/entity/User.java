@@ -15,6 +15,7 @@ public class User {
     private String Phone;//手机号
     private String Email;//邮箱
     private String PassWord;//密码
+    private String WeChat; //微信
     private String Photo;//照片
     private String Identity;//所在行业 身份
     private int Gender;//性别
@@ -34,6 +35,7 @@ public class User {
     private int IsAuthed; //资料审核状态
     private int IsLogged; //登录状态
     private int MatchStatus; //匹配状态
+    private int MatchChoice; //匹配模式选择
 
 
     /** 令牌*/

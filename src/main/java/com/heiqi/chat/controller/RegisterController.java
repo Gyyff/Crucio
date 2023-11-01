@@ -215,6 +215,7 @@ public class RegisterController {
         userService.updateUserGender(userId, user.getGender());
         userService.updateUserName(userId, user.getUserName());
         userService.updateUserEducation(userId, user.getEducation());
+        userService.updateUserWeChat(userId,user.getWeChat());
         userService.updateUserHeight(userId, user.getHeight());
         userService.updateUserBirthDay(userId, user.getBirthDay());
         userService.updateUserWeight(userId, user.getWeight());
