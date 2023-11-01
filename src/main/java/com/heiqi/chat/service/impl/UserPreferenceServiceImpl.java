@@ -160,4 +160,24 @@ public class UserPreferenceServiceImpl implements UserPreferenceService {
     public int updateMale(int UserId, int male) {
         return userPreferenceMapper.updateMale(UserId,male);
     }
+
+    @Override
+    public int updateSex(int UserId, int sex) {
+        return userPreferenceMapper.updateSex(UserId,sex);
+    }
+
+    @Override
+    public int updateEducation(int UserId, int education) {
+        return userPreferenceMapper.updateEducation(UserId,education);
+    }
+
+    @Override
+    public int updateAgeMax(int UserId, int ageMax) {
+        return userPreferenceMapper.updateAgeMax(UserId,ageMax);
+    }
+
+    @Override
+    public int updateAgeMin(int UserId, int ageMin) {
+        return userPreferenceMapper.updateAgeMin(UserId,ageMin);
+    }
 }

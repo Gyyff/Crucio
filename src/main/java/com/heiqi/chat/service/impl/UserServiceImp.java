@@ -4,6 +4,7 @@ package com.heiqi.chat.service.impl;
 import com.heiqi.chat.Utils.JwtUtil;
 import com.heiqi.chat.Utils.MatchUtils;
 import com.heiqi.chat.Utils.MateUtils;
+import com.heiqi.chat.Utils.SendEmailUtils;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.controller.ChatEndPoint;
 import com.heiqi.chat.controller.SendSMS;
@@ -431,6 +432,8 @@ public class UserServiceImp implements UserService {
                     userMapper.updateUserMatchStatus(user.getUserId(), 1);
                     userMapper.updateUserMatchStatus(sUser.getUserId(), 1);
                     systemEndpoint.sendSystemMessageToClient("已经成功为您匹配到一位适配对象", sUser.getUserId());
+                    SendEmailUtils.sendMatchEmail(sUser.getEmail());
+                    SendEmailUtils.sendMatchEmail(user.getEmail());
                     return Result.success(sUser);
                 } else {
                     return Result.error("暂时还没有找到适配对象，您可以查看Crucio中目前有多少人符合您的偏好");
@@ -572,6 +575,21 @@ public class UserServiceImp implements UserService {
     @Override
     public void updateUserGender(int UserId, int Gender) {
         userMapper.updateUserGender(UserId, Gender);
+    }
+
+    @Override
+    public void updateUserWeChat(int UserId, String WeChat) {
+        userMapper.updateUserWeChat(UserId,WeChat);
+    }
+
+    @Override
+    public void updateUserMatchChoiceAuto(int UserId) {
+        userMapper.updateUserMatchChoiceAuto(UserId);
+    }
+
+    @Override
+    public void updateUserMatchChoiceStop(int UserId) {
+        userMapper.updateUserMatchChoiceStop(UserId);
     }
 
 

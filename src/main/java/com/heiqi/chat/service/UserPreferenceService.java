@@ -82,4 +82,19 @@ public interface UserPreferenceService {
 
 
     int updateMale(int UserId, int male);
+
+
+
+    int updateSex(int UserId,int sex);
+
+
+
+    int updateEducation(int UserId, int education);
+
+
+    int updateAgeMax( int UserId,int ageMax);
+
+
+    int updateAgeMin(int UserId,int ageMin);
+
 }

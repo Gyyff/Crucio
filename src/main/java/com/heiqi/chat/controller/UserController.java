@@ -120,6 +120,7 @@ public class UserController {
         return userService.determineToMatchPages(UserId);
     }
 
+
     // 这里写更多的 getter 函数...+
 
     @PostMapping("/insertUser")
@@ -140,6 +141,21 @@ public class UserController {
         String path = UploadUtil.uploadImage(file);
         userService.updateUserPhoto(UserId, path);
         return Result.success(path);
+    }
+    @PutMapping("/updateUserWeChat/{UserId}")
+    public void updateUserWeChat(@PathVariable("UserId") int UserId, @RequestBody String WeChat, BaseUser baseUser) {
+        userService.updateUserWeChat(UserId, WeChat);
+    }
+    //切换为自动匹配状态
+    @PutMapping("/updateUserMatchChoiceAuto/{UserId}")
+    public void updateUserMatchChoiceAuto(@PathVariable("UserId") int UserId, BaseUser baseUser) {
+        userService.updateUserMatchChoiceAuto(UserId);
+    }
+
+    //切换为暂停匹配状态
+    @PutMapping("/updateUserMatchChoiceStop/{UserId}")
+    public void updateUserMatchChoiceStop(@PathVariable("UserId") int UserId, BaseUser baseUser) {
+        userService.updateUserMatchChoiceStop(UserId);
     }
 
 

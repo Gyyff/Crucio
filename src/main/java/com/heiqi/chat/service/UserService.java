@@ -30,6 +30,7 @@ public interface UserService {
 
 
 
+
     //   public List<Metrics> getUserMatch(int UserId);
     void insertUser(User user) throws Exception;
 
@@ -50,6 +51,12 @@ public interface UserService {
     void updateUserPhoto(int UserId, String Photo);
 
     void updateUserGender(int UserId, int Gender);
+
+    void updateUserWeChat(int UserId, String WeChat);
+
+    void updateUserMatchChoiceAuto(int UserId);
+
+    void updateUserMatchChoiceStop(int UserId);
 
 
 

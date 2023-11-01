@@ -29,12 +29,11 @@ public interface UserMapper {
     @Select("SELECT * FROM user WHERE Email = #{Email}")
     User getUserByEmail(@Param("Email") String Email);
 
-
     @Select("SElECT * FROM user WHERE age BETWEEN #{ageMin} AND #{ageMax} ")
     List<User> getUsersByAgeBetween(int ageMax, int ageMin);
 
 
-    @Insert("INSERT INTO user(UserId, UserName,Phone,Email,PassWord, Photo, Identity, Gender, Age,BirthDay,Weight,School,HomeTownA,HomeTownB, AddressA,AddressB, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus) VALUES(#{UserId}, #{UserName}, #{Phone},#{Email},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{BirthDay},#{Weight},#{School},#{HomeTownA},#{HomeTownB},#{AddressA},#{AddressB}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus})")
+    @Insert("INSERT INTO user(UserId, UserName,Phone,Email,PassWord,WeChat, Photo, Identity, Gender, Age,BirthDay,Weight,School,HomeTownA,HomeTownB, AddressA,AddressB, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus,MatchChoice) VALUES(#{UserId}, #{UserName}, #{Phone},#{Email},#{WeChat},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{BirthDay},#{Weight},#{School},#{HomeTownA},#{HomeTownB},#{AddressA},#{AddressB}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus},#{MatchChoice})")
     @Options(useGeneratedKeys = true, keyProperty = "UserId")
     int insertUser(User user);
 
@@ -46,6 +45,16 @@ public interface UserMapper {
 
     @Update("UPDATE user SET Age = #{Age} WHERE UserId = #{UserId}")
     int updateUserAge(@Param("UserId") int UserId, @Param("Age") int Age);
+
+    @Update("UPDATE user SET WeChat = #{WeChat} WHERE UserId = #{UserId}")
+    int updateUserWeChat(@Param("UserId") int UserId, @Param("WeChat") String WeChat);
+
+    @Update("UPDATE user SET MatchChoice = 1 WHERE UserId = #{UserId}")
+    int updateUserMatchChoiceAuto(@Param("UserId") int UserId);
+
+    @Update("UPDATE user SET MatchChoice = 0 WHERE UserId = #{UserId}")
+    int updateUserMatchChoiceStop(@Param("UserId") int UserId);
+
 
 
     @Update("UPDATE user SET Identity = #{Identity} WHERE UserId = #{UserId}")

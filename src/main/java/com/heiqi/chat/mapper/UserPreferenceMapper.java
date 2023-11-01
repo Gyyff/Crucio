@@ -36,6 +36,7 @@ public interface UserPreferenceMapper {
 
     @Update("UPDATE userpreference SET tryNew = #{tryNew} WHERE UserId = #{UserId}")
     int updateTryNew(@Param("UserId") int UserId, @Param("tryNew") int tryNew);
+
     @Update("UPDATE userpreference SET idea = #{idea} WHERE UserId = #{UserId}")
     int updateIdea(@Param("UserId") int UserId, @Param("idea") int idea);
 
@@ -84,8 +85,22 @@ public interface UserPreferenceMapper {
     @Update("UPDATE userpreference SET selfish = #{selfish} WHERE UserId = #{UserId}")
     int updateSelfish(@Param("UserId") int UserId, @Param("selfish") int selfish);
 
+
     @Update("UPDATE userpreference SET male = #{male} WHERE UserId = #{UserId}")
     int updateMale(@Param("UserId") int UserId, @Param("male") int male);
+
+    @Update("UPDATE userpreference SET sex = #{sex} WHERE UserId = #{UserId}")
+    int updateSex(@Param("UserId") int UserId, @Param("sex") int sex);
+
+
+    @Update("UPDATE userpreference SET education = #{education} WHERE UserId = #{UserId}")
+    int updateEducation(@Param("UserId") int UserId, @Param("education") int education);
+
+    @Update("UPDATE userpreference SET ageMax = #{ageMax} WHERE UserId = #{UserId}")
+    int updateAgeMax(@Param("UserId") int UserId, @Param("ageMax") int ageMax);
+
+    @Update("UPDATE userpreference SET ageMin = #{ageMin} WHERE UserId = #{UserId}")
+    int updateAgeMin(@Param("UserId") int UserId, @Param("ageMin") int ageMin);
 
 
 }
