@@ -35,12 +35,16 @@ public class UserPreferenceController {
 
     }
 
+    @GetMapping("/getUserPreferenceChoiceByUserId/{UserId}]")
+    public Result getUserPreferenceChoiceByUserId(@PathVariable("UserId") int UserId){
+        UserPreferenceChoice userPreferenceChoiceByUserId = userPreferenceService.getUserPreferenceChoiceByUserId(UserId);
+        return Result.success(userPreferenceChoiceByUserId);
+    }
+
     @GetMapping("/getUserPreferenceFoundationByUserId/{UserId}")
     public Result getUserPreferenceFoundationByUserId(@PathVariable("UserId") int UserId) {
         UserPreferenceFoundation userPreferenceFoundationByUserId = userPreferenceService.getUserPreferenceFoundationByUserId(UserId);
-        if (userPreferenceFoundationByUserId != null) {
             return Result.success(userPreferenceFoundationByUserId);
-        } else return Result.error("查找失败");
     }
 
     @GetMapping("/getUserPreferenceByUserPreferenceID/{UserPreferenceId}")
