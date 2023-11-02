@@ -44,22 +44,20 @@ public class MetricsController {
 
     @PutMapping("/insertMetrics")
     public Result insertMetrics(@RequestBody MetricsChoice metricsChoice, BaseUser baseUser) {
-        if (metricsService.getMetricsChoiceByUserID(metricsChoice.getUserID())!=null){
-            Metrics metricsByUserID = metricsService.getMetricsByUserID(metricsChoice.getUserID());
-            int metricID = metricsByUserID.getMetricID();
+        if (metricsService.getMetricsChoiceByUserID(metricsChoice.getUserId())!=null){
+            metricsService.deleteMetricsChoice(metricsChoice.getUserId());
+            metricsService.deleteByUserID(metricsChoice.getUserId());
             Metrics metrics = metricsUtils.MetricsStructure(metricsChoice);
-            metrics.setMetricID(metricID);
-            metricsService.upDateMetricsChoiceByUserId(metricsChoice);
-            metricsService.deleteByUserID(metricsChoice.getUserID());
             metricsService.insertMetrics(metrics);
-            MetricsChoice metricsChoiceByUserID = metricsService.getMetricsChoiceByUserID(metricsChoice.getUserID());
+            metricsService.insertMetricsChoice(metricsChoice);
+            MetricsChoice metricsChoiceByUserID = metricsService.getMetricsChoiceByUserID(metricsChoice.getUserId());
             return Result.success(metricsChoiceByUserID);
         }else {
             Metrics metrics = metricsUtils.MetricsStructure(metricsChoice);
             metricsService.insertMetricsChoice(metricsChoice);
             metricsService.insertMetrics(metrics);
-            MetricsChoice metricsChoiceByUserID = metricsService.getMetricsChoiceByUserID(metricsChoice.getUserID());
-            return Result.success(metrics);
+            MetricsChoice metricsChoiceByUserID = metricsService.getMetricsChoiceByUserID(metricsChoice.getUserId());
+            return Result.success(metricsChoiceByUserID);
         }
 
     }

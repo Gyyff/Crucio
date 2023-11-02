@@ -32,6 +32,8 @@ public interface UserService {
 
     Result getConformUsers(int UserId);
 
+
+
     List<Integer> getUserIds();
 
     List<User>  getUsers();

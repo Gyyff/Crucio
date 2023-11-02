@@ -6,8 +6,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class MetricsChoice {
-    private int metricID;
-    private int userID;
+    private int metricsChoiceId;
+    private int userId;
     private Integer curiosity1;//好奇心
     private Integer curiosity2;//好奇心
     private Integer readly; //是否阅读

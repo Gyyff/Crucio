@@ -24,5 +24,7 @@ public interface MetricsService {
 
     MetricsChoice insertMetricsChoice(MetricsChoice metricsChoice);
 
+    void deleteMetricsChoice(int userId);
+
 //    int insertScoRel(int MetricID,int ScoRel);
 }

@@ -37,7 +37,7 @@ public class MetricsUtils {
         intellectual += (Endowments1(metricsChoice.getIntellectual()) + Endowments1(metricsChoice.getIntellectual()));
         openl += (Endowments1(metricsChoice.getOpenl1()) + EnDoWenTs3(metricsChoice.getOpenl2()));
         tryNew += (Endowments1(metricsChoice.getTryNew1()) + Endowments1(metricsChoice.getTryNew2()));
-        idea += (EnDoWenTs3(metricsChoice.getIdea1()) + metricsChoice.getIdea2());
+        idea += (EnDoWenTs3(metricsChoice.getIdea1()) + EnDoWenTs3(metricsChoice.getIdea2()));
         standard += (EnDoWenTs3(metricsChoice.getStandard1()) + EnDoWenTs3(metricsChoice.getStandard2()));
         attitudes += EnDoWenTs4(metricsChoice.getAttitudes());
         hc += EnDoWenTsHc(metricsChoice.getHc());
@@ -56,7 +56,7 @@ public class MetricsUtils {
         male += (Endowments1(metricsChoice.getMale1()) + Endowments1(metricsChoice.getMale2()));
 
         Metrics metrics = new Metrics();
-        metrics.setUserID(metricsChoice.getUserID());
+        metrics.setUserID(metricsChoice.getUserId());
         metrics.setCuriosity(curiosity);
         metrics.setReadly(readly);
         metrics.setAdventure(adventure);

@@ -7,12 +7,8 @@ import lombok.Setter;
 @Getter
 public class UserPreferenceChoice {
 
-    private int userPreferenceID;
-    private int userID;
-    private int sex;
-    private int education; // 想要匹配的人的最高学历
-    private int ageMax;  // 想要匹配的人的最大年龄
-    private int ageMin; // 想要匹配的人的最小年龄
+    private int userPreferenceChoiceId;
+    private int userId;
     private Integer curiosity;//好奇心
     private Integer readly; //是否阅读
     private Integer abstractness;  //抽象性

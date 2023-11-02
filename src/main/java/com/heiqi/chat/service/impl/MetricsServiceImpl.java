@@ -54,16 +54,21 @@ public class MetricsServiceImpl implements MetricsService {
 
     @Override
     public MetricsChoice upDateMetricsChoiceByUserId(MetricsChoice metricsChoice) {
-        metricsMapper.upDateMetricsChoiceByUserId(metricsChoice,metricsChoice.getUserID());
-        MetricsChoice metricsChoiceByUserID = metricsMapper.getMetricsChoiceByUserID(metricsChoice.getUserID());
+        metricsMapper.upDateMetricsChoiceByUserId(metricsChoice,metricsChoice.getUserId());
+        MetricsChoice metricsChoiceByUserID = metricsMapper.getMetricsChoiceByUserID(metricsChoice.getUserId());
         return metricsChoiceByUserID;
     }
 
     @Override
     public MetricsChoice insertMetricsChoice(MetricsChoice metricsChoice) {
         metricsMapper.insertMetricsChoice(metricsChoice);
-        MetricsChoice metricsChoiceByUserID = metricsMapper.getMetricsChoiceByUserID(metricsChoice.getUserID());
+        MetricsChoice metricsChoiceByUserID = metricsMapper.getMetricsChoiceByUserID(metricsChoice.getUserId());
         return metricsChoiceByUserID;
+    }
+
+    @Override
+    public void deleteMetricsChoice(int userId) {
+        metricsMapper.deleteMetricsChoiceByUserId(userId);
     }
 
 

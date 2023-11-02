@@ -22,6 +22,9 @@ public interface UserPreferenceMapper {
     @Delete("DELETE FROM userpreferencefoundation WHERE userId = #{userId}")
     void deleteUserPreferenceFoundationByUserId(@Param("userId") int userId);
 
+    @Delete("DELETE FROM userpreferencechoice WHERE userId = #{userId}")
+    void deleteUserPreferenceChoiceByUserId(@Param("userId") int userId);
+
     @Update("UPDATE userpreferencefoundation SET sex=#{sex},education=#{education},ageMax=#{ageMax},ageMin=#{ageMin}  WHERE userId = #{userId}")
     void updateUserPreferenceFoundationByUserId(UserPreferenceFoundation userPreferenceFoundation,int userId);
 

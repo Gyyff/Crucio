@@ -65,14 +65,14 @@ public class UserPreferenceServiceImpl implements UserPreferenceService {
     @Override
     public UserPreferenceChoice insertUserPreferenceChoice(UserPreferenceChoice userPreferenceChoice) {
         userPreferenceMapper.insertUserPreferenceChoice(userPreferenceChoice);
-        UserPreferenceChoice userPreferenceChoiceByUserId = userPreferenceMapper.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserID());
+        UserPreferenceChoice userPreferenceChoiceByUserId = userPreferenceMapper.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserId());
         return userPreferenceChoiceByUserId;
     }
 
     @Override
     public UserPreferenceChoice updateUserPreferenceChoiceIdByUserId(UserPreferenceChoice userPreferenceChoice) {
-        userPreferenceMapper.updateUserPreferenceChoiceIdByUserId(userPreferenceChoice,userPreferenceChoice.getUserID());
-        UserPreferenceChoice userPreferenceChoiceByUserId = userPreferenceMapper.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserID());
+        userPreferenceMapper.updateUserPreferenceChoiceIdByUserId(userPreferenceChoice,userPreferenceChoice.getUserId());
+        UserPreferenceChoice userPreferenceChoiceByUserId = userPreferenceMapper.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserId());
         return userPreferenceChoiceByUserId;
     }
 
@@ -221,5 +221,15 @@ public class UserPreferenceServiceImpl implements UserPreferenceService {
     @Override
     public int updateAgeMin(int UserId, int ageMin) {
         return userPreferenceMapper.updateAgeMin(UserId,ageMin);
+    }
+
+    @Override
+    public void deleteUserPreferenceFoundationByUserId(int userId) {
+        userPreferenceMapper.deleteUserPreferenceFoundationByUserId(userId);
+    }
+
+    @Override
+    public void deleteUserPreferenceChoiceByUserId(int userId) {
+        userPreferenceMapper.deleteUserPreferenceChoiceByUserId(userId);
     }
 }

@@ -112,4 +112,8 @@ public interface UserPreferenceService {
 
     int updateAgeMin(int UserId,int ageMin);
 
+    void deleteUserPreferenceFoundationByUserId(int userId);
+
+    void deleteUserPreferenceChoiceByUserId(int userId);
+
 }

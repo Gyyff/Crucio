@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserPreferenceController {
     private final UserPreferenceService userPreferenceService;
     private final UserPerferenceUtils userPerferenceUtils;
+
     @Autowired
-    public UserPreferenceController(UserPreferenceService userPreferenceService,UserPerferenceUtils userPerferenceUtils) {
+    public UserPreferenceController(UserPreferenceService userPreferenceService, UserPerferenceUtils userPerferenceUtils) {
         this.userPreferenceService = userPreferenceService;
         this.userPerferenceUtils = userPerferenceUtils;
 
@@ -61,32 +62,78 @@ public class UserPreferenceController {
 
     @PutMapping("/insertUserPreferenceFoundation")
     public Result insertUserPreferenceFoundation(@RequestBody UserPreferenceFoundation userPreferenceFoundation) {
-        UserPreferenceFoundation userPreferenceFoundation1 = userPreferenceService.insertUserPreferenceFoundation(userPreferenceFoundation);
-        return Result.success(userPreferenceFoundation1);
+        int userId = userPreferenceFoundation.getUserId();
+        UserPreferenceChoice choice = userPreferenceService.getUserPreferenceChoiceByUserId(userId);
+        UserPreferenceFoundation foundation = userPreferenceService.getUserPreferenceFoundationByUserId(userId);
+        if ((choice==null)&&(foundation==null)){
+            UserPreferenceFoundation foundation1 = userPreferenceService.insertUserPreferenceFoundation(userPreferenceFoundation);
+            return Result.success(foundation1);
+        }if ((choice==null)&&(foundation!=null)){
+            userPreferenceService.deleteUserPreferenceFoundationByUserId(userId);
+            UserPreferenceFoundation foundation1 = userPreferenceService.insertUserPreferenceFoundation(userPreferenceFoundation);
+            return Result.success(foundation1);
+        }if ((choice!=null)&&(foundation==null)){
+            UserPreferenceFoundation foundation1 = userPreferenceService.insertUserPreferenceFoundation(userPreferenceFoundation);
+            UserPreference userPreference = userPerferenceUtils.UserPerferenceStructure(choice, userPreferenceFoundation);
+            if (userPreferenceService.getUserPreferenceByUserId(userId)!=null){
+                userPreferenceService.deleteUserPreferenceByUserId(userId);
+                userPreferenceService.insertUserPreference(userPreference);
+            } if (userPreferenceService.getUserPreferenceByUserId(userId)==null){
+                userPreferenceService.insertUserPreference(userPreference);
+            }
+            return Result.success(foundation1);
+        }if ((choice!=null)&&(foundation!=null)){
+            userPreferenceService.deleteUserPreferenceFoundationByUserId(userId);
+            userPreferenceService.insertUserPreferenceFoundation(userPreferenceFoundation);
+            UserPreference userPreference = userPerferenceUtils.UserPerferenceStructure(choice, userPreferenceFoundation);
+            if (userPreferenceService.getUserPreferenceByUserId(userId)!=null){
+                userPreferenceService.deleteUserPreferenceByUserId(userId);
+                userPreferenceService.insertUserPreference(userPreference);
+            } if (userPreferenceService.getUserPreferenceByUserId(userId)==null){
+                userPreferenceService.insertUserPreference(userPreference);
+            }
+            UserPreferenceFoundation userPreferenceFoundationByUserId = userPreferenceService.getUserPreferenceFoundationByUserId(userId);
+            return Result.success(userPreferenceFoundationByUserId);
+        }
+        else return Result.error("提交失败");
     }
 
 
     @PutMapping("/insertUserPreference")
     public Result insertUserPreference(@RequestBody UserPreferenceChoice userPreferenceChoice) {
-       if (userPreferenceService.getUserPreferenceFoundationByUserId(userPreferenceChoice.getUserID())==null){
-           return Result.error("请您先完成基础偏好测试");
-       }if (userPreferenceService.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserID())==null) {
-            UserPreferenceFoundation upf = userPreferenceService.getUserPreferenceFoundationByUserId(userPreferenceChoice.getUserID());
-            UserPreference userPreference = userPerferenceUtils.UserPerferenceStructure(userPreferenceChoice, upf);
-            userPreferenceService.insertUserPreference(userPreference);
-            userPreferenceService.insertUserPreferenceChoice(userPreferenceChoice);
-            UserPreferenceChoice usc = userPreferenceService.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserID());
-            return Result.success(usc);
-        }if (userPreferenceService.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserID())!=null){
-            UserPreferenceFoundation upf = userPreferenceService.getUserPreferenceFoundationByUserId(userPreferenceChoice.getUserID());
-            int userPreferenceID = userPreferenceService.getUserPreferenceByUserId(userPreferenceChoice.getUserID()).getUserPreferenceID();
-            UserPreference userPreference = userPerferenceUtils.UserPerferenceStructure(userPreferenceChoice, upf);
-            userPreference.setUserPreferenceID(userPreferenceID);
-            UserPreferenceChoice choice = userPreferenceService.updateUserPreferenceChoiceIdByUserId(userPreferenceChoice);
-            userPreferenceService.deleteUserPreferenceByUserId(userPreference.getUserID());
-            userPreferenceService.insertUserPreference(userPreference);
-            return Result.success(choice);
-        }else return Result.error("提交失败");
+        int userId = userPreferenceChoice.getUserId();
+        UserPreferenceChoice choice = userPreferenceService.getUserPreferenceChoiceByUserId(userId);
+        UserPreferenceFoundation foundation = userPreferenceService.getUserPreferenceFoundationByUserId(userId);
+        if ((choice==null)&&(foundation==null)){
+            UserPreferenceChoice choice1 = userPreferenceService.insertUserPreferenceChoice(userPreferenceChoice);
+            return Result.success(choice1);
+        }if ((choice==null)&&(foundation!=null)){
+            UserPreference userPreference = userPerferenceUtils.UserPerferenceStructure(userPreferenceChoice, foundation);
+            UserPreferenceChoice choice1 = userPreferenceService.insertUserPreferenceChoice(userPreferenceChoice);
+            if (userPreferenceService.getUserPreferenceByUserId(userId)!=null){
+                userPreferenceService.deleteUserPreferenceByUserId(userId);
+                userPreferenceService.insertUserPreference(userPreference);
+            } if (userPreferenceService.getUserPreferenceByUserId(userId)==null){
+                userPreferenceService.insertUserPreference(userPreference);
+            }
+            return Result.success(choice1);
+        }if ((choice!=null)&&(foundation==null)){
+            userPreferenceService.deleteUserPreferenceChoiceByUserId(userId);
+            UserPreferenceChoice choice1 = userPreferenceService.insertUserPreferenceChoice(userPreferenceChoice);
+            return Result.success(choice1);
+        }if ((choice!=null)&&(foundation!=null)){
+            userPreferenceService.deleteUserPreferenceChoiceByUserId(userId);
+            UserPreferenceChoice choice1 = userPreferenceService.insertUserPreferenceChoice(userPreferenceChoice);
+            UserPreference userPreference = userPerferenceUtils.UserPerferenceStructure(userPreferenceChoice, foundation);
+            if (userPreferenceService.getUserPreferenceByUserId(userId)!=null){
+                userPreferenceService.deleteUserPreferenceByUserId(userId);
+                userPreferenceService.insertUserPreference(userPreference);
+            } if (userPreferenceService.getUserPreferenceByUserId(userId)==null){
+                userPreferenceService.insertUserPreference(userPreference);
+            }
+            return Result.success(choice1);
+        }
+        else return Result.error("提交失败");
     }
 
 

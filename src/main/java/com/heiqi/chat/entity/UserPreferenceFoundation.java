@@ -6,7 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserPreferenceFoundation {
+
     int userPreferenceFoundationId;
+
     int userId;
 
     Integer sex;
@@ -14,5 +16,6 @@ public class UserPreferenceFoundation {
     Integer education;
 
     Integer ageMax;
+
     Integer ageMin;
 }
