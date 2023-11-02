@@ -32,7 +32,7 @@ public class UserMatchTask {
         log.info("开始执行用户匹配定时任务，用户数量:{}", userIds.size());
         userIds.forEach(item -> {
             try {
-                userService.getUserMatch(item);
+                userService.getUserMatch0(item);
             } catch (Exception e) {
                 log.error("用户匹配定时任务执行失败,用户id:{}", item, e);
             }

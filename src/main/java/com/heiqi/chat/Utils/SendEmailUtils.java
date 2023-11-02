@@ -14,7 +14,8 @@ public final class SendEmailUtils {
         final Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.host", "smtp.exmail.qq.com");
-        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
 
         //发件人的账号
@@ -57,7 +58,8 @@ public final class SendEmailUtils {
         final Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.host", "smtp.exmail.qq.com");
-        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
 
         //发件人的账号
@@ -95,13 +97,13 @@ public final class SendEmailUtils {
 
     }
 
-//    public static void main(String[] args) {
-//        try {
-//            SendEmailUtils.sendEmail("15355315088@163.com","1234");
-//        }catch (Exception ex){
-//            ex.printStackTrace();
-//        }
-//
-//
-//    }
+    public static void main(String[] args) {
+        try {
+            SendEmailUtils.sendMatchEmail("1821661414@qq.com");
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+
+    }
 }

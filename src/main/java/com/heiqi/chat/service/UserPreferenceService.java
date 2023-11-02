@@ -1,6 +1,9 @@
 package com.heiqi.chat.service;
 
+import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.UserPreference;
+import com.heiqi.chat.entity.UserPreferenceChoice;
+import com.heiqi.chat.entity.UserPreferenceFoundation;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
@@ -15,7 +18,19 @@ public interface UserPreferenceService {
 
     UserPreference insertUserPreference(UserPreference userPreference);
 
+    UserPreferenceFoundation insertUserPreferenceFoundation(UserPreferenceFoundation userPreferenceFoundation);
 
+
+    UserPreferenceFoundation getUserPreferenceFoundationByUserId(int userId);
+
+
+    UserPreferenceChoice insertUserPreferenceChoice(UserPreferenceChoice userPreferenceChoice);
+
+    UserPreferenceChoice updateUserPreferenceChoiceIdByUserId(UserPreferenceChoice userPreferenceChoice);
+
+    UserPreferenceChoice getUserPreferenceChoiceByUserId(int userId);
+
+    UserPreferenceFoundation updateUserPreferenceFoundationByUserId(UserPreferenceFoundation userPreferenceFoundation);
     int updateCuriosity(int UserId, int curiosity);
 
 

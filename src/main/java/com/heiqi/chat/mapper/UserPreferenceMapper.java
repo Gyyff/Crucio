@@ -1,6 +1,9 @@
 package com.heiqi.chat.mapper;
 
+import com.heiqi.chat.entity.Metrics;
 import com.heiqi.chat.entity.UserPreference;
+import com.heiqi.chat.entity.UserPreferenceChoice;
+import com.heiqi.chat.entity.UserPreferenceFoundation;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -8,13 +11,34 @@ import org.springframework.stereotype.Component;
 public interface UserPreferenceMapper {
     @Select("SELECT * FROM userpreference WHERE UserId = #{UserId}")
     UserPreference getUserPreferenceByUserId(@Param("UserId") int UserId);
+    @Select("SELECT * FROM userpreference WHERE userPreferenceId = #{userPreferenceId}")
+    UserPreference getUserPreferenceByUserPreferenceID(int userPreferenceId);
 
-    @Select("SELECT * FROM userpreference WHERE UserPreferenceId = #{UserPreferenceId}")
-    UserPreference getUserPreferenceByUserPreferenceID(@Param("UserPreferenceId") int UserPreferenceId);
+    @Select("SELECT * FROM userpreferencefoundation WHERE userId = #{userId}")
+    UserPreferenceFoundation getUserPreferenceFoundationByUserId(@Param("userId") int userId);
+
+    @Select("SELECT * FROM userpreferencechoice WHERE userId = #{userId}")
+    UserPreferenceChoice getUserPreferenceChoiceByUserId(@Param("userId") int userId);
+    @Delete("DELETE FROM userpreferencefoundation WHERE userId = #{userId}")
+    void deleteUserPreferenceFoundationByUserId(@Param("userId") int userId);
+
+    @Update("UPDATE userpreferencefoundation SET sex=#{sex},education=#{education},ageMax=#{ageMax},ageMin=#{ageMin}  WHERE userId = #{userId}")
+    void updateUserPreferenceFoundationByUserId(UserPreferenceFoundation userPreferenceFoundation,int userId);
+
 
     @Insert("INSERT INTO userpreference(userPreferenceID, userID,sex,education,ageMax, ageMin,curiosity, readly, abstractness, intellectual, openl, tryNew,idea, standard, hc, fs,adventure,achievement,aesthetic,excitement,rebel,altruism,emotion,characterl,organization,inductive,attitudes,selfish,male) VALUES(#{userPreferenceID},#{userID},#{sex},#{education},#{ageMax},#{ageMin},#{curiosity},#{readly},#{abstractness},#{intellectual},#{openl},#{tryNew},#{idea},#{standard},#{hc},#{fs},#{adventure},#{achievement},#{aesthetic},#{excitement},#{rebel},#{altruism},#{emotion},#{characterl},#{organization},#{inductive},#{attitudes},#{selfish},#{male})")
     @Options(useGeneratedKeys = true, keyProperty = "userPreferenceID")
     int insertUserPreference(UserPreference userPreference);
+
+    @Insert("INSERT INTO userpreferencefoundation(userPreferenceFoundationId, userId,sex,education,ageMax, ageMin) VALUES(#{userPreferenceFoundationId},#{userId},#{sex},#{education},#{ageMax},#{ageMin})")
+    @Options(useGeneratedKeys = true, keyProperty = "userPreferenceFoundationId")
+    int insertUserPreferenceFoundation(UserPreferenceFoundation userPreferenceFoundation);
+
+    @Insert("INSERT INTO userpreferencechoice(userPreferenceChoiceId, userId,curiosity, readly, abstractness, intellectual, openl, tryNew,idea, standard, hc, fs,adventure,achievement,aesthetic,excitement,rebel,altruism,emotion,characterl,organization,inductive,attitudes,selfish,male) VALUES(#{userPreferenceChoiceId},#{userId},#{curiosity},#{readly},#{abstractness},#{intellectual},#{openl},#{tryNew},#{idea},#{standard},#{hc},#{fs},#{adventure},#{achievement},#{aesthetic},#{excitement},#{rebel},#{altruism},#{emotion},#{characterl},#{organization},#{inductive},#{attitudes},#{selfish},#{male})")
+    int insertUserPreferenceChoice(UserPreferenceChoice userPreferenceChoice);
+
+    @Update("UPDATE userpreferencechoice SET curiosity=#{curiosity},readly=#{readly},abstractness=#{abstractness},intellectual=#{intellectual},openl=#{openl},tryNew=#{tryNew},idea=#{idea},standard=#{standard},hc=#{hc},fs=#{fs},characterl1=#{characterl1},characterl2=#{characterl2},organization1=#{organization1},organization2=#{organization2},inductive=#{inductive},adventure1=#{adventure1},adventure2=#{adventure2},achievement1=#{achievement1},achievement2=#{achievement2},aesthetic1=#{aesthetic1},aesthetic2=#{aesthetic2},excitement1=#{excitement1},excitement2=#{excitement2},emotion1=#{emotion1},emotion2=#{emotion2},rebel1=#{rebel1},rebel2=#{rebel2} ,altruism1=#{altruism1},altruism2=#{altruism2},emotion1=#{emotion1} ,selfish1=#{selfish1} ,selfish2=#{selfish2} ,male1=#{male1} ,male2=#{male2} WHERE userId = #{userId}")
+    void updateUserPreferenceChoiceIdByUserId(UserPreferenceChoice userPreferenceChoice,int userId);
 
     @Delete("DELETE FROM userpreference WHERE UserID = #{UserID}")
     void deleteUserPreferenceByUserId(@Param("UserID") int UserID);
@@ -101,6 +125,7 @@ public interface UserPreferenceMapper {
 
     @Update("UPDATE userpreference SET ageMin = #{ageMin} WHERE UserId = #{UserId}")
     int updateAgeMin(@Param("UserId") int UserId, @Param("ageMin") int ageMin);
+
 
 
 }

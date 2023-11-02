@@ -3,6 +3,7 @@ package com.heiqi.chat.service;
 
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.User;
+import com.heiqi.chat.entity.UserPreferenceChoice;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
@@ -26,6 +27,8 @@ public interface UserService {
     User getUserByEmail(String email);
 
     Result getUserMatch(int UserId) throws Exception;
+
+    Result getUserMatch0(int UserId);
 
     Result getConformUsers(int UserId);
 

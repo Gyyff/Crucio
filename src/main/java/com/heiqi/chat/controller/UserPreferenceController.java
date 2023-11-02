@@ -1,8 +1,11 @@
 package com.heiqi.chat.controller;
 
 
+import com.heiqi.chat.Utils.UserPerferenceUtils;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.UserPreference;
+import com.heiqi.chat.entity.UserPreferenceChoice;
+import com.heiqi.chat.entity.UserPreferenceFoundation;
 import com.heiqi.chat.service.UserPreferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,87 +14,80 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user/UserPreference")
 public class UserPreferenceController {
     private final UserPreferenceService userPreferenceService;
-
+    private final UserPerferenceUtils userPerferenceUtils;
     @Autowired
-    public UserPreferenceController(UserPreferenceService userPreferenceService) {
+    public UserPreferenceController(UserPreferenceService userPreferenceService,UserPerferenceUtils userPerferenceUtils) {
         this.userPreferenceService = userPreferenceService;
+        this.userPerferenceUtils = userPerferenceUtils;
 
     }
+
     @GetMapping("/getUserPreferenceByUserId/{UserId}")
-    public Result getUserPreferenceByUserId(@PathVariable("UserId") int UserId){
+    public Result getUserPreferenceByUserId(@PathVariable("UserId") int UserId) {
         UserPreference userPreference = userPreferenceService.getUserPreferenceByUserId(UserId);
-        if (userPreference!=null){
+        if (userPreference != null) {
             return Result.success(userPreference);
-        }else {
+        } else {
             return Result.error("查找失败");
         }
 
 
     }
 
+    @GetMapping("/getUserPreferenceFoundationByUserId/{UserId}")
+    public Result getUserPreferenceFoundationByUserId(@PathVariable("UserId") int UserId) {
+        UserPreferenceFoundation userPreferenceFoundationByUserId = userPreferenceService.getUserPreferenceFoundationByUserId(UserId);
+        if (userPreferenceFoundationByUserId != null) {
+            return Result.success(userPreferenceFoundationByUserId);
+        } else return Result.error("查找失败");
+    }
 
     @GetMapping("/getUserPreferenceByUserPreferenceID/{UserPreferenceId}")
-    public Result getUserPreferenceByUserPreferenceID(@PathVariable("UserPreferenceId")int UserPreferenceId){
+    public Result getUserPreferenceByUserPreferenceID(@PathVariable("UserPreferenceId") int UserPreferenceId) {
         UserPreference userPreference = userPreferenceService.getUserPreferenceByUserPreferenceID(UserPreferenceId);
-        if (userPreference!=null){
+        if (userPreference != null) {
             return Result.success(userPreference);
-        }else {
+        } else {
             return Result.error("查找失败");
         }
     }
 
 
     @DeleteMapping("/deleteUserPreferenceByUserId/{UserId}")
-    public Result deleteUserPreferenceByUserId(@PathVariable("UserId") int UserId){
+    public Result deleteUserPreferenceByUserId(@PathVariable("UserId") int UserId) {
         userPreferenceService.deleteUserPreferenceByUserId(UserId);
         return Result.success();
     }
 
+    @PutMapping("/insertUserPreferenceFoundation")
+    public Result insertUserPreferenceFoundation(@RequestBody UserPreferenceFoundation userPreferenceFoundation) {
+        UserPreferenceFoundation userPreferenceFoundation1 = userPreferenceService.insertUserPreferenceFoundation(userPreferenceFoundation);
+        return Result.success(userPreferenceFoundation1);
+    }
+
 
     @PutMapping("/insertUserPreference")
-    public Result insertUserPreference(@RequestBody UserPreference userPreference){
-        UserPreference userPreferenceByUserId = userPreferenceService.getUserPreferenceByUserId(userPreference.getUserID());
-        if (userPreferenceByUserId==null){
-            UserPreference userPreference1 = userPreferenceService.insertUserPreference(userPreference);
-            return Result.success(userPreference1);
-        }if (userPreferenceByUserId!=null){
-            int id = userPreference.getUserID();
-            userPreferenceService.updateSex(userPreference.getUserID(),userPreference.getSex());
-            userPreferenceService.updateEducation(userPreference.getUserID(),userPreference.getEducation());
-            userPreferenceService.updateAgeMax(userPreference.getUserID(),userPreference.getAgeMax());
-            userPreferenceService.updateAgeMin(userPreference.getUserID(),userPreference.getAgeMin());
-            userPreferenceService.updateCuriosity(id,userPreference.getCuriosity());
-            userPreferenceService.updateReadLy(id,userPreference.getReadly());
-            userPreferenceService.updateAbstractness(id,userPreference.getAbstractness());
-            userPreferenceService.updateIntellectual(id,userPreference.getIntellectual());
-            userPreferenceService.updateOpenL(id,userPreference.getOpenl());
-            userPreferenceService.updateTryNew(id,userPreference.getTryNew());
-            userPreferenceService.updateIdea(id,userPreference.getIdea());
-            userPreferenceService.updateStandard(id,userPreference.getStandard());
-            userPreferenceService.updateHc(id,userPreference.getHc());
-            userPreferenceService.updateFs(id,userPreference.getFs());
-            userPreferenceService.updateAdventure(id,userPreference.getAdventure());
-            userPreferenceService.updateAchievement(id,userPreference.getAchievement());
-            userPreferenceService.updateAesthetic(id,userPreference.getAesthetic());
-            userPreferenceService.updateExcitement(id,userPreference.getExcitement());
-            userPreferenceService.updateRebel(id,userPreference.getRebel());
-            userPreferenceService.updateAltruism(id,userPreference.getAltruism());
-            userPreferenceService.updateEmotion(id,userPreference.getEmotion());
-            userPreferenceService.updateCharacterL(id,userPreference.getCharacterl());
-            userPreferenceService.updateOrganization(id,userPreference.getOrganization());
-            userPreferenceService.updateInductive(id,userPreference.getInductive());
-            userPreferenceService.updateAttitudes(id,userPreference.getAttitudes());
-            userPreferenceService.updateSelfish(id,userPreference.getSelfish());
-            userPreferenceService.updateMale(id,userPreference.getMale());
-            UserPreference preference = userPreferenceService.getUserPreferenceByUserId(id);
-            return Result.success(preference);
-
-        }
-
-        else {
-            return Result.error("失败");
-        }
-
+    public Result insertUserPreference(@RequestBody UserPreferenceChoice userPreferenceChoice) {
+       if (userPreferenceService.getUserPreferenceFoundationByUserId(userPreferenceChoice.getUserID())==null){
+           return Result.error("请您先完成基础偏好测试");
+       }if (userPreferenceService.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserID())==null) {
+            UserPreferenceFoundation upf = userPreferenceService.getUserPreferenceFoundationByUserId(userPreferenceChoice.getUserID());
+            UserPreference userPreference = userPerferenceUtils.UserPerferenceStructure(userPreferenceChoice, upf);
+            userPreferenceService.insertUserPreference(userPreference);
+            userPreferenceService.insertUserPreferenceChoice(userPreferenceChoice);
+            UserPreferenceChoice usc = userPreferenceService.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserID());
+            return Result.success(usc);
+        }if (userPreferenceService.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserID())!=null){
+            UserPreferenceFoundation upf = userPreferenceService.getUserPreferenceFoundationByUserId(userPreferenceChoice.getUserID());
+            int userPreferenceID = userPreferenceService.getUserPreferenceByUserId(userPreferenceChoice.getUserID()).getUserPreferenceID();
+            UserPreference userPreference = userPerferenceUtils.UserPerferenceStructure(userPreferenceChoice, upf);
+            userPreference.setUserPreferenceID(userPreferenceID);
+            UserPreferenceChoice choice = userPreferenceService.updateUserPreferenceChoiceIdByUserId(userPreferenceChoice);
+            userPreferenceService.deleteUserPreferenceByUserId(userPreference.getUserID());
+            userPreferenceService.insertUserPreference(userPreference);
+            return Result.success(choice);
+        }else return Result.error("提交失败");
     }
+
 
 }

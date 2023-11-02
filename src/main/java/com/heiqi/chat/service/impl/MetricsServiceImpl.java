@@ -1,6 +1,7 @@
 package com.heiqi.chat.service.impl;
 
 import com.heiqi.chat.entity.Metrics;
+import com.heiqi.chat.entity.MetricsChoice;
 import com.heiqi.chat.mapper.MetricsMapper;
 import com.heiqi.chat.mapper.UserMapper;
 import com.heiqi.chat.service.MetricsService;
@@ -44,6 +45,25 @@ public class MetricsServiceImpl implements MetricsService {
     @Override
     public int deleteByMetricID(int MetricID) {
         return metricsMapper.deleteByMetricID(MetricID);
+    }
+
+    @Override
+    public MetricsChoice getMetricsChoiceByUserID(int userId) {
+        return metricsMapper.getMetricsChoiceByUserID(userId);
+    }
+
+    @Override
+    public MetricsChoice upDateMetricsChoiceByUserId(MetricsChoice metricsChoice) {
+        metricsMapper.upDateMetricsChoiceByUserId(metricsChoice,metricsChoice.getUserID());
+        MetricsChoice metricsChoiceByUserID = metricsMapper.getMetricsChoiceByUserID(metricsChoice.getUserID());
+        return metricsChoiceByUserID;
+    }
+
+    @Override
+    public MetricsChoice insertMetricsChoice(MetricsChoice metricsChoice) {
+        metricsMapper.insertMetricsChoice(metricsChoice);
+        MetricsChoice metricsChoiceByUserID = metricsMapper.getMetricsChoiceByUserID(metricsChoice.getUserID());
+        return metricsChoiceByUserID;
     }
 
 

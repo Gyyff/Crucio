@@ -1,6 +1,9 @@
 package com.heiqi.chat.service.impl;
 
+import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.UserPreference;
+import com.heiqi.chat.entity.UserPreferenceChoice;
+import com.heiqi.chat.entity.UserPreferenceFoundation;
 import com.heiqi.chat.mapper.UserMapper;
 import com.heiqi.chat.mapper.UserPreferenceMapper;
 import com.heiqi.chat.service.UserPreferenceService;
@@ -44,6 +47,45 @@ public class UserPreferenceServiceImpl implements UserPreferenceService {
 
         }
         return userPreferenceMapper.getUserPreferenceByUserId(userPreference.getUserID());
+    }
+
+    @Override
+    public UserPreferenceFoundation insertUserPreferenceFoundation(UserPreferenceFoundation userPreferenceFoundation) {
+        userPreferenceMapper.insertUserPreferenceFoundation(userPreferenceFoundation);
+        UserPreferenceFoundation userPreferenceFoundationByUserId = userPreferenceMapper.getUserPreferenceFoundationByUserId(userPreferenceFoundation.getUserId());
+        return userPreferenceFoundationByUserId;
+    }
+
+    @Override
+    public UserPreferenceFoundation getUserPreferenceFoundationByUserId(int userId) {
+        UserPreferenceFoundation userPreferenceFoundationByUserId = userPreferenceMapper.getUserPreferenceFoundationByUserId(userId);
+        return userPreferenceFoundationByUserId;
+    }
+
+    @Override
+    public UserPreferenceChoice insertUserPreferenceChoice(UserPreferenceChoice userPreferenceChoice) {
+        userPreferenceMapper.insertUserPreferenceChoice(userPreferenceChoice);
+        UserPreferenceChoice userPreferenceChoiceByUserId = userPreferenceMapper.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserID());
+        return userPreferenceChoiceByUserId;
+    }
+
+    @Override
+    public UserPreferenceChoice updateUserPreferenceChoiceIdByUserId(UserPreferenceChoice userPreferenceChoice) {
+        userPreferenceMapper.updateUserPreferenceChoiceIdByUserId(userPreferenceChoice,userPreferenceChoice.getUserID());
+        UserPreferenceChoice userPreferenceChoiceByUserId = userPreferenceMapper.getUserPreferenceChoiceByUserId(userPreferenceChoice.getUserID());
+        return userPreferenceChoiceByUserId;
+    }
+
+    @Override
+    public UserPreferenceChoice getUserPreferenceChoiceByUserId(int userId) {
+        return userPreferenceMapper.getUserPreferenceChoiceByUserId(userId);
+    }
+
+    @Override
+    public UserPreferenceFoundation updateUserPreferenceFoundationByUserId(UserPreferenceFoundation userPreferenceFoundation) {
+        userPreferenceMapper.updateUserPreferenceFoundationByUserId(userPreferenceFoundation,userPreferenceFoundation.getUserId());
+        UserPreferenceFoundation userPreferenceFoundationByUserId = userPreferenceMapper.getUserPreferenceFoundationByUserId(userPreferenceFoundation.getUserId());
+        return userPreferenceFoundationByUserId;
     }
 
     @Override

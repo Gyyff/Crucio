@@ -448,6 +448,12 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public Result getUserMatch0(int UserId) {
+        return Result.error("目前暂无合适对象，将会在后台持续为你匹配，匹配成功将会通过邮箱联系你。");
+    }
+
+
+    @Override
     public Result getConformUsers(int UserId) {
         List<User> ConformUsers = new ArrayList<>();
         if (userMapper.getUserById(UserId).getMatchStatus() == 0) {

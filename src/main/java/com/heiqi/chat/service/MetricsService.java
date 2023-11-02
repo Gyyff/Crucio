@@ -2,6 +2,7 @@ package com.heiqi.chat.service;
 
 
 import com.heiqi.chat.entity.Metrics;
+import com.heiqi.chat.entity.MetricsChoice;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,12 @@ public interface MetricsService {
     int deleteByUserID(int UserID);
 
     int deleteByMetricID(int MetricID);
+
+    MetricsChoice getMetricsChoiceByUserID(int userId);
+
+    MetricsChoice upDateMetricsChoiceByUserId(MetricsChoice metricsChoice);
+
+    MetricsChoice insertMetricsChoice(MetricsChoice metricsChoice);
 
 //    int insertScoRel(int MetricID,int ScoRel);
 }
