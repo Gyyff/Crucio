@@ -1,11 +1,13 @@
 package com.heiqi.chat.mapper;
 
-import com.heiqi.chat.entity.Metrics;
+
 import com.heiqi.chat.entity.UserPreference;
 import com.heiqi.chat.entity.UserPreferenceChoice;
 import com.heiqi.chat.entity.UserPreferenceFoundation;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public interface UserPreferenceMapper {
@@ -13,6 +15,12 @@ public interface UserPreferenceMapper {
     UserPreference getUserPreferenceByUserId(@Param("UserId") int UserId);
     @Select("SELECT * FROM userpreference WHERE userPreferenceId = #{userPreferenceId}")
     UserPreference getUserPreferenceByUserPreferenceID(int userPreferenceId);
+
+    @Select("SELECT * FROM userpreferencefoundation")
+    List<UserPreferenceFoundation> getAllUserPreferenceFoundation();
+
+    @Select("SELECT * FROM userpreferencechoice")
+    List<UserPreferenceChoice> getAllUserPreferenceChoice();
 
     @Select("SELECT * FROM userpreferencefoundation WHERE userId = #{userId}")
     UserPreferenceFoundation getUserPreferenceFoundationByUserId(@Param("userId") int userId);
@@ -30,11 +38,9 @@ public interface UserPreferenceMapper {
 
 
     @Insert("INSERT INTO userpreference(userPreferenceID, userID,sex,education,ageMax, ageMin,curiosity, readly, abstractness, intellectual, openl, tryNew,idea, standard, hc, fs,adventure,achievement,aesthetic,excitement,rebel,altruism,emotion,characterl,organization,inductive,attitudes,selfish,male) VALUES(#{userPreferenceID},#{userID},#{sex},#{education},#{ageMax},#{ageMin},#{curiosity},#{readly},#{abstractness},#{intellectual},#{openl},#{tryNew},#{idea},#{standard},#{hc},#{fs},#{adventure},#{achievement},#{aesthetic},#{excitement},#{rebel},#{altruism},#{emotion},#{characterl},#{organization},#{inductive},#{attitudes},#{selfish},#{male})")
-    @Options(useGeneratedKeys = true, keyProperty = "userPreferenceID")
     int insertUserPreference(UserPreference userPreference);
 
     @Insert("INSERT INTO userpreferencefoundation(userPreferenceFoundationId, userId,sex,education,ageMax, ageMin) VALUES(#{userPreferenceFoundationId},#{userId},#{sex},#{education},#{ageMax},#{ageMin})")
-    @Options(useGeneratedKeys = true, keyProperty = "userPreferenceFoundationId")
     int insertUserPreferenceFoundation(UserPreferenceFoundation userPreferenceFoundation);
 
     @Insert("INSERT INTO userpreferencechoice(userPreferenceChoiceId, userId,curiosity, readly, abstractness, intellectual, openl, tryNew,idea, standard, hc, fs,adventure,achievement,aesthetic,excitement,rebel,altruism,emotion,characterl,organization,inductive,attitudes,selfish,male) VALUES(#{userPreferenceChoiceId},#{userId},#{curiosity},#{readly},#{abstractness},#{intellectual},#{openl},#{tryNew},#{idea},#{standard},#{hc},#{fs},#{adventure},#{achievement},#{aesthetic},#{excitement},#{rebel},#{altruism},#{emotion},#{characterl},#{organization},#{inductive},#{attitudes},#{selfish},#{male})")

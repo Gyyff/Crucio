@@ -2,10 +2,13 @@ package com.heiqi.chat.controller;
 
 
 import com.heiqi.chat.Utils.JwtUtil;
+import com.heiqi.chat.Utils.MatchUtils;
 import com.heiqi.chat.Utils.UploadUtil;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.BaseUser;
 import com.heiqi.chat.entity.User;
+import com.heiqi.chat.entity.UserPreference;
+import com.heiqi.chat.service.UserPreferenceService;
 import com.heiqi.chat.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -20,13 +24,15 @@ import java.util.concurrent.TimeUnit;
 public class UserController {
 
     private final UserService userService;
+    private final UserPreferenceService userPreferenceService;
 
-
+    private final MatchUtils matchUtils;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService , UserPreferenceService userPreferenceService ,MatchUtils matchUtils ) {
         this.userService = userService;
-
+        this.userPreferenceService=userPreferenceService;
+        this.matchUtils = matchUtils;
 
     }
 
@@ -106,7 +112,7 @@ public class UserController {
     //这里是用户匹配
     @GetMapping("/getUserMatch/{UserId}")
     public Result getUserMatch(@PathVariable("UserId") int UserId) throws Exception {
-        return userService.getUserMatch(UserId);
+        return userService.getUserMatch0(UserId);
     }
     //向另一位用户发送消息
    @PostMapping("sendMessageToUserOther/{UserId}")
@@ -156,6 +162,28 @@ public class UserController {
     //切换为自动匹配状态
     @PutMapping("/updateUserMatchChoiceAuto/{UserId}")
     public Result updateUserMatchChoiceAuto(@PathVariable("UserId") int UserId, BaseUser baseUser) {
+        User userById = userService.getUserById(UserId);
+        if (userPreferenceService.getUserPreferenceFoundationByUserId(UserId)==null&&userById.getIsPreference()==0&&userById.getIsTested()==0){
+            return Result.error("请先完成基础信息选项、恋爱偏好测试、性格与价值观测试");
+        }
+        if (userById.getIsPreference()==0&&userById.getIsTested()==0){
+            return Result.error("请先完成恋爱偏好测试、性格与价值观测试");
+        }
+        if (userPreferenceService.getUserPreferenceFoundationByUserId(UserId)==null&&userById.getIsPreference()==0){
+            return Result.error("请先完成基础信息选项、恋爱偏好测试");
+        }
+        if (userPreferenceService.getUserPreferenceFoundationByUserId(UserId)==null&&userById.getIsTested()==0){
+            return Result.error("请先完成基础信息选项、性格与价值观测试");
+        }
+        if (userPreferenceService.getUserPreferenceFoundationByUserId(UserId)==null){
+            return Result.error("请先完成基础信息选项");
+        }
+        if (userById.getIsPreference()==0){
+            return Result.error("请先完成恋爱偏好测试");
+        }
+        if (userById.getIsTested()==0){
+            return Result.error("请先完成性格与价值观测试");
+        }
         userService.updateUserMatchChoiceAuto(UserId);
         return Result.success();
     }
@@ -213,4 +241,13 @@ public class UserController {
 
 
     // 这里写更多的 setter 函数...
+
+  //测试用
+    @GetMapping("/matchTest")
+    public void matchTest(){
+
+       userService.testMatch();
+
+    }
+
 }

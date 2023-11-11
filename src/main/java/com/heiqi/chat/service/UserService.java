@@ -26,7 +26,7 @@ public interface UserService {
 
     User getUserByEmail(String email);
 
-    Result getUserMatch(int UserId) throws Exception;
+//    Result getUserMatch(int UserId) throws Exception;
 
     Result getUserMatch0(int UserId);
 
@@ -38,8 +38,12 @@ public interface UserService {
 
     List<User>  getUsers();
 
+    List<Integer> getAllUsersIds();
+
+    List<User> getUserTable();
 
 
+    void testMatch();
 
     //   public List<Metrics> getUserMatch(int UserId);
     void insertUser(User user) throws Exception;

@@ -9,6 +9,8 @@ public interface FeedbackMapper {
     @Select("SELECT * FROM feedback WHERE feedbackId = #{feedbackId}")
     FeedBack getFeedbackByFeedbackID(@Param("feedbackId") int feedbackId);
 
+    @Select("SELECT * FROM feedback ")
+    List<FeedBack> getAllFeedback();
     @Select("SELECT * FROM feedback WHERE UserID = #{userId}")
     List<FeedBack> getFeedbackByUserID(@Param("userId") int userId);
 

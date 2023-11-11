@@ -1,12 +1,14 @@
 package com.heiqi.chat.controller;
 
 
+import com.baomidou.mybatisplus.generator.IFill;
 import com.heiqi.chat.Utils.UserPerferenceUtils;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.UserPreference;
 import com.heiqi.chat.entity.UserPreferenceChoice;
 import com.heiqi.chat.entity.UserPreferenceFoundation;
 import com.heiqi.chat.service.UserPreferenceService;
+import com.heiqi.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +18,13 @@ public class UserPreferenceController {
     private final UserPreferenceService userPreferenceService;
     private final UserPerferenceUtils userPerferenceUtils;
 
+
+
     @Autowired
     public UserPreferenceController(UserPreferenceService userPreferenceService, UserPerferenceUtils userPerferenceUtils) {
         this.userPreferenceService = userPreferenceService;
         this.userPerferenceUtils = userPerferenceUtils;
+
 
     }
 
@@ -35,16 +40,23 @@ public class UserPreferenceController {
 
     }
 
-    @GetMapping("/getUserPreferenceChoiceByUserId/{UserId}]")
+    @GetMapping("/getUserPreferenceChoiceByUserId/{UserId}")
     public Result getUserPreferenceChoiceByUserId(@PathVariable("UserId") int UserId){
         UserPreferenceChoice userPreferenceChoiceByUserId = userPreferenceService.getUserPreferenceChoiceByUserId(UserId);
-        return Result.success(userPreferenceChoiceByUserId);
+        if (userPreferenceChoiceByUserId!=null){
+            return Result.success(userPreferenceChoiceByUserId);
+        }
+        return Result.error();
+
     }
 
     @GetMapping("/getUserPreferenceFoundationByUserId/{UserId}")
     public Result getUserPreferenceFoundationByUserId(@PathVariable("UserId") int UserId) {
         UserPreferenceFoundation userPreferenceFoundationByUserId = userPreferenceService.getUserPreferenceFoundationByUserId(UserId);
+        if (userPreferenceFoundationByUserId!=null){
             return Result.success(userPreferenceFoundationByUserId);
+        }else return Result.error();
+
     }
 
     @GetMapping("/getUserPreferenceByUserPreferenceID/{UserPreferenceId}")
@@ -66,6 +78,9 @@ public class UserPreferenceController {
 
     @PutMapping("/insertUserPreferenceFoundation")
     public Result insertUserPreferenceFoundation(@RequestBody UserPreferenceFoundation userPreferenceFoundation) {
+        if ((userPreferenceFoundation.getSex()==null)||(userPreferenceFoundation.getEducation()==null)){
+            return Result.error("请重新填写选项提交");
+        }
         int userId = userPreferenceFoundation.getUserId();
         UserPreferenceChoice choice = userPreferenceService.getUserPreferenceChoiceByUserId(userId);
         UserPreferenceFoundation foundation = userPreferenceService.getUserPreferenceFoundationByUserId(userId);
@@ -135,6 +150,7 @@ public class UserPreferenceController {
             } if (userPreferenceService.getUserPreferenceByUserId(userId)==null){
                 userPreferenceService.insertUserPreference(userPreference);
             }
+
             return Result.success(choice1);
         }
         else return Result.error("提交失败");

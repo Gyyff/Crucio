@@ -35,11 +35,19 @@ public interface UserMapper {
     @Select("SElECT * FROM user WHERE MatchChoice = 1 ")
     List<User> getUsers();
 
+
+    @Select("SElECT * FROM user ")
+    List<User> getUserTable();
+
+
+
     @Select("SElECT UserId FROM user WHERE MatchChoice = 1 ")
     List<Integer> getUserIds();
 
+    @Select("SElECT UserId FROM user ")
+    List<Integer> getAllUsersIds();
 
-    @Insert("INSERT INTO user(UserId, UserName,Phone,Email,PassWord,WeChat, Photo, Identity, Gender, Age,BirthDay,Weight,School,HomeTownA,HomeTownB, AddressA,AddressB, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus,MatchChoice) VALUES(#{UserId}, #{UserName}, #{Phone},#{Email},#{WeChat},#{PassWord}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{BirthDay},#{Weight},#{School},#{HomeTownA},#{HomeTownB},#{AddressA},#{AddressB}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus},#{MatchChoice})")
+    @Insert("INSERT INTO user(UserId, UserName,Phone,Email,PassWord,WeChat, Photo, Identity, Gender, Age,BirthDay,Weight,School,HomeTownA,HomeTownB, AddressA,AddressB, Height, Education,Beauty,IsPreference,IsTested,IsAuthed,IsLogged,MatchStatus,MatchChoice) VALUES(#{UserId}, #{UserName}, #{Phone},#{Email},#{PassWord},#{WeChat}, #{Photo}, #{Identity}, #{Gender}, #{Age}, #{BirthDay},#{Weight},#{School},#{HomeTownA},#{HomeTownB},#{AddressA},#{AddressB}, #{Height}, #{Education},#{Beauty},#{IsPreference},#{IsTested},#{IsAuthed},#{IsLogged},#{MatchStatus},#{MatchChoice})")
     @Options(useGeneratedKeys = true, keyProperty = "UserId")
     int insertUser(User user);
 

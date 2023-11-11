@@ -4,6 +4,8 @@ import com.heiqi.chat.entity.Blog;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public interface BlogMapper {
     @Select("SELECT * FROM blog WHERE BlogID = #{BlogID}")
@@ -11,6 +13,9 @@ public interface BlogMapper {
 
     @Select("SELECT * FROM blog WHERE UserID = #{UserID}")
     Blog getBlogByUserID(@Param("UserID") int UserID);
+
+    @Select("SELECT * FROM blog")
+    List<Blog> getAllBlog();
 
     @Insert("INSERT INTO blog(BlogID, UserID, ContentIntroduction,ContentDream,PostTime,Content2,Content3,Content4,Content5,Content6,Content7,Content8,Content9,Content10,Photo1,Photo2,Photo3,Photo4,Photo5,Photo6) VALUES(#{BlogID}, #{UserID}, #{ContentIntroduction},#{ContentDream},#{PostTime},#{Content2},#{Content3},#{Content4},#{Content5},#{Content6},#{Content7},#{Content8},#{Content9},#{Content10},#{Photo1},#{Photo2},#{Photo3},#{Photo4},#{Photo5},#{Photo6})")
     @Options(useGeneratedKeys = true, keyProperty = "BlogID")

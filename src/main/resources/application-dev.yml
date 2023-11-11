@@ -16,10 +16,9 @@ spring:
           max-idle: 8
           min-idle: 0
       database: 0
-      host:  119.96.236.22
+      host:  localhost
       connect-timeout: 10000
       port: 6379
-      password: Libo20230910
 
 auth:
   # JWT认证加密私钥(Base64加密)

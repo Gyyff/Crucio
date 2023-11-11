@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
+import java.util.List;
+
 
 @Component
 public interface MetricsMapper {
@@ -14,6 +16,9 @@ public interface MetricsMapper {
 
     @Select("SELECT * FROM metricschoice WHERE UserID = #{UserID}")
     MetricsChoice getMetricsChoiceByUserID(@Param("UserID") int UserID);
+
+    @Select("SELECT * FROM metricschoice")
+    List<MetricsChoice> getAllMetricsChoice();
 
 //    @Select("SELECT * FROM metrics WHERE ScoRel BETWEEN #{ScoRelMin} and #{ScoRelMax}")
 //    List<Metrics> findUserByScoRel(@Param("ScoRelMax")int ScoRelMax, @Param("ScoRelMin")int ScoRelMin);

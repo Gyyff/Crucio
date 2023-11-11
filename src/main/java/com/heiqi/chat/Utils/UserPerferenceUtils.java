@@ -10,8 +10,8 @@ public class UserPerferenceUtils {
 
     public UserPreference UserPerferenceStructure(UserPreferenceChoice upc, UserPreferenceFoundation upf){
         UserPreference up = new UserPreference();
-        up.setSex(upf.getSex());
-        up.setEducation(upf.getEducation());
+        up.setSex(Ssex(upf.getSex()));
+        up.setEducation(Sedu(upf.getEducation()));
         up.setAgeMax(upf.getAgeMax());
         up.setAgeMin(upf.getAgeMin());
         up.setUserID(upf.getUserId());
@@ -44,6 +44,38 @@ public class UserPerferenceUtils {
 
 
     }
+
+
+    private int Ssex(int i){
+        if (i==1){
+            return 0;
+        }
+        if (i==2){
+            return 1;
+        }
+        if (i==3){
+            return 2;
+        }else
+            return 2;
+    }
+    private int Sedu(int i){
+        if (i==1){
+            return 0;
+        }
+        if (i==2){
+            return 1;
+        }
+        if (i==3){
+            return 2;
+        }
+        if (i==4){
+            return 3;
+        }
+        if (i==5){
+            return 4;
+        }else return 0;
+    }
+
 
 
 

@@ -5,9 +5,13 @@ import com.heiqi.chat.Utils.MateUtils;
 import com.heiqi.chat.Utils.SendEmailUtils;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.common.SensitiveWordsChecker;
+import com.heiqi.chat.entity.BaseUser;
+import com.heiqi.chat.entity.Manager;
 import com.heiqi.chat.entity.User;
+import com.heiqi.chat.service.ManagerService;
 import com.heiqi.chat.service.UserService;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +29,7 @@ public class RegisterController {
     private final MateUtils mateUtils;
     private final SensitiveWordsChecker sensitiveWordsChecker;
 
+    private final ManagerService managerService;
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
@@ -32,10 +37,11 @@ public class RegisterController {
 
 
     @Autowired
-    public RegisterController(UserService userService, MateUtils mateUtils,SensitiveWordsChecker sensitiveWordsChecker) {
+    public RegisterController(UserService userService, MateUtils mateUtils,SensitiveWordsChecker sensitiveWordsChecker,ManagerService managerService) {
         this.userService = userService;
         this.mateUtils = mateUtils;
         this.sensitiveWordsChecker=sensitiveWordsChecker;
+        this.managerService = managerService;
 
     }
 
@@ -58,9 +64,9 @@ public class RegisterController {
     @PostMapping("/userRegisterOfPassword/{PasswordAgain}")
     public Result RegisterOfPassword(@PathVariable("PasswordAgain") String PasswordAgain,@RequestBody User user
     ) throws Exception {
-        if (sensitiveWordsChecker.containsSensitiveWords(user.getUserName())){
-            return Result.error("用户名中存在敏感词");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(user.getUserName())){
+//            return Result.error("用户名中存在敏感词");
+//        }
         if (userService.getUserByPhone(user.getPhone()) == null) {
             if (user.getPassWord().equals(PasswordAgain)) {
                 userService.insertUser(user);
@@ -115,9 +121,9 @@ public class RegisterController {
         System.out.println("temp = " + temp);
         System.out.println("user.getPhone() = " + user.getPhone());
         System.out.println("map values " + map.get(user.getPhone()));
-        if (sensitiveWordsChecker.containsSensitiveWords(user.getUserName())){
-            return Result.error("用户名中存在敏感词");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(user.getUserName())){
+//            return Result.error("用户名中存在敏感词");
+//        }
         if (map.get(user.getPhone()).equals(temp)) {
             userService.insertUser(user);
             System.out.println("验证完成，注册成功");
@@ -161,9 +167,9 @@ public class RegisterController {
         if (userService.getUserByEmail(user.getEmail())!=null){
             return Result.error("该邮箱已被注册，请勿重复注册");
         }
-        if (sensitiveWordsChecker.containsSensitiveWords(user.getUserName())){
-            return Result.error("用户名中存在敏感词");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(user.getUserName())){
+//            return Result.error("用户名中存在敏感词");
+//        }
         if (map.get(user.getEmail()).equals(code)) {
             userService.insertUser(user);
             System.out.println("验证完成，注册成功");
@@ -206,9 +212,9 @@ public class RegisterController {
     //修改用户其他的属性
     @PutMapping("/userSet")
     public Result userSet(@RequestBody User user) {
-        if (sensitiveWordsChecker.containsSensitiveWords(user.getUserName())){
-            return Result.error("用户名中存在敏感词");
-        }
+//        if (sensitiveWordsChecker.containsSensitiveWords(user.getUserName())){
+//            return Result.error("用户名中存在敏感词");
+//        }
         int userId = user.getUserId();
         userService.updateUserAge(userId, user.getAge());
         userService.updateUserIdentity(userId, user.getIdentity());
@@ -232,5 +238,19 @@ public class RegisterController {
         } else {
             return Result.error();
         }
+    }
+
+
+    //管理员的登录
+    @GetMapping("/checkLogin")
+    public Result checkLogin(@RequestBody Manager manager){
+        Manager m = managerService.getManager(manager);
+        if (m!=null){
+            String token = JwtUtil.sign(m.getManagerId());
+            stringRedisTemplate.opsForValue().set(token, "", 1, TimeUnit.DAYS);
+            m.setToken(token);
+            return Result.success(m);
+        }else
+            return Result.error("账号验证错误");
     }
 }
