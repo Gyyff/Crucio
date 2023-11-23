@@ -242,7 +242,7 @@ public class RegisterController {
 
 
     //管理员登录
-    @GetMapping("/checkLogin")
+    @PostMapping("/checkLogin")
     public Result checkLogin(@RequestBody Manager manager){
         Manager m = managerService.getManager(manager);
         if (m!=null){
