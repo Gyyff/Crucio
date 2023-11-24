@@ -6,10 +6,7 @@ import com.heiqi.chat.entity.*;
 import com.heiqi.chat.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class ManagerController {
         this.managerService = managerService;
     }
 
-    @GetMapping("/getAllUsers")
+    @PostMapping("/getAllUsers")
     public Result getAllUsers(@RequestBody BaseUser baseUser) {
         List<User> allUsers = managerService.getAllUsers();
         if (allUsers!=null){
@@ -31,7 +28,7 @@ public class ManagerController {
         }else return Result.error("目前还没有用户数据");
     }
 
-    @GetMapping("/getAllBlog")
+    @PostMapping("/getAllBlog")
     public Result getAllBlog(@RequestBody BaseUser baseUser) {
         List<Blog> allBlog = managerService.getAllBlog();
         if (allBlog!=null){
@@ -39,7 +36,7 @@ public class ManagerController {
         }else return Result.error("目前还没有用户个人资料数据");
     }
 
-    @GetMapping("/getAllFeedback")
+    @PostMapping("/getAllFeedback")
     public Result getAllFeedback(@RequestBody BaseUser baseUser) {
         List<FeedBack> allFeedback = managerService.getAllFeedback();
         if (allFeedback!=null){
@@ -47,7 +44,7 @@ public class ManagerController {
         }else return Result.error("目前还没有反馈数据");
     }
 
-    @GetMapping("/getAllMetricsChoice")
+    @PostMapping("/getAllMetricsChoice")
     public Result getAllMetricsChoice(@RequestBody BaseUser baseUser) {
         List<MetricsChoice> allMetricsChoice = managerService.getAllMetricsChoice();
         if (allMetricsChoice!=null){
@@ -55,7 +52,7 @@ public class ManagerController {
         }else return Result.error("目前还没有用户性格测试选项数据");
     }
 
-    @GetMapping("/getAllUserPreferenceFoundation")
+    @PostMapping("/getAllUserPreferenceFoundation")
     public Result getAllUserPreferenceFoundation(@RequestBody BaseUser baseUser) {
         List<UserPreferenceFoundation> allUserPreferenceFoundation = managerService.getAllUserPreferenceFoundation();
         if (allUserPreferenceFoundation!=null){
@@ -63,7 +60,7 @@ public class ManagerController {
         }else return Result.error("目前还没有用户基础信息选项数据");
     }
 
-    @GetMapping("/getAllUserPreferenceChoice")
+    @PostMapping("/getAllUserPreferenceChoice")
     public Result getAllUserPreferenceChoice(@RequestBody BaseUser baseUser) {
         List<UserPreferenceChoice> allUserPreferenceChoice = managerService.getAllUserPreferenceChoice();
         if (allUserPreferenceChoice!=null){
