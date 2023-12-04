@@ -7,3 +7,7 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
+
+tencent:
+  sdkappid: 1600013312
+  key: 051e1435032c372632b29a10a0a80bb507bc4fe0239969153f0aebd99cf6b64a
