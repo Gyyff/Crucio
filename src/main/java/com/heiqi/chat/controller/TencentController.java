@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description
  */
 @RestController
-@RequestMapping("/tencent")
+@RequestMapping("/api/tencent")
 public class TencentController {
 
   @Autowired
