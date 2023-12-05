@@ -7,6 +7,7 @@ import com.heiqi.chat.Utils.UploadUtil;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.BaseUser;
 import com.heiqi.chat.entity.User;
+import com.heiqi.chat.entity.UserDevice;
 import com.heiqi.chat.entity.UserPreference;
 import com.heiqi.chat.service.UserPreferenceService;
 import com.heiqi.chat.service.UserService;
@@ -250,4 +251,9 @@ public class UserController {
 
     }
 
+    //绑定设备
+    @PostMapping("/bindDevice")
+    public Result bindDevice(@RequestBody UserDevice userDevice){
+        return userService.bindDevice(userDevice.getUserId(),userDevice.getDeviceId());
+    }
 }

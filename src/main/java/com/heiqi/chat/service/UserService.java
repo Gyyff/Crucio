@@ -118,4 +118,6 @@ public interface UserService {
 
     Result determineToMatchPages(int UserId);
 
+
+    Result bindDevice(int userId,String deviceId);
 }

@@ -12,9 +12,11 @@ import com.heiqi.chat.controller.SystemEndpoint;
 import com.heiqi.chat.entity.Match;
 import com.heiqi.chat.entity.Metrics;
 import com.heiqi.chat.entity.User;
+import com.heiqi.chat.entity.UserDevice;
 import com.heiqi.chat.entity.UserPreference;
 import com.heiqi.chat.mapper.MatchMapper;
 import com.heiqi.chat.mapper.MetricsMapper;
+import com.heiqi.chat.mapper.UserDeviceMapper;
 import com.heiqi.chat.mapper.UserMapper;
 import com.heiqi.chat.mapper.UserPreferenceMapper;
 import com.heiqi.chat.service.UserService;
@@ -38,6 +40,8 @@ public class UserServiceImp implements UserService {
 
     private final MatchMapper matchMapper;
 
+    private final UserDeviceMapper userDeviceMapper;
+
     private final MatchUtils matchUtils;
 
     private final MateUtils mateUtils;
@@ -49,13 +53,14 @@ public class UserServiceImp implements UserService {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    public UserServiceImp(UserMapper userMapper, MetricsMapper metricsMapper, UserPreferenceMapper userPreferenceMapper, MatchUtils matchUtils, MateUtils mateUtils, MatchMapper matchMapper, ChatEndPoint chatEndPoint, SystemEndpoint systemEndpoint) {
+    public UserServiceImp(UserMapper userMapper, MetricsMapper metricsMapper, UserPreferenceMapper userPreferenceMapper, MatchUtils matchUtils, MateUtils mateUtils, MatchMapper matchMapper,UserDeviceMapper userDeviceMapper, ChatEndPoint chatEndPoint, SystemEndpoint systemEndpoint) {
         this.userMapper = userMapper;
         this.metricsMapper = metricsMapper;
         this.userPreferenceMapper = userPreferenceMapper;
         this.matchUtils = matchUtils;
         this.mateUtils = mateUtils;
         this.matchMapper = matchMapper;
+        this.userDeviceMapper = userDeviceMapper;
         this.chatEndPoint = chatEndPoint;
         this.systemEndpoint = systemEndpoint;
     }
@@ -665,5 +670,20 @@ public class UserServiceImp implements UserService {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    @Override
+    public Result bindDevice(int userId, String deviceId) {
+
+        int i = userDeviceMapper.selectUserDevice(userId);
+        UserDevice userDevice = new UserDevice();
+        userDevice.setUserId(userId);
+        userDevice.setDeviceId(deviceId);
+        if ( i > 0 ) {
+            userDeviceMapper.updateUserDevice(userDevice);
+        } else {
+            userDeviceMapper.insertUserDevice(userDevice);
+        }
+        return Result.success();
     }
 }
