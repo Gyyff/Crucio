@@ -675,6 +675,11 @@ public class UserServiceImp implements UserService {
     @Override
     public Result bindDevice(int userId, String deviceId) {
 
+        User user = userMapper.getUserById(userId);
+        if(user == null){
+            return Result.error("用户不存在");
+        }
+
         int i = userDeviceMapper.selectUserDevice(userId);
         UserDevice userDevice = new UserDevice();
         userDevice.setUserId(userId);

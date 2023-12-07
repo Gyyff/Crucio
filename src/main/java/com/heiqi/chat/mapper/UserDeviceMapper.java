@@ -5,6 +5,7 @@ import com.heiqi.chat.entity.UserDevice;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -18,14 +19,15 @@ import org.apache.ibatis.annotations.Update;
 public interface UserDeviceMapper {
 
 
-  @Insert("INSERT INTO user_device (id,userId,deviceId) VALUES (#{id},#{userId},#{deviceId})")
+  @Insert("INSERT INTO userdevice (id,UserId,DeviceId) VALUES (#{id},#{userId},#{deviceId})")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   int insertUserDevice(UserDevice userDevice);
 
-  @Update("UPDATE user_device set deviceId=#{deviceId} where userId=#{userId}}")
+  @Update("UPDATE userdevice set DeviceId=#{deviceId} where UserId=#{userId}")
   int updateUserDevice(UserDevice userDevice);
 
 
-  @Select("select 1 from user_device from userId=#{userId}")
-  int selectUserDevice(int userId);
+  @Select("select count(1) from userdevice where UserId=#{userId}")
+  int selectUserDevice(@Param("userId") Integer userId);
+
 }

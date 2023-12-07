@@ -14,9 +14,15 @@ import lombok.Setter;
 public class UserDevice {
 
  /**
+  * 主键id
+  */
+ private Integer id;
+
+
+ /**
   * 用户id
   */
-  private int userId;
+  private Integer userId;
 
  /**
   * 设备id
