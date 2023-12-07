@@ -28,4 +28,9 @@ public class UserDevice {
   * 设备id
   */
  private String deviceId;
+
+ /**
+  * 0-安卓 1-ios
+  */
+ private Integer clientType;
 }

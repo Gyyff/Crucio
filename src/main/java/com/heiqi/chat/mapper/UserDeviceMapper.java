@@ -19,11 +19,11 @@ import org.apache.ibatis.annotations.Update;
 public interface UserDeviceMapper {
 
 
-  @Insert("INSERT INTO userdevice (id,UserId,DeviceId) VALUES (#{id},#{userId},#{deviceId})")
+  @Insert("INSERT INTO userdevice (id,UserId,DeviceId,ClientType) VALUES (#{id},#{userId},#{deviceId},#{clientType})")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   int insertUserDevice(UserDevice userDevice);
 
-  @Update("UPDATE userdevice set DeviceId=#{deviceId} where UserId=#{userId}")
+  @Update("UPDATE userdevice set DeviceId=#{deviceId},clientType=#{clientType} where UserId=#{userId}")
   int updateUserDevice(UserDevice userDevice);
 
 

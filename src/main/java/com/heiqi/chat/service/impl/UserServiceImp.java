@@ -673,7 +673,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public Result bindDevice(int userId, String deviceId) {
+    public Result bindDevice(int userId, String deviceId,Integer clientType) {
 
         User user = userMapper.getUserById(userId);
         if(user == null){
@@ -684,6 +684,7 @@ public class UserServiceImp implements UserService {
         UserDevice userDevice = new UserDevice();
         userDevice.setUserId(userId);
         userDevice.setDeviceId(deviceId);
+        userDevice.setClientType(clientType);
         if ( i > 0 ) {
             userDeviceMapper.updateUserDevice(userDevice);
         } else {

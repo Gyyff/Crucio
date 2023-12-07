@@ -254,6 +254,6 @@ public class UserController {
     //绑定设备
     @PostMapping("/bindDevice")
     public Result bindDevice(@RequestBody UserDevice userDevice){
-        return userService.bindDevice(userDevice.getUserId(),userDevice.getDeviceId());
+        return userService.bindDevice(userDevice.getUserId(),userDevice.getDeviceId(),userDevice.getClientType());
     }
 }
