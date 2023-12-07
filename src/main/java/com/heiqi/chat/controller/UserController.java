@@ -1,6 +1,8 @@
 package com.heiqi.chat.controller;
 
 
+import cn.jiguang.common.resp.APIConnectionException;
+import cn.jiguang.common.resp.APIRequestException;
 import com.heiqi.chat.Utils.JwtUtil;
 import com.heiqi.chat.Utils.MatchUtils;
 import com.heiqi.chat.Utils.UploadUtil;
@@ -9,6 +11,7 @@ import com.heiqi.chat.entity.BaseUser;
 import com.heiqi.chat.entity.User;
 import com.heiqi.chat.entity.UserDevice;
 import com.heiqi.chat.entity.UserPreference;
+import com.heiqi.chat.service.PushService;
 import com.heiqi.chat.service.UserPreferenceService;
 import com.heiqi.chat.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +31,9 @@ public class UserController {
     private final UserPreferenceService userPreferenceService;
 
     private final MatchUtils matchUtils;
+
+    @Autowired
+    private PushService pushService;
 
     @Autowired
     public UserController(UserService userService , UserPreferenceService userPreferenceService ,MatchUtils matchUtils ) {
@@ -255,5 +261,12 @@ public class UserController {
     @PostMapping("/bindDevice")
     public Result bindDevice(@RequestBody UserDevice userDevice){
         return userService.bindDevice(userDevice.getUserId(),userDevice.getDeviceId(),userDevice.getClientType());
+    }
+
+
+    @PostMapping("/push")
+    public Result pushMsg() throws APIConnectionException, APIRequestException {
+        pushService.pushMatchingMsg(new UserDevice());
+        return new Result<>();
     }
 }
