@@ -1,7 +1,7 @@
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/heiqi?user=root&password=root&autoReconnect=true&failOverReadOnly=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://gz-cdb-n80gj0zv.sql.tencentcdb.com:63547/chat?user=root&password=Admin123!&autoReconnect=true&failOverReadOnly=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 16
@@ -28,5 +28,5 @@ server:
   port: 9999
 
 jpush:
-  appkey: d30b5f8ebd696b9d5da9a77f
-  appsecret:
+  appkey: ebae1fea7f785ba3d5ff8869
+  appsecret: 47a208b34004925190240f9f

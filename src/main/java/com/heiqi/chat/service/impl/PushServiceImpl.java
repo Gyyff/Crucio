@@ -51,7 +51,7 @@ public class PushServiceImpl implements PushService {
         return PushPayload.newBuilder()
                 .setPlatform(userDevice.getClientType() == 0 ? Platform.android() : Platform.ios())
                 .setAudience(Audience.registrationId(userDevice.getDeviceId()))
-                .setNotification(Notification.alert(NEW_CHAT_MSG))
+                .setNotification(Notification.alert(msg))
                 .setCid(UUID.randomUUID().toString())
                 .build();
     }
