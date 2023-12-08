@@ -4,9 +4,7 @@ package com.heiqi.chat.service.impl;
 import com.heiqi.chat.Utils.JwtUtil;
 import com.heiqi.chat.Utils.MatchUtils;
 import com.heiqi.chat.Utils.MateUtils;
-import com.heiqi.chat.Utils.SendEmailUtils;
 import com.heiqi.chat.common.Result;
-import com.heiqi.chat.controller.ChatEndPoint;
 import com.heiqi.chat.controller.SendSMS;
 import com.heiqi.chat.controller.SystemEndpoint;
 import com.heiqi.chat.entity.Match;
@@ -21,15 +19,12 @@ import com.heiqi.chat.mapper.UserMapper;
 import com.heiqi.chat.mapper.UserPreferenceMapper;
 import com.heiqi.chat.service.UserService;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -46,14 +41,12 @@ public class UserServiceImp implements UserService {
 
     private final MateUtils mateUtils;
 
-    private final ChatEndPoint chatEndPoint;
-
     private final SystemEndpoint systemEndpoint;
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    public UserServiceImp(UserMapper userMapper, MetricsMapper metricsMapper, UserPreferenceMapper userPreferenceMapper, MatchUtils matchUtils, MateUtils mateUtils, MatchMapper matchMapper,UserDeviceMapper userDeviceMapper, ChatEndPoint chatEndPoint, SystemEndpoint systemEndpoint) {
+    public UserServiceImp(UserMapper userMapper, MetricsMapper metricsMapper, UserPreferenceMapper userPreferenceMapper, MatchUtils matchUtils, MateUtils mateUtils, MatchMapper matchMapper,UserDeviceMapper userDeviceMapper, SystemEndpoint systemEndpoint) {
         this.userMapper = userMapper;
         this.metricsMapper = metricsMapper;
         this.userPreferenceMapper = userPreferenceMapper;
@@ -61,7 +54,6 @@ public class UserServiceImp implements UserService {
         this.mateUtils = mateUtils;
         this.matchMapper = matchMapper;
         this.userDeviceMapper = userDeviceMapper;
-        this.chatEndPoint = chatEndPoint;
         this.systemEndpoint = systemEndpoint;
     }
 
@@ -691,5 +683,10 @@ public class UserServiceImp implements UserService {
             userDeviceMapper.insertUserDevice(userDevice);
         }
         return Result.success();
+    }
+
+    @Override
+    public UserDevice selectUserDevice(Integer userId) {
+        return userDeviceMapper.selectByUserId(userId);
     }
 }

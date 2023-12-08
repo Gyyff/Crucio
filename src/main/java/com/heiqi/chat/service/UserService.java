@@ -3,6 +3,7 @@ package com.heiqi.chat.service;
 
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.User;
+import com.heiqi.chat.entity.UserDevice;
 import com.heiqi.chat.entity.UserPreferenceChoice;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
@@ -120,4 +121,7 @@ public interface UserService {
 
 
     Result bindDevice(int userId,String deviceId,Integer clientType);
+
+
+    UserDevice selectUserDevice(Integer userId);
 }

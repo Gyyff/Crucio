@@ -4,11 +4,15 @@ import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.heiqi.chat.Utils.RedisUtil;
 import com.heiqi.chat.common.SessionWrap;
+import com.heiqi.chat.entity.UserDevice;
+import com.heiqi.chat.service.PushService;
+import com.heiqi.chat.service.UserService;
 import io.swagger.models.auth.In;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +29,11 @@ public class ChatEndPoint {
 
     private Map<Session,SessionWrap> FROM_TO = new ConcurrentHashMap<>();
 
+    @Autowired
+    private PushService pushService;
+
+    @Autowired
+    private UserService userService;
 
     @OnMessage
     //接收到客户端发送的数据时被调用
@@ -64,11 +73,23 @@ public class ChatEndPoint {
         sessionList.add(sessionWrap);
         String key = from + "-" + to;
         FROM_TO.put(session, sessionWrap);
+
+        try{
+            UserDevice userDevice = userService.selectUserDevice(from);
+            if(userDevice != null){
+                pushService.pushMatchingMsg(userDevice);
+            }
+        }catch (Exception e){
+            log.info("推送消息异常");
+        }
+
+
         List<String> msgList = RedisUtil.lRange(key, 0, -1);
         if (CollUtil.isNotEmpty(msgList)) {
             msgList.forEach(item -> {
                 try {
                     sendMessageToClient(item, to);
+
                 } catch (Exception e) {
                     log.error("消息发送失败,from:{},to:{}", from, to, e);
                 }

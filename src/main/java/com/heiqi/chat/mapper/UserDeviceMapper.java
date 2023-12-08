@@ -30,4 +30,7 @@ public interface UserDeviceMapper {
   @Select("select count(1) from userdevice where UserId=#{userId}")
   int selectUserDevice(@Param("userId") Integer userId);
 
+
+  @Select("select * from userdevice where UserId=#{userId}")
+  UserDevice selectByUserId(@Param("userId") Integer userId);
 }
