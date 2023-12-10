@@ -1,5 +1,6 @@
 package com.heiqi.chat.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.heiqi.chat.entity.TecentCallback;
 import com.heiqi.chat.entity.TencentCallbackRet;
 import com.heiqi.chat.entity.UserDevice;
@@ -31,6 +32,7 @@ public class JpushRetController {
   public TencentCallbackRet notifyJpush(@RequestBody TecentCallback tecentCallback) {
 
     try {
+      log.info("腾讯云回调：{}", JSONObject.toJSONString(tecentCallback));
       Integer toAccount = Integer.parseInt(tecentCallback.getTo_Account());
       UserDevice userDevice = userService.selectUserDevice(toAccount);
       if (userDevice != null) {

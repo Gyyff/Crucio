@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `userdevice`;
 CREATE TABLE `userdevice`  (
   `Id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `UserId` int(11) NULL DEFAULT NULL COMMENT '用户id',
-  `DeviceId` int(11) NULL DEFAULT NULL COMMENT '设备id',
+  `DeviceId` varchar(64) NULL DEFAULT NULL COMMENT '设备id',
   PRIMARY KEY (`Id`) USING BTREE,
   UNIQUE INDEX `idx_userid`(`UserId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3;
 
 SET FOREIGN_KEY_CHECKS = 1;

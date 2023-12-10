@@ -256,9 +256,9 @@ public class UserController {
 
   // 测试用
   @GetMapping("/matchTest")
-  public void matchTest() {
+  public void matchTest() throws Exception {
 
-    userService.testMatch();
+    userService.getUserMatch(1337);
   }
 
   // 绑定设备

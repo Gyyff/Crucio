@@ -2,8 +2,10 @@ package com.heiqi.chat.service.impl;
 
 import cn.jiguang.common.resp.APIConnectionException;
 import cn.jiguang.common.resp.APIRequestException;
+import com.alibaba.fastjson.JSONObject;
 import com.heiqi.chat.api.jpush.JPushClient;
 import com.heiqi.chat.api.jpush.push.CIDResult;
+import com.heiqi.chat.api.jpush.push.PushResult;
 import com.heiqi.chat.api.jpush.push.model.Options;
 import com.heiqi.chat.api.jpush.push.model.Platform;
 import com.heiqi.chat.api.jpush.push.model.PushPayload;
@@ -43,7 +45,12 @@ public class PushServiceImpl implements PushService {
   public void pushMatchingMsg(UserDevice userDevice)
       throws APIConnectionException, APIRequestException {
     PushPayload pushPayload = buildPushPayload(userDevice, NEW_MATCHING_MSG);
-    jpushClient.sendPush(pushPayload);
+    PushResult result = jpushClient.sendPush(pushPayload);
+    if(result == null || !result.isResultOK()){
+      log.error("消息推送失败：{}", JSONObject.toJSONString(result));
+    }else{
+      log.info("消息推送成功：{}", JSONObject.toJSONString(result));
+    }
   }
 
   private PushPayload buildPushPayload(UserDevice userDevice, String msg)
