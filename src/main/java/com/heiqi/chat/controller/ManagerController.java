@@ -4,12 +4,15 @@ package com.heiqi.chat.controller;
 import com.heiqi.chat.common.Result;
 import com.heiqi.chat.entity.*;
 import com.heiqi.chat.service.ManagerService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/manager")
 public class ManagerController {

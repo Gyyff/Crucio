@@ -242,6 +242,7 @@ public class RegisterController {
 
 
     //管理员登录
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/checkLogin")
     public Result checkLogin(@RequestBody Manager manager){
         Manager m = managerService.getManager(manager);
