@@ -33,6 +33,9 @@ public class JpushRetController {
 
     try {
       log.info("腾讯云回调：{}", JSONObject.toJSONString(tecentCallback));
+      if(!"C2C.CallbackBeforeSendMsg".equals(tecentCallback.getCallbackCommand())){
+        return TencentCallbackRet.success();
+      }
       Integer toAccount = Integer.parseInt(tecentCallback.getTo_Account());
       UserDevice userDevice = userService.selectUserDevice(toAccount);
       if (userDevice != null) {
