@@ -13,6 +13,7 @@ import lombok.Data;
 @Data
 public class TecentCallback {
 
+    @JsonProperty("CallbackCommand")
    private String callbackCommand;
 
    @JsonProperty("From_Account")
@@ -23,25 +24,16 @@ public class TecentCallback {
 
 
    @JsonProperty("MsgSeq")
-   private String MsgSeq;
+   private Long MsgSeq;
 
    @JsonProperty("MsgRandom")
-   private Integer MsgRandom;
+   private Long MsgRandom;
 
   @JsonProperty("MsgKey")
    private String MsgKey;
 
   @JsonProperty("OnlineOnlyFlag")
    private Integer OnlineOnlyFlag;
-
-  @JsonProperty("SendMsgResult")
-   private Integer SendMsgResult;
-
-  @JsonProperty("ErrorInfo")
-   private String ErrorInfo;
-
-  @JsonProperty("UnreadMsgNum")
-   private Integer UnreadMsgNum;
 
   @JsonProperty("MsgBody")
    private List MsgBody;
