@@ -469,7 +469,7 @@ public class UserServiceImp implements UserService {
                     userMapper.updateUserMatchStatus(user.getUserId(), 1);
                     userMapper.updateUserMatchStatus(sUser.getUserId(), 1);
                     systemEndpoint.sendSystemMessageToClient("已经成功为您匹配到一位适配对象", sUser.getUserId());
-
+                    systemEndpoint.sendSystemMessageToClient("已经成功为您匹配到一位适配对象", user.getUserId());
                     //*Todo* 这里添加推送
                     UserDevice userDevice = userDeviceMapper.selectByUserId(user.getUserId());
                     UserDevice sUserDevice = userDeviceMapper.selectByUserId(sUser.getUserId());
