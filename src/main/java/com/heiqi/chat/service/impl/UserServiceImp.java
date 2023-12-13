@@ -337,8 +337,8 @@ public class UserServiceImp implements UserService {
             //遍历集合进行循环匹配  匹配逻辑参考 MatchUtils这个类中的 MateMatchSimilarity()方法
             if (firstUsers != null) {
                 firstUsers.forEach((sUser -> {
-                    System.out.println("---------------开始--------------");
-                    System.out.println("当前进行适配的用户id是" + sUser.getUserId());
+//                    System.out.println("---------------开始--------------");
+                   System.out.println("当前进行适配的用户id是" + sUser.getUserId());
                     Metrics metricsUser = metricsMapper.getMetricsByUserID(sUser.getUserId());
                     int T = 0;
                     if (metricsUser != null) {
@@ -386,16 +386,16 @@ public class UserServiceImp implements UserService {
                         T += matchUtils.MateMatchSimilarity(userPreference.getSelfish(), metricsUser.getSelfish());
                         T += matchUtils.MaleSimilarity(userPreference.getMale(), metricsUser.getMale(),
                                 user.getGender());
-                        System.out.println("当前用户性别为" + user.getGender() + "----大男子主义匹配分数为" + matchUtils.MaleSimilarity(
-                                userPreference.getMale(), metricsUser.getMale(), user.getGender()));
-                    }
+//                        System.out.println("当前用户性别为" + user.getGender() + "----大男子主义匹配分数为" + matchUtils.MaleSimilarity(
+//                                userPreference.getMale(), metricsUser.getMale(), user.getGender()));
+                  }
                     //采用累加制 计算出T的总和
-                    System.out.println("最终匹配结束总分T总 = " + T);
+//                    System.out.println("最终匹配结束总分T总 = " + T);
                     //只有单向匹配分数>0 才可进入双向匹配  同时如果单向得分小于最高分数 则排除掉该用户
                     if (T > 0) {
                         //进行双向匹配 同理参考MatchUtils这个类中的 MateMatchSimilarity()方法  只不过参数调换位置
-                        System.out.println("------找到了一名契合度高的用户 开始双向契合度匹配------");
-                        System.out.println("-------双向匹配开始-------");
+//                        System.out.println("------找到了一名契合度高的用户 开始双向契合度匹配------");
+//                        System.out.println("-------双向匹配开始-------");
                         int St = 0;
                         UserPreference sUserPreference = userPreferenceMapper.getUserPreferenceByUserId(
                                 sUser.getUserId());
@@ -439,26 +439,26 @@ public class UserServiceImp implements UserService {
                                     UserMetrics.getSelfish());
                             St += matchUtils.MaleSimilarity(sUserPreference.getMale(), UserMetrics.getMale(),
                                     sUser.getGender());
-                            System.out.println(
-                                    "当前用户性别为" + sUser.getGender() + "----大男子主义匹配分数为" + matchUtils.MaleSimilarity(
-                                            sUserPreference.getMale(), UserMetrics.getMale(), sUser.getGender()));
-                            System.out.println("该用户对当前用户的双向匹配得分为" + St);
+//                            System.out.println(
+//                                    "当前用户性别为" + sUser.getGender() + "----大男子主义匹配分数为" + matchUtils.MaleSimilarity(
+//                                            sUserPreference.getMale(), UserMetrics.getMale(), sUser.getGender()));
+//                            System.out.println("该用户对当前用户的双向匹配得分为" + St);
 
                             if ((St > 0) && ((St + T) > TAndS.get())) {
                                 TAndS.set(St + T);
                                 SucCesUserId.set(sUser.getUserId());
-                                System.out.println(
-                                        "当前双向契合度最高分为" + TAndS.get() + "   " + "这位用户的ID是" + SucCesUserId.get());
-                                System.out.println("成功找到一位适配对象！！");
+//                                System.out.println(
+//                                        "当前双向契合度最高分为" + TAndS.get() + "   " + "这位用户的ID是" + SucCesUserId.get());
+//                                System.out.println("成功找到一位适配对象！！");
                             } else {
-                                System.out.println("双向匹配度过低 适配结束 开始匹配下一位对象");
+//                                System.out.println("双向匹配度过低 适配结束 开始匹配下一位对象");
                             }
-                            System.out.println("-------双向匹配结束------- ");
+//                            System.out.println("-------双向匹配结束------- ");
                         }
                     }
-                    System.out.println("---------------结束--------------");
-                    System.out.println("    ");
-                    System.out.println("    ");
+//                    System.out.println("---------------结束--------------");
+//                    System.out.println("    ");
+//                    System.out.println("    ");
                 }));
                 System.out.println(
                         "匹配结束 最高适配度的用户是" + " " + SucCesUserId.get() + " " + "号用户" + "    " + "他与当前用户的双向契合度总分是" + " "
