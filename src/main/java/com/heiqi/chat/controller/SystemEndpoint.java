@@ -4,10 +4,13 @@ import com.heiqi.chat.common.SessionWrap;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
+import java.util.Iterator;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.util.CollectionUtils;
+
 @Component
 @ServerEndpoint(value = "/api/SystemEndPoint/{to}")
 public class SystemEndpoint {
@@ -54,7 +57,16 @@ public class SystemEndpoint {
 
         @OnClose
         public void onClose(Session session) {
-            System.out.println("链接关闭了");
+            if(CollectionUtils.isEmpty(sessionsList)){
+                return;
+            }
+            Iterator<SessionWrap> it = sessionsList.iterator();
+            while (it.hasNext()){
+                SessionWrap sessionWrap = it.next();
+                if(sessionWrap.getSession().getId().equals(session.getId())){
+                    it.remove();
+                }
+            }
         }
 
         @OnError
