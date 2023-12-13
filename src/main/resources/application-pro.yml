@@ -31,3 +31,7 @@ auth:
 
 server:
   port: 9999
+
+jpush:
+  appkey: ebae1fea7f785ba3d5ff8869
+  appsecret: 47a208b34004925190240f9f
